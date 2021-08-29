@@ -1,0 +1,20 @@
+button {
+    color: #000;
+    background-color: #FFF;
+}
+
+button:hover {
+    color: #F00;
+}
+
+button:focus {
+    color: #00F;
+}
+
+button:disabled {
+    background-color: #333;
+}
+
+button:pressed {
+    background-color: #0F0;
+}

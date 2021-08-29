@@ -1,11 +1,13 @@
 class_name CSSParser
 
+const DEFAULT_STATE = "normal"
+
 var _values = {}
 
 func get_classes() -> Array:
 	return _values.keys()
 
-func get_class_properties(cls: String, state = "normal") -> Dictionary:
+func get_class_properties(cls: String, state = DEFAULT_STATE) -> Dictionary:
 	if not _values.has(cls): return {}
 	if not _values[cls].has(state): return {}
 	return _values[cls][state]
@@ -37,7 +39,6 @@ func parse(file_path: String) -> bool:
 		var classes_line := content.substr(processed_length, start_block - processed_length)
 		current_classes = _parse_classes(classes_line)
 		processed_length += (classes_line + "{").length()
-		print("Classes: %s in line %s" % [current_classes, classes_line])
 		
 		var end_block = content.find("}", processed_length)
 		if end_block == -1:
@@ -45,7 +46,6 @@ func parse(file_path: String) -> bool:
 			return false
 		
 		var block = content.substr(processed_length, end_block - processed_length)
-		print("Block: '%s'" % block)
 		if _parse_block(current_classes, block):
 			processed_length += (block + "}").length()
 			current_classes = {}
@@ -62,7 +62,7 @@ func _parse_classes(line: String) -> Dictionary:
 		var trimmed: String = cls.strip_edges()
 		if trimmed.length() > 0:
 			var split = trimmed.split(":")
-			var state = split[1].strip_edges() if split.size() == 2 else "normal"
+			var state = split[1].strip_edges() if split.size() == 2 else DEFAULT_STATE
 			var key = split[0].strip_edges()
 			if not result.has(key):
 				result[key] = []
