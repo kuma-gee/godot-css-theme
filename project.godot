@@ -1,0 +1,57 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "ArgumentParser",
+"language": "GDScript",
+"path": "res://addons/godot-css-theme/ArgumentParser.gd"
+}, {
+"base": "Reference",
+"class": "CSSParser",
+"language": "GDScript",
+"path": "res://addons/godot-css-theme/CSSParser.gd"
+}, {
+"base": "Reference",
+"class": "OptParse",
+"language": "GDScript",
+"path": "res://addons/godot-css-theme/optparse.gd"
+}, {
+"base": "Reference",
+"class": "Options",
+"language": "GDScript",
+"path": "res://addons/godot-css-theme/Options.gd"
+}, {
+"base": "Node",
+"class": "UnitTest",
+"language": "GDScript",
+"path": "res://tests/godot-css-theme/UnitTest.gd"
+} ]
+_global_script_class_icons={
+"ArgumentParser": "",
+"CSSParser": "",
+"OptParse": "",
+"Options": "",
+"UnitTest": ""
+}
+
+[application]
+
+config/name="Godot-CSS-Theme"
+run/main_scene="res://demo/Demo.tscn"
+config/icon="res://icon.png"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
