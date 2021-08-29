@@ -18,6 +18,10 @@ func _init():
 	
 	var theme = Theme.new()
 	
+	for cls in parser.get_classes():
+		if not CLASS_TYPE_MAP.has(cls): continue
+		
+		var type = CLASS_TYPE_MAP.get(cls)
 	
 	
 	theme.set_color("font_color", "Button", Color.black)

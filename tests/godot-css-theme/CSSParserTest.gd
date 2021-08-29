@@ -8,6 +8,7 @@ func before_each():
 func test_parse():
 	assert_true(parser.parse("res://tests/godot-css-theme/example.css"))
 	assert_eq(parser.get_classes(), ["button", "h1", "body"])
+	print(parser._values)
 	
 	var button = parser.get_class_properties('button')
 	assert_eq_deep(button, {
@@ -15,6 +16,15 @@ func test_parse():
 		"color": "white",
 		"padding": "2em",
 	})
+	
+	var button_state = parser.get_class_properties('button', 'hover')
+	assert_eq_deep(button_state, {"color": "black"})
+	button_state = parser.get_class_properties('button', 'disabled')
+	assert_eq_deep(button_state, {"color": "black"})
+	button_state = parser.get_class_properties('button', 'focus')
+	assert_eq_deep(button_state, {"color": "black"})
+	button_state = parser.get_class_properties('button', 'active')
+	assert_eq_deep(button_state, {"color": "black"})
 	
 	var body = parser.get_class_properties('body')
 	assert_eq_deep(body, {

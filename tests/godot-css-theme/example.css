@@ -13,3 +13,7 @@ h1 {
     color: black
     ;
 }
+
+button:hover, button:disabled, button:focus, button:active {
+    color: black
+}

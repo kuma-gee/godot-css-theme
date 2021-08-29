@@ -5,9 +5,10 @@ var _values = {}
 func get_classes() -> Array:
 	return _values.keys()
 
-func get_class_properties(cls: String) -> Dictionary:
+func get_class_properties(cls: String, state = "normal") -> Dictionary:
 	if not _values.has(cls): return {}
-	return _values[cls]
+	if not _values[cls].has(state): return {}
+	return _values[cls][state]
 
 func parse(file_path: String) -> bool:
 	var file = File.new()
@@ -25,15 +26,15 @@ func parse(file_path: String) -> bool:
 	
 	var content: String = file.get_as_text() # TODO: use buffer?
 	
-	var current_classes = []
-	var processed_length = 0
+	var current_classes := {}
+	var processed_length := 0
 	
 	while processed_length < content.length():
-		var start_block = content.find("{", processed_length)
+		var start_block := content.find("{", processed_length)
 		if start_block == -1:
 			break
 		
-		var classes_line = content.substr(processed_length, start_block - processed_length)
+		var classes_line := content.substr(processed_length, start_block - processed_length)
 		current_classes = _parse_classes(classes_line)
 		processed_length += (classes_line + "{").length()
 		print("Classes: %s in line %s" % [current_classes, classes_line])
@@ -47,24 +48,29 @@ func parse(file_path: String) -> bool:
 		print("Block: '%s'" % block)
 		if _parse_block(current_classes, block):
 			processed_length += (block + "}").length()
-			current_classes = []
+			current_classes = {}
 		else:
 			return false
 	
 	file.close()
 	return true
 	
-func _parse_classes(line: String) -> Array:
-	var result = []
+func _parse_classes(line: String) -> Dictionary:
+	var result = {}
 	var classes = line.split(",")
 	for cls in classes:
-		var trimmed = cls.strip_edges()
+		var trimmed: String = cls.strip_edges()
 		if trimmed.length() > 0:
-			result.append(trimmed)
+			var split = trimmed.split(":")
+			var state = split[1].strip_edges() if split.size() == 2 else "normal"
+			var key = split[0].strip_edges()
+			if not result.has(key):
+				result[key] = []
+			result[key].append(state)
 	return result
 	
 
-func _parse_block(classes: Array, block: String) -> bool:
+func _parse_block(classes: Dictionary, block: String) -> bool:
 	var statements = block.split(";")
 	for statement in statements:
 		if statement.strip_edges() == "": continue
@@ -80,5 +86,10 @@ func _parse_block(classes: Array, block: String) -> bool:
 		for cls in classes:
 			if not _values.has(cls):
 				_values[cls] = {}
-			_values[cls][property] = value
+			
+			var states = classes[cls]
+			for state in states:
+				if not _values[cls].has(state):
+					_values[cls][state] = {}
+				_values[cls][state][property] = value
 	return true
