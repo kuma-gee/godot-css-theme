@@ -30,6 +30,16 @@ _global_script_classes=[ {
 "path": "res://addons/godot-css-theme/Options.gd"
 }, {
 "base": "Reference",
+"class": "Stylesheet",
+"language": "GDScript",
+"path": "res://addons/godot-css-theme/Stylesheet.gd"
+}, {
+"base": "Reference",
+"class": "ThemeApplier",
+"language": "GDScript",
+"path": "res://addons/godot-css-theme/ThemeApplier.gd"
+}, {
+"base": "Reference",
 "class": "ThemeEdit",
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/ThemeEdit.gd"
@@ -44,6 +54,8 @@ _global_script_class_icons={
 "CSSParser": "",
 "OptParse": "",
 "Options": "",
+"Stylesheet": "",
+"ThemeApplier": "",
 "ThemeEdit": "",
 "UnitTest": ""
 }

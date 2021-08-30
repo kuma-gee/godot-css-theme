@@ -2,6 +2,7 @@ class_name ThemeEdit
 
 var _theme: Theme
 var _node_type: String
+var _states: Array
 
 func _init(theme: Theme, node_type: String):
 	_theme = theme

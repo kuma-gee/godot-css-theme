@@ -3,4 +3,12 @@ Button {
     --colors-font-color-disabled: #333;
     --colors-font-color-hover: #FFF;
     --colors-font-color-pressed: #999;
+
+    --const-hseparation: 10;
+
+    --fonts-font: url(font.tres);
+}
+
+CheckBox {
+    --icons-checked: url(res://icon.png);
 }

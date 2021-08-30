@@ -14,6 +14,14 @@ h1 {
     ;
 }
 
-button:hover, button:disabled, button:focus, button:active {
+button:hover, button:focus {
+    color: red;
+}
+
+button:disabled, button:active {
     color: black
+}
+
+Resource {
+    --icon: url(res://test.png);
 }

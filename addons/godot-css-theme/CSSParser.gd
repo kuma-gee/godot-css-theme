@@ -1,30 +1,21 @@
 class_name CSSParser
 
-const DEFAULT_STATE = "normal"
-
 var _values = {}
 
-func get_classes() -> Array:
-	return _values.keys()
-
-func get_class_properties(cls: String, state = DEFAULT_STATE) -> Dictionary:
-	if not _values.has(cls): return {}
-	if not _values[cls].has(state): return {}
-	return _values[cls][state]
-
-func parse(file_path: String) -> bool:
+func parse(file_path: String) -> Stylesheet:
+	_values = {}
 	var file = File.new()
 	if not file.file_exists(file_path):
 		print("File %s does not exist" % file_path)
-		return false
+		return null
 	
 	if not file_path.ends_with(".css"):
 		print("File %s is not a css file" % file_path)
-		return false
+		return null
 	
 	if file.open(file_path, File.READ) != OK:
 		print("Failed to open file %s" % file_path)
-		return false
+		return null
 	
 	var content: String = file.get_as_text() # TODO: use buffer?
 	
@@ -43,18 +34,19 @@ func parse(file_path: String) -> bool:
 		var end_block = content.find("}", processed_length)
 		if end_block == -1:
 			print("Missing closing bracket after length %s" % processed_length)
-			return false
+			return null
 		
 		var block = content.substr(processed_length, end_block - processed_length)
 		if _parse_block(current_classes, block):
 			processed_length += (block + "}").length()
 			current_classes = {}
 		else:
-			return false
+			return null
 	
 	file.close()
-	return true
-	
+	return Stylesheet.new(_values, file_path)
+
+
 func _parse_classes(line: String) -> Dictionary:
 	var result = {}
 	var classes = line.split(",")
@@ -62,20 +54,20 @@ func _parse_classes(line: String) -> Dictionary:
 		var trimmed: String = cls.strip_edges()
 		if trimmed.length() > 0:
 			var split = trimmed.split(":")
-			var state = split[1].strip_edges() if split.size() == 2 else DEFAULT_STATE
+			var state = split[1].strip_edges() if split.size() == 2 else Stylesheet.DEFAULT_STATE
 			var key = split[0].strip_edges()
 			if not result.has(key):
 				result[key] = []
 			result[key].append(state)
 	return result
-	
+
 
 func _parse_block(classes: Dictionary, block: String) -> bool:
 	var statements = block.split(";")
 	for statement in statements:
 		if statement.strip_edges() == "": continue
 		
-		var split: Array = statement.split(":")
+		var split: Array = statement.split(":", true, 1) # limit is zero-based?
 		if split.size() != 2:
 			print("Invalid statement: %s" % statement)
 			return false
