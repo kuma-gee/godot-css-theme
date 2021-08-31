@@ -27,4 +27,11 @@ func test_apply_css():
 
     assert_eq(theme.get_font("font", "Button").resource_path, "res://tests/godot-css-theme/font.tres")
 
+    assert_true(theme.get_stylebox("normal", "Button") is StyleBoxEmpty, "Expected normal style to be StyleBoxEmpty")
+
+    var hover = theme.get_stylebox("hover", "Button")
+    assert_true(hover is StyleBoxFlat, "Expected hover style to be StyleBoxFlat")
+    assert_eq(hover.get("bg_color"), Color('#FFF'))
+    assert_eq(hover.get("shadow_size"), 5)
+
     assert_eq(theme.get_icon("checked", "CheckBox").resource_path, "res://icon.png")

@@ -7,6 +7,12 @@ Button {
     --const-hseparation: 10;
 
     --fonts-font: url(font.tres);
+
+    --styles-normal-type: Empty;
+
+    --styles-hover-type: Flat;
+    --styles-hover-bg-color: #FFF;
+    --styles-hover-shadow-size: 5;
 }
 
 CheckBox {

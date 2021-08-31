@@ -10,7 +10,6 @@ const STATE_MAP = {
 var EMPTY_STYLE = StyleBoxEmpty.new()
 
 var _theme: Theme
-var _current_style: StyleBox = EMPTY_STYLE
 
 
 func _init(theme: Theme):
@@ -21,6 +20,8 @@ func apply_css(stylesheet: Stylesheet) -> void:
 	for node_type in stylesheet.get_classes():
 		var properties = stylesheet.get_class_properties(node_type)
 		
+		var style_properties = []
+		var styles = {}
 		
 		for prop in properties:
 			var property := prop as String
@@ -46,21 +47,54 @@ func apply_css(stylesheet: Stylesheet) -> void:
 					_theme.set_icon(type, node_type, load(url))
 				else:
 					print("Invalid url %s for class %s" % [value, node_type])
-			elif property.begins_with("--styles-") and not property.ends_with("-type"):
-				var type := _parse_type("--styles-", property)
-				if _theme.has_stylebox(type, node_type):
-					var style_type = properties.get("--styles-%s-type" % type)
-					var style := _create_style(style_type)
-					if style:
-						_theme.set_stylebox(type, node_type, style)
-					else:
-						print("Invalid Style Type")
-				
-				if _theme.has_stylebox(type, node_type):
-					var style = _theme.get_stylebox(type, node_type)
-					style.set()
-				
-				
+			elif property.begins_with("--styles-"):
+				if property.ends_with("-type"):
+					var type := _parse_type("--styles-", prop)
+					type = type.substr(0, type.length() - "-type".length())
+					var style := _create_style(properties[prop])
+					styles[type] = style
+				else:
+					style_properties.append(property)
+		
+		for style in styles:
+			for prop in style_properties:
+				var prefix = "--styles-" + style + "-"
+				if prop.begins_with(prefix):
+					var type := _parse_type(prefix, node_type)
+					var value = _create_value(stylesheet, properties[prop])
+					print("Set %s to %s for style %s: %s" % [type, value, style, styles[style]])
+					styles[style].set(type, value)
+		
+		for style in styles:
+			print("set %s to %s" % [style, styles[style]])
+			_theme.set_stylebox(style, node_type, styles[style])
+#			var type := _parse_type("--styles-", property)
+#			if _theme.has_stylebox(type, node_type):
+#				var style_type = properties.get("--styles-%s-type" % type)
+#				var style := _create_style(style_type)
+#				if style:
+#					_theme.set_stylebox(type, node_type, style)
+#				else:
+#					print("Invalid Style Type")
+#
+#			if _theme.has_stylebox(type, node_type):
+#				var style = _theme.get_stylebox(type, node_type)
+#				style.set()
+
+func _create_value(stylesheet: Stylesheet, value: String):
+	var url = stylesheet.resolve_url(value)
+	if url != "":
+		return url
+	
+	if value.begins_with("#"):
+		return Color(value)
+		
+	
+	return str2var(value)
+	
+#	if (value.begins_with('"') and value.ends_with('"')) or \
+#		(value.begins_with("'") and value.ends_with("'")):
+#		return value.substr(1, value.length() - 1)
 
 func _create_style(type: String) -> StyleBox:
 	if type:
@@ -86,28 +120,3 @@ func _parse_type(prefix: String, property: String) -> String:
 #		for state in STATE_MAP:
 #			var props = css.get_class_properties(cls, state)
 #			_apply_state_styles(editor, STATE_MAP[state], props)
-
-
-func _apply_normal_styles(editor: ThemeEdit, properties: Dictionary) -> void:
-	var style = _create_background_style(properties)
-	editor.set_default_style(style)
-
-	if properties.has("color"):
-		editor.set_default_font_color(Color(properties["color"]))
-
-
-func _apply_state_styles(editor: ThemeEdit, state: String, properties: Dictionary) -> void:
-	var style = _create_background_style(properties)
-	editor.set_style(style, [state])
-
-	if properties.has("color"):
-		editor.set_font_color(Color(properties["color"]), [state])
-
-
-func _create_background_style(props: Dictionary) -> StyleBox:
-	if props.has("background-color"):
-		var style = StyleBoxFlat.new()
-		style.set("bg_color", Color(props["background-color"]))
-		return style
-	else:
-		return EMPTY_STYLE

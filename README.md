@@ -3,10 +3,7 @@
 Converts CSS to Godot Themes
 
 ### Supported Features
-Colors only works with hex values right now
 
- - Types
-    - button -> Button
- - Properties
-    - color
-    - background-color
+### Problems
+ - Colors only works with hex values right now
+ - Godot might have to be closed before generating. Otherwise it might rewrite some values

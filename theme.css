@@ -3,4 +3,18 @@ Button {
     --colors-font-color-disabled: #333;
     --colors-font-color-hover: #FFF;
     --colors-font-color-pressed: #999;
+
+    --const-hseparation: 10;
+
+    --fonts-font: url(res://tests/godot-css-theme/font.tres);
+
+    --styles-normal-type: Empty;
+
+    --styles-hover-type: Flat;
+    --styles-hover-bg-color: #FFF;
+    --styles-hover-shadow-size: 5;
+}
+
+CheckBox {
+    --icons-checked: url(res://icon.png);
 }

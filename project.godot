@@ -39,11 +39,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/ThemeApplier.gd"
 }, {
-"base": "Reference",
-"class": "ThemeEdit",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/ThemeEdit.gd"
-}, {
 "base": "Node",
 "class": "UnitTest",
 "language": "GDScript",
@@ -56,7 +51,6 @@ _global_script_class_icons={
 "Options": "",
 "Stylesheet": "",
 "ThemeApplier": "",
-"ThemeEdit": "",
 "UnitTest": ""
 }
 
