@@ -20,6 +20,14 @@ func apply_css(stylesheet: Stylesheet) -> void:
 	for node_type in stylesheet.get_classes():
 		var properties = stylesheet.get_class_properties(node_type)
 		
+		print(node_type)
+		if node_type == "body" or node_type == "*":
+			if properties.has("font-family"):
+				var url = stylesheet.resolve_url(properties.get("font-family"))
+				if url:
+					_theme.set("default_font", load(url))
+			continue
+		
 		var style_properties = []
 		var styles = {}
 		
@@ -65,7 +73,6 @@ func apply_css(stylesheet: Stylesheet) -> void:
 					styles[style].set(type, value)
 		
 		for style in styles:
-			print("set %s to %s" % [style, styles[style]])
 			_theme.set_stylebox(style, node_type, styles[style])
 
 func _create_value(stylesheet: Stylesheet, value: String):

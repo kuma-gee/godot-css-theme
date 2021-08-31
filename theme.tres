@@ -10,6 +10,7 @@ shadow_size = 5
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [resource]
+default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0.2, 0.2, 0.2, 1 )
 Button/colors/font_color_hover = Color( 1, 1, 1, 1 )

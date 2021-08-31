@@ -18,6 +18,8 @@ func before_each():
 func test_apply_css():
     theme_applier.apply_css(stylesheet)
 
+    assert_eq(theme.get("default_font").resource_path, "res://tests/godot-css-theme/font.tres")
+
     assert_eq(theme.get_color("font_color", "Button"), Color('#000'))
     assert_eq(theme.get_color("font_color_disabled", "Button"), Color('#333'))
     assert_eq(theme.get_color("font_color_hover", "Button"), Color('#FFF'))
