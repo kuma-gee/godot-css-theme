@@ -4,6 +4,8 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+shadow_size = 5
 
 [sub_resource type="StyleBoxEmpty" id=2]
 

@@ -60,26 +60,13 @@ func apply_css(stylesheet: Stylesheet) -> void:
 			for prop in style_properties:
 				var prefix = "--styles-" + style + "-"
 				if prop.begins_with(prefix):
-					var type := _parse_type(prefix, node_type)
+					var type := _parse_type(prefix, prop)
 					var value = _create_value(stylesheet, properties[prop])
-					print("Set %s to %s for style %s: %s" % [type, value, style, styles[style]])
 					styles[style].set(type, value)
 		
 		for style in styles:
 			print("set %s to %s" % [style, styles[style]])
 			_theme.set_stylebox(style, node_type, styles[style])
-#			var type := _parse_type("--styles-", property)
-#			if _theme.has_stylebox(type, node_type):
-#				var style_type = properties.get("--styles-%s-type" % type)
-#				var style := _create_style(style_type)
-#				if style:
-#					_theme.set_stylebox(type, node_type, style)
-#				else:
-#					print("Invalid Style Type")
-#
-#			if _theme.has_stylebox(type, node_type):
-#				var style = _theme.get_stylebox(type, node_type)
-#				style.set()
 
 func _create_value(stylesheet: Stylesheet, value: String):
 	var url = stylesheet.resolve_url(value)
@@ -91,10 +78,6 @@ func _create_value(stylesheet: Stylesheet, value: String):
 		
 	
 	return str2var(value)
-	
-#	if (value.begins_with('"') and value.ends_with('"')) or \
-#		(value.begins_with("'") and value.ends_with("'")):
-#		return value.substr(1, value.length() - 1)
 
 func _create_style(type: String) -> StyleBox:
 	if type:
