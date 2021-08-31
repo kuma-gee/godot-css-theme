@@ -20,7 +20,6 @@ func apply_css(stylesheet: Stylesheet) -> void:
 	for node_type in stylesheet.get_classes():
 		var properties = stylesheet.get_class_properties(node_type)
 		
-		print(node_type)
 		if node_type == "body" or node_type == "*":
 			if properties.has("font-family"):
 				var url = stylesheet.resolve_url(properties.get("font-family"))
@@ -37,10 +36,10 @@ func apply_css(stylesheet: Stylesheet) -> void:
 			
 			if property.begins_with("--colors-"):
 				var type := _parse_type("--colors-", property)
-				_theme.set_color(type, node_type, Color(value))
+				_theme.set_color(type, node_type, _create_value(stylesheet, value))
 			elif property.begins_with("--const-"):
 				var type := _parse_type("--const-", property)
-				_theme.set_constant(type, node_type, int(value))
+				_theme.set_constant(type, node_type, _create_value(stylesheet, value))
 			elif property.begins_with("--fonts-"):
 				var type := _parse_type("--fonts-", property)
 				var url := stylesheet.resolve_url(value)

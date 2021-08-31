@@ -6,7 +6,7 @@ Button {
     --colors-font-color: #000;
     --colors-font-color-disabled: #333;
     --colors-font-color-hover: #FFF;
-    --colors-font-color-pressed: #999;
+    --colors-font-color-pressed: Color(0, 0, 0, 0);
 
     --const-hseparation: 10;
 

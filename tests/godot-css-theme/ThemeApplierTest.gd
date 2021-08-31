@@ -23,7 +23,7 @@ func test_apply_css():
     assert_eq(theme.get_color("font_color", "Button"), Color('#000'))
     assert_eq(theme.get_color("font_color_disabled", "Button"), Color('#333'))
     assert_eq(theme.get_color("font_color_hover", "Button"), Color('#FFF'))
-    assert_eq(theme.get_color("font_color_pressed", "Button"), Color('#999'))
+    assert_eq(theme.get_color("font_color_pressed", "Button"), Color(0, 0, 0, 0))
 
     assert_eq(theme.get_constant("hseparation", "Button"), 10)
 
