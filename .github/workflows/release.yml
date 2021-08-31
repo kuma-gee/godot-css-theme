@@ -1,0 +1,24 @@
+name: "Push to asset lib"
+on: 
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish new version to asset lib
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Unit Test
+        run: sh scripts/test.sh
+        timeout-minutes: 5
+      - name: Godot Asset Lib
+        uses: actions/godot-asset-lib-action@v0.3.0
+        env:
+          VERSION: ${GITHUB_REF/refs\/tags\//}
+        with:
+          username: sakkaku13
+          password: ${{ secrets.ASSET_STORE_PASSWORD }}
+          assetId: 4230
