@@ -1,1 +1,5 @@
-!/addons/godot-css-theme     export-ignore
+*.*           export-ignore
+tests         export-ignore
+demo          export-ignore
+scripts       export-ignore
+addons/gut    export-ignore
