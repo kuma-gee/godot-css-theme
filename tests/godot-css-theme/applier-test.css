@@ -22,3 +22,9 @@ Button {
 CheckBox {
     --icons-checked: url(res://icon.png);
 }
+
+HSlider {
+    --styles-grabber-area-type: Flat;
+    --styles-grabber-area-bg-color: Color(0, 0, 0, 0);
+    --styles-grabber-area-border-width-left: 2;
+}

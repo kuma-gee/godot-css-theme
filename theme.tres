@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=2]
+[gd_resource type="Theme" load_steps=6 format=2]
 
 [ext_resource path="res://tests/godot-css-theme/font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -8,6 +8,8 @@ bg_color = Color( 1, 1, 1, 1 )
 shadow_size = 5
 
 [sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [resource]
 default_font = ExtResource( 1 )
@@ -20,3 +22,10 @@ Button/fonts/font = ExtResource( 1 )
 Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 2 )
 CheckBox/icons/checked = ExtResource( 2 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = null
+HSlider/styles/grabber_area_highlight = null
+HSlider/styles/slider = SubResource( 3 )

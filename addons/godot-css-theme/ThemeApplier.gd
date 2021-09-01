@@ -1,16 +1,8 @@
 class_name ThemeApplier
 
-const STATE_MAP = {
-	"hover": "hover",
-	"focus": "focus",
-	"disabled": "disabled",
-	"active": "pressed",
-}
-
 var EMPTY_STYLE = StyleBoxEmpty.new()
 
 var _theme: Theme
-
 
 func _init(theme: Theme):
 	_theme = theme
@@ -56,7 +48,7 @@ func apply_css(stylesheet: Stylesheet) -> void:
 					print("Invalid url %s for class %s" % [value, node_type])
 			elif property.begins_with("--styles-"):
 				if property.ends_with("-type"):
-					var type := _parse_type("--styles-", prop)
+					var type := _parse_type("--styles-", prop, false)
 					type = type.substr(0, type.length() - "-type".length())
 					var style := _create_style(properties[prop])
 					styles[type] = style
@@ -66,13 +58,15 @@ func apply_css(stylesheet: Stylesheet) -> void:
 		for style in styles:
 			for prop in style_properties:
 				var prefix = "--styles-" + style + "-"
+				print(prefix)
 				if prop.begins_with(prefix):
 					var type := _parse_type(prefix, prop)
 					var value = _create_value(stylesheet, properties[prop])
+					print("%s - %s" % [type, value])
 					styles[style].set(type, value)
 		
 		for style in styles:
-			_theme.set_stylebox(style, node_type, styles[style])
+			_theme.set_stylebox(style.replace("-", "_"), node_type, styles[style])
 
 func _create_value(stylesheet: Stylesheet, value: String):
 	var url = stylesheet.resolve_url(value)
@@ -94,8 +88,11 @@ func _create_style(type: String) -> StyleBox:
 			"Texture": return StyleBoxTexture.new()
 	return null
 
-func _parse_type(prefix: String, property: String) -> String:
-	return property.substr(prefix.length()).replace("-", "_")
+func _parse_type(prefix: String, property: String, replace = true) -> String:
+	var value = property.substr(prefix.length())
+	if replace:
+		value = value.replace("-", "_")
+	return value
 
 #	_theme.set_color()
 #

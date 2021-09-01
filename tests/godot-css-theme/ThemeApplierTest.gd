@@ -37,3 +37,7 @@ func test_apply_css():
     assert_eq(hover.get("shadow_size"), 5)
 
     assert_eq(theme.get_icon("checked", "CheckBox").resource_path, "res://icon.png")
+
+    var grabber_area = theme.get_stylebox("grabber_area", "HSlider")
+    assert_eq(grabber_area.get("bg_color"), Color(0, 0, 0, 0))
+    assert_eq(grabber_area.get("border_width_left"), 2);
