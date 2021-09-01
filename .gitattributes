@@ -1,2 +1,1 @@
-/addons/godot-css-theme     -export-ignore
-*                           export-ignore
+!/addons/godot-css-theme     export-ignore
