@@ -25,19 +25,8 @@ CheckBox {
 
 
 HSlider {
-    --styles-grabber-area-type: Flat;
-    --styles-grabber-area-bg-color: Color(0, 0, 0, 0);
-    --styles-grabber-area-border-width-left: 2;
-    --styles-grabber-area-border-width-right: 2;
-    --styles-grabber-area-border-width-top: 2;
-    --styles-grabber-area-border-width-bottom: 2;
-    --styles-grabber-area-border-color: #000;
-
-    --styles-grabber-area-highlight-type: Flat;
-    --styles-grabber-area-highlight-bg-color: #FFF;
-    --styles-grabber-area-highlight-border-width-left: 2;
-    --styles-grabber-area-highlight-border-width-right: 2;
-    --styles-grabber-area-highlight-border-width-top: 2;
-    --styles-grabber-area-highlight-border-width-bottom: 2;
-    --styles-grabber-area-highlight-border-color: #000;
+    --styles-grabber-area-type: Empty;
+    --styles-grabber-area-highlight-type: Empty;
+    --styles-slider-type: Empty;
+    --styles-slider-content-margin-top: 10;
 }

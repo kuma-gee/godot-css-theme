@@ -27,4 +27,7 @@ HSlider {
     --styles-grabber-area-type: Flat;
     --styles-grabber-area-bg-color: Color(0, 0, 0, 0);
     --styles-grabber-area-border-width-left: 2;
+
+    --styles-grabber-area-highlight-type: Empty;
+    --styles-slider-type: Empty;
 }

@@ -58,15 +58,34 @@ func apply_css(stylesheet: Stylesheet) -> void:
 		for style in styles:
 			for prop in style_properties:
 				var prefix = "--styles-" + style + "-"
-				print(prefix)
 				if prop.begins_with(prefix):
 					var type := _parse_type(prefix, prop)
 					var value = _create_value(stylesheet, properties[prop])
-					print("%s - %s" % [type, value])
 					styles[style].set(type, value)
 		
 		for style in styles:
-			_theme.set_stylebox(style.replace("-", "_"), node_type, styles[style])
+			var stylebox = styles[style]
+			if stylebox is StyleBoxEmpty and _is_equal_stylebox(stylebox, EMPTY_STYLE):
+				stylebox = EMPTY_STYLE
+			_theme.set_stylebox(style.replace("-", "_"), node_type, stylebox)
+
+func _is_equal_stylebox(style1: StyleBox, style2: StyleBox) -> bool:
+	var prop1 = _get_properties(style1)
+	var prop2 = _get_properties(style2)
+	
+	if prop1 != prop2:
+		return false
+	
+	for prop in prop1:
+		if style1.get(prop) != style2.get(prop):
+			return false
+	return true
+
+func _get_properties(obj: Object) -> Array:
+	var result = []
+	for prop in obj.get_property_list():
+		result.append(prop["name"])
+	return result
 
 func _create_value(stylesheet: Stylesheet, value: String):
 	var url = stylesheet.resolve_url(value)

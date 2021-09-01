@@ -41,3 +41,5 @@ func test_apply_css():
     var grabber_area = theme.get_stylebox("grabber_area", "HSlider")
     assert_eq(grabber_area.get("bg_color"), Color(0, 0, 0, 0))
     assert_eq(grabber_area.get("border_width_left"), 2);
+
+    assert_eq(theme.get_stylebox("grabber_area_highlight", "HSlider"), theme.get_stylebox("slider", "HSlider"))

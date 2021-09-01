@@ -10,6 +10,7 @@ shadow_size = 5
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
+content_margin_top = 10.0
 
 [resource]
 default_font = ExtResource( 1 )
@@ -22,10 +23,6 @@ Button/fonts/font = ExtResource( 1 )
 Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 2 )
 CheckBox/icons/checked = ExtResource( 2 )
-HSlider/icons/grabber = null
-HSlider/icons/grabber_disabled = null
-HSlider/icons/grabber_highlight = null
-HSlider/icons/tick = null
-HSlider/styles/grabber_area = null
-HSlider/styles/grabber_area_highlight = null
+HSlider/styles/grabber_area = SubResource( 2 )
+HSlider/styles/grabber_area_highlight = SubResource( 2 )
 HSlider/styles/slider = SubResource( 3 )
