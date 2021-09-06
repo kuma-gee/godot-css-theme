@@ -1,0 +1,11 @@
+.*            export-ignore
+*.md          export-ignore
+*.txt         export-ignore
+theme.*       export-ignore
+icon.*        export-ignore
+*.godot       export-ignore
+*.tres        export-ignore
+tests         export-ignore
+demo          export-ignore
+scripts       export-ignore
+addons/gut    export-ignore
