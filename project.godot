@@ -60,6 +60,14 @@ config/name="Godot-CSS-Theme"
 run/main_scene="res://demo/Demo.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/scene-editor/plugin.cfg" )
+
+[global]
+
+debug=false
+
 [physics]
 
 common/enable_pause_aware_picking=true

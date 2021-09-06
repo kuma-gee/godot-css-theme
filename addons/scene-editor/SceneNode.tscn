@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/scene-editor/SceneNode.gd" type="Script" id=1]
+
+[node name="SceneNode" type="GraphNode"]
+show_close = true
+resizable = true
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 116.0
+margin_bottom = 48.0
+columns = 2
+
+[node name="Scene" type="Label" parent="GridContainer"]
+margin_top = 5.0
+margin_right = 38.0
+margin_bottom = 19.0
+text = "Scene"
+
+[node name="SceneEdit" type="LineEdit" parent="GridContainer"]
+margin_left = 42.0
+margin_right = 100.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[connection signal="resize_request" from="." to="." method="_on_SceneNode_resize_request"]
