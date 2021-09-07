@@ -16,23 +16,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 16.0
 margin_top = 24.0
-margin_right = 116.0
-margin_bottom = 48.0
-columns = 2
+margin_right = 63.0
+margin_bottom = 62.0
 
-[node name="Scene" type="Label" parent="GridContainer"]
-margin_top = 5.0
-margin_right = 38.0
-margin_bottom = 19.0
-text = "Scene"
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+margin_right = 47.0
+margin_bottom = 14.0
 
-[node name="SceneEdit" type="LineEdit" parent="GridContainer"]
-margin_left = 42.0
-margin_right = 100.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
+[node name="OpenScene" type="Button" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 47.0
+margin_bottom = 38.0
+text = "Open"
 
 [connection signal="resize_request" from="." to="." method="_on_SceneNode_resize_request"]
+[connection signal="pressed" from="VBoxContainer/OpenScene" to="." method="_on_OpenScene_pressed"]

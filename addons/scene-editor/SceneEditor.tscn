@@ -29,3 +29,6 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="node_selected" from="GraphEdit" to="." method="_on_GraphEdit_node_selected"]
+[connection signal="open_scene" from="GraphEdit" to="." method="_on_GraphEdit_open_scene"]
+[connection signal="resize_request" from="GraphEdit/SceneNode" to="GraphEdit/SceneNode" method="_on_SceneNode_resize_request"]
