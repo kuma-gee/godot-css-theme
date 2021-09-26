@@ -5,6 +5,7 @@ func _init():
 	if not options.init():
 		quit(1)
 		return
+	var debug = options.get_value("debug")
 	
 	var parser = CSSParser.new()
 	var css_file = options.get_value("input")
@@ -14,7 +15,7 @@ func _init():
 		return
 	
 	var theme = Theme.new()
-	var applier = ThemeApplier.new(theme)
+	var applier = ThemeApplier.new(theme, debug)
 	applier.apply_css(stylesheet)
 	
 #	for cls in parser.get_classes():

@@ -3,13 +3,17 @@ class_name ThemeApplier
 var EMPTY_STYLE = StyleBoxEmpty.new()
 
 var _theme: Theme
+var _debug: bool
 
-func _init(theme: Theme):
+func _init(theme: Theme, debug := false):
 	_theme = theme
+	_debug = debug
 
 
 func apply_css(stylesheet: Stylesheet) -> void:
 	for node_type in stylesheet.get_classes():
+		if _debug:
+			print("Setting properties for %s" % node_type)
 		var properties = stylesheet.get_class_properties(node_type)
 		
 		if node_type == "body" or node_type == "*":
@@ -17,6 +21,8 @@ func apply_css(stylesheet: Stylesheet) -> void:
 				var url = stylesheet.resolve_url(properties.get("font-family"))
 				if url:
 					_theme.set("default_font", load(url))
+					if _debug:
+						print("Set default font: %s" % url)
 			continue
 		
 		var style_properties = []
@@ -28,15 +34,23 @@ func apply_css(stylesheet: Stylesheet) -> void:
 			
 			if property.begins_with("--colors-"):
 				var type := _parse_type("--colors-", property)
-				_theme.set_color(type, node_type, _create_value(stylesheet, value))
+				var _value = _create_value(stylesheet, value)
+				_theme.set_color(type, node_type, _value)
+				if _debug:
+					print("Set color for %s: %s" % [type, _value])
 			elif property.begins_with("--const-"):
 				var type := _parse_type("--const-", property)
-				_theme.set_constant(type, node_type, _create_value(stylesheet, value))
+				var _value = _create_value(stylesheet, value)
+				_theme.set_constant(type, node_type, _value)
+				if _debug:
+					print("Set const for %s: %s" % [type, _value])
 			elif property.begins_with("--fonts-"):
 				var type := _parse_type("--fonts-", property)
 				var url := stylesheet.resolve_url(value)
 				if url:
 					_theme.set_font(type, node_type, load(url))
+					if _debug:
+						print("Set font for %s: %s" % [type, url])
 				else:
 					print("Invalid url %s for class %s" % [value, node_type])
 			elif property.begins_with("--icons-"):
@@ -44,6 +58,8 @@ func apply_css(stylesheet: Stylesheet) -> void:
 				var url := stylesheet.resolve_url(value)
 				if url:
 					_theme.set_icon(type, node_type, load(url))
+					if _debug:
+						print("Set icon for %s: %s" % [type, url])
 				else:
 					print("Invalid url %s for class %s" % [value, node_type])
 			elif property.begins_with("--styles-"):
@@ -61,6 +77,8 @@ func apply_css(stylesheet: Stylesheet) -> void:
 				if prop.begins_with(prefix):
 					var type := _parse_type(prefix, prop)
 					var value = _create_value(stylesheet, properties[prop])
+					if _debug:
+						print("set style for %s: %s" % [type, value])
 					styles[style].set(type, value)
 		
 		for style in styles:

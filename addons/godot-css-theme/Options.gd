@@ -4,6 +4,7 @@ var _options = {
 	input = ['res://theme.css', 'CSS Input File'],
 	output = ['res://theme.tres', 'Theme Output File'],
 	config_file = ['res://.godot-css-config.json', 'Config file'],
+	debug = [false, 'Enable debug mode']
 }
 
 var args: ArgumentParser
