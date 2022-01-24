@@ -15,7 +15,7 @@ jobs:
         run: sh scripts/test.sh
         timeout-minutes: 5
       - name: Godot Asset Lib
-        uses: actions/godot-asset-lib-action@v0.3.0
+        uses: deep-entertainment/godot-asset-lib-action@v0.3.0
         env:
           VERSION: ${GITHUB_REF/refs\/tags\//}
         with:
