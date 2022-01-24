@@ -16,10 +16,13 @@ jobs:
       - name: Unit Test
         run: sh scripts/test.sh
         timeout-minutes: 5
+      - name: Get the version
+        id: version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
       - name: Godot Asset Lib
         uses: deep-entertainment/godot-asset-lib-action@v0.3.0
         env:
-          VERSION: ${GITHUB_REF/refs\/tags\//}
+          VERSION: ${{ steps.version.outputs.VERSION }}
         with:
           username: sakkaku13
           password: ${{ secrets.ASSET_STORE_PASSWORD }}
