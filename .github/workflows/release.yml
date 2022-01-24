@@ -1,5 +1,5 @@
 name: "Push to asset lib"
-on: 
+on:
   push:
     tags:
       - "v*.*.*"
@@ -8,6 +8,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     name: Publish new version to asset lib
+    container:
+      image: barichello/godot-ci:3.3.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
