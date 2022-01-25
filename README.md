@@ -9,9 +9,11 @@ The goal is to make theme creating easier and more reusable. Using CSS you also 
 Generally all properties of a Godot Theme should be supported. The program uses custom css variables to set values.
 
 The node_type is used like a tag to decide which node to style (e.g. `Button` or `CheckBox`).
+The `body` tag has a special meaning. It is used to set global styles where possible.
 
 The structure for a statement is `--{TYPE}-{PROPERTY}: {VALUE}` 
-The only exception is for setting `styles`. They need a special type definition like `--styles-{PROPERTY}-type: {VALUE}`. See [syntax](#syntax)
+The only exception is for setting `styles`. They need a special type definition like
+`--styles-{PROPERTY}-type: {VALUE}`. See [syntax](#syntax)
 
 ### Syntax
  - `--{TYPE}-{PROPERTY}: {VALUE}`
