@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "UnitTest",
 "language": "GDScript",
-"path": "res://tests/godot-css-theme/UnitTest.gd"
+"path": "res://tests/UnitTest.gd"
 } ]
 _global_script_class_icons={
 "ArgumentParser": "",

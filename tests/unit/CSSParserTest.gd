@@ -6,7 +6,7 @@ func before_each():
 	parser = CSSParser.new()
 
 func test_parse():
-	var stylesheet = parser.parse("res://tests/godot-css-theme/parser-test.css")
+	var stylesheet = parser.parse("res://tests/unit/parser-test.css")
 	assert_not_null(stylesheet)
 	
 	assert_eq(stylesheet.get_classes(), ["button", "h1", "body", "Resource"])
