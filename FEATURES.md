@@ -32,3 +32,5 @@ External resources are specified with `url()`:
 - `url(file.txt)` - relative path to css file
 
 ## Special Syntax
+
+See `tests/e2e/simple-syntax.css` for now.
