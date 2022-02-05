@@ -33,4 +33,8 @@ External resources are specified with `url()`:
 
 ## Special Syntax
 
-See `tests/e2e/simple-syntax.css` for now.
+See [`tests/e2e/simple-syntax.css`](./tests/e2e/simple-syntax.css) for now.
+
+## SCSS
+
+See [this file](https://github.com/kuma-gee/robo-soul/blob/master/theme/theme.scss) for now
