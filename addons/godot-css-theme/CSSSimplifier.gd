@@ -54,5 +54,4 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 		values[cls][Stylesheet.DEFAULT_STATE] = new_props
 
-	print(values)
 	return Stylesheet.new(values, stylesheet.get_css_file())
