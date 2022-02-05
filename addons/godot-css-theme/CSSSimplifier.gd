@@ -24,11 +24,13 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 						if state == Stylesheet.DEFAULT_STATE
 						else "--colors-font-color-%s" % state
 					)
-					print(mapped_prop + " " + state)
 					new_props[mapped_prop] = value
 				elif prop == "background":
-					new_props[style_type] = "Flat"
-					new_props[style_prefix + "bg-color"] = value
+					if value == "none":
+						new_props[style_type] = "Empty"
+					else:
+						new_props[style_type] = "Flat"
+						new_props[style_prefix + "bg-color"] = value
 				elif prop == "padding":
 					if not new_props.has(style_type):
 						new_props[style_type] = "Empty"

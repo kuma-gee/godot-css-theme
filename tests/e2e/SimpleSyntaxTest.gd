@@ -20,10 +20,10 @@ func test_simple_prop_mapping():
 	assert_is(normal, StyleBoxFlat)
 	assert_eq(normal.get("bg_color"), Color("#000"))
 
-	assert_eq(normal.get("content_margin_top"), 5)
-	assert_eq(normal.get("content_margin_bottom"), 5)
-	assert_eq(normal.get("content_margin_left"), 10)
-	assert_eq(normal.get("content_margin_right"), 10)
+	assert_eq(normal.get("content_margin_top"), 5.0)
+	assert_eq(normal.get("content_margin_bottom"), 5.0)
+	assert_eq(normal.get("content_margin_left"), 10.0)
+	assert_eq(normal.get("content_margin_right"), 10.0)
 
 
 func test_button_states():

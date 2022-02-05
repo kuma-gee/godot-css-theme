@@ -19,12 +19,12 @@ func test_font_color():
 
 
 func test_style_box_empty():
-	var empty = autofree(theme.get_stylebox("normal", "Button"))
+	var empty = theme.get_stylebox("normal", "Button")
 	assert_is(empty, StyleBoxEmpty)
-	assert_eq(empty.get("content_margin_top"), 2)
-	assert_eq(empty.get("content_margin_left"), 2)
-	assert_eq(empty.get("content_margin_right"), 2)
-	assert_eq(empty.get("content_margin_bottom"), 2)
+	assert_eq(empty.get("content_margin_top"), 2.0)
+	assert_eq(empty.get("content_margin_left"), 2.0)
+	assert_eq(empty.get("content_margin_right"), 2.0)
+	assert_eq(empty.get("content_margin_bottom"), 2.0)
 
 
 func test_style_box_flat():
