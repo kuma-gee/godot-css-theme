@@ -2,7 +2,8 @@
 
 Converts CSS to Godot Themes.
 
-The goal is to make theme creating easier and more reusable. Using CSS you also have the advantage to use preprocessors like [SASS](https://sass-lang.com/). Since using normal CSS variables with `var()` is not supported (yet?).
+The goal is to make theme creating easier and more reusable. Using CSS you also have the advantage to use preprocessors
+like [SASS](https://sass-lang.com/). Since using normal CSS variables with `var()` is not supported (yet?).
 
 ## Supported Features
 
@@ -48,7 +49,18 @@ Button {
 
 `godot -s addons/godot-css-theme/convert.gd --input="res://theme.css" --output="res://theme.tres"`
 
+## Contribute
+
+If you see any problem or have any ideas for new features feel free to create an issue or a PR :)
+
+Just make sure that the tests in `tests/e2e` should be updated to handle the case
+and that features are documented in `FEATURES.md`.
+
+- `base-syntax.css` - should contain all possible styles that can be set
+- `simple-syntax.css` - should contain all simplified syntax that is supported
+
 ## Problems
 
-- Using colors with words like `red` or `blue` does not work. Either use hex `#000` or native gdscript `Color(0, 0, 0, 1)`
+- Using colors with words like `red` or `blue` does not work. Either use hex `#000` or
+  native gdscript `Color(0, 0, 0, 1)`
 - Godot might have to be closed before generating. Otherwise it might rewrite some values

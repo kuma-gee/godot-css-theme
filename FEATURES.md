@@ -1,3 +1,7 @@
+# Features
+
+For a full list of examples see the css files in `tests/e2e`.
+
 ## Base Syntax
 
 This syntax should theoretically support every property in godot.

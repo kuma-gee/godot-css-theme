@@ -1,0 +1,36 @@
+Button {
+  --colors-font-color: #000;
+  --colors-font-color-disabled: #333;
+  --colors-font-color-hover: #fff;
+  --colors-font-color-pressed: Color(0, 0, 0, 0);
+
+  --const-hseparation: 10;
+
+  --fonts-font: url(font.tres);
+
+  --styles-normal-type: Empty;
+  --styles-normal-content-margin-top: 2;
+  --styles-normal-content-margin-left: 2;
+  --styles-normal-content-margin-right: 2;
+  --styles-normal-content-margin-bottom: 2;
+
+  --styles-hover-type: Flat;
+  --styles-hover-bg-color: #fff;
+  --styles-hover-draw-center: false;
+  --styles-hover-shadow-color: #333;
+  --styles-hover-shadow-size: 5;
+  --styles-hover-shadow-offset: Vector2(1, 1);
+}
+
+CheckBox {
+  --icons-checked: url(res://icon.png);
+}
+
+HSlider {
+  --styles-grabber-area-type: Flat;
+  --styles-grabber-area-bg-color: Color(0, 0, 0, 0);
+  --styles-grabber-area-border-width-left: 2;
+
+  --styles-grabber-area-highlight-type: Empty;
+  --styles-slider-type: Empty;
+}
