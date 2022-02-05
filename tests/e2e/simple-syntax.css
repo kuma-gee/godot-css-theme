@@ -1,3 +1,18 @@
 body {
   font-family: url(font.tres);
 }
+
+Label {
+  color: #fff;
+  background: #000;
+  padding: 5 10;
+}
+
+Button,
+Button:hover,
+Button:focus,
+Button:disabled,
+Button:pressed {
+  --colors-font-color: #fff;
+  background: #333;
+}

@@ -6,6 +6,10 @@ func create_theme_from_css(file: String) -> Theme:
 	var theme_applier = ThemeApplier.new(theme)
 	var parser = CSSParser.new()
 	var stylesheet = parser.parse(file)
-	theme_applier.apply_css(stylesheet)
+
+	var simplifier = CSSSimplifier.new()
+	var fullStylesheet = simplifier.simplify(stylesheet)
+
+	theme_applier.apply_css(fullStylesheet)
 
 	return theme

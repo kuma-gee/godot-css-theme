@@ -11,3 +11,30 @@ func before_all():
 
 func test_global_font():
 	assert_eq(theme.get("default_font").resource_path, "res://tests/e2e/font.tres")
+
+
+func test_simple_prop_mapping():
+	assert_eq(theme.get_color("font_color", "Label"), Color("#FFF"))
+
+	var normal = theme.get_stylebox("normal", "Label")
+	assert_is(normal, StyleBoxFlat)
+	assert_eq(normal.get("bg_color"), Color("#000"))
+
+	assert_eq(normal.get("content_margin_top"), 5)
+	assert_eq(normal.get("content_margin_bottom"), 5)
+	assert_eq(normal.get("content_margin_left"), 10)
+	assert_eq(normal.get("content_margin_right"), 10)
+
+
+func test_button_states():
+	assert_eq(theme.get_color("font_color", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_color_disabled", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_color_hover", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_color_pressed", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_color_focus", "Button"), Color("#FFF"))
+
+	assert_eq(theme.get_stylebox("normal", "Button").get("bg_color"), Color("#333"))
+	assert_eq(theme.get_stylebox("disabled", "Button").get("bg_color"), Color("#333"))
+	assert_eq(theme.get_stylebox("hover", "Button").get("bg_color"), Color("#333"))
+	assert_eq(theme.get_stylebox("pressed", "Button").get("bg_color"), Color("#333"))
+	assert_eq(theme.get_stylebox("focus", "Button").get("bg_color"), Color("#333"))

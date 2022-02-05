@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://addons/godot-css-theme/CSSParser.gd"
 }, {
 "base": "Reference",
+"class": "CSSSimplifier",
+"language": "GDScript",
+"path": "res://addons/godot-css-theme/CSSSimplifier.gd"
+}, {
+"base": "Reference",
 "class": "OptParse",
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/optparse.gd"
@@ -53,6 +58,7 @@ _global_script_class_icons={
 "ArgumentParser": "",
 "BaseCSSTest": "",
 "CSSParser": "",
+"CSSSimplifier": "",
 "OptParse": "",
 "Options": "",
 "Stylesheet": "",
