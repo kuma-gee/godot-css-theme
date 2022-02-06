@@ -33,7 +33,16 @@ External resources are specified with `url()`:
 
 ## Simplified Syntax
 
-See [`tests/e2e/simple-syntax.css`](./tests/e2e/simple-syntax.css) for now.
+See [`tests/e2e/simple-syntax.css`](./tests/e2e/simple-syntax.css) for an example.
+
+States can be selected with pseudo selectors like `Button:disabled` where `disabled` could be any state.
+Right now only simplified syntax works with this selector.
+If you use the base syntax like `--colors-font-color`, it will only apply to the normal state.
+
+- `color` -> `font_color`
+- `gap` -> `separation`
+- `padding` -> `content_margin_*`
+- `background` -> `bg_color`
 
 ## SCSS
 
