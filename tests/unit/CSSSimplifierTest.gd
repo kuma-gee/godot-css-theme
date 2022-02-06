@@ -60,3 +60,8 @@ func test_map_padding_from_state():
 	assert_eq(disabled.get("content_margin_right"), 5.0)
 	assert_eq(disabled.get("content_margin_top"), 5.0)
 	assert_eq(disabled.get("content_margin_bottom"), 5.0)
+
+
+func test_map_gap():
+	var theme = create_theme_from_text("HBoxContainer { gap: 5 }")
+	assert_eq(theme.get_constant("separation", "HBoxContainer"), 5)

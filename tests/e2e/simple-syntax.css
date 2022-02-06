@@ -13,6 +13,6 @@ Button:hover,
 Button:focus,
 Button:disabled,
 Button:pressed {
-  --colors-font-color: #fff;
+  color: #fff;
   background: #333;
 }
