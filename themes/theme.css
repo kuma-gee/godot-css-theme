@@ -1,5 +1,5 @@
 body {
-    font-family: url(res://tests/godot-css-theme/font.tres);
+    font-family: url(res://tests/unit/font.tres);
 }
 
 Button {
@@ -10,7 +10,7 @@ Button {
 
     --const-hseparation: 10;
 
-    --fonts-font: url(res://tests/godot-css-theme/font.tres);
+    --fonts-font: url(res://tests/unit/font.tres);
 
     --styles-normal-type: Empty;
 

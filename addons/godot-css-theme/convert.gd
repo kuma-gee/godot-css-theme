@@ -22,18 +22,16 @@ func _init():
 	var fullStylesheet = simplifier.simplify(stylesheet)
 	applier.apply_css(fullStylesheet)
 
-#	for cls in parser.get_classes():
-#		var normal = parser.get_class_properties(cls)
-#		applier.apply_css(cls, normal)
-
-#		var editor := ThemeEdit.new(_theme, cls)
-#		_apply_normal_styles(editor, normal)
-#
-#		for state in STATE_MAP:
-#			var props = css.get_class_properties(cls, state)
-#			_apply_state_styles(editor, STATE_MAP[state], props)
-
 	var output = options.get_value("output")
+	if not output:
+		var last_slash = css_file.find_last("/")
+		var file_name = css_file.substr(last_slash + 1)
+		var dir_path = css_file.substr(0, last_slash)
+
+		var file_name_without_ext = file_name.split(".")[0]
+		output = dir_path + "/" + file_name_without_ext + ".tres"
+
+	print(output)
 	var err = ResourceSaver.save(output, theme)
 	if err != OK:
 		print("Failed to save theme %s" % err)

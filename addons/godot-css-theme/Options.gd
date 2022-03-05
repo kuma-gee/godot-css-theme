@@ -1,8 +1,8 @@
 class_name Options
 
 var _options = {
-	input = ['res://theme.css', 'CSS Input File'],
-	output = ['res://theme.tres', 'Theme Output File'],
+	input = ['', 'CSS Input File'],
+	output = ['', 'Theme Output File'],
 	config_file = ['res://.godot-css-config.json', 'Config file'],
 	debug = [false, 'Enable debug mode']
 }
