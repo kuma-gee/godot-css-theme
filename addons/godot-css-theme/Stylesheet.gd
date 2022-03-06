@@ -2,35 +2,54 @@ class_name Stylesheet
 
 const DEFAULT_STATE = "normal"
 
-var _values: Dictionary
 var _css_file: String
+var _values: Dictionary = {"": {}}
 
 
 func _init(values: Dictionary, file: String):
-	_values = values
 	_css_file = file
+
+	for tag in values.keys():
+		var value = values[tag]
+		if "." in tag:
+			var split = tag.split(".")
+			var actual_tag = split[0]
+			var class_group = split[1]
+
+			if not class_group in _values:
+				_values[class_group] = {}
+
+			_values[class_group][actual_tag] = value
+		else:
+			_values[""][tag] = value
+
+	print(_values)
 
 
 func get_css_file() -> String:
 	return _css_file
 
 
-func get_classes() -> Array:
+func get_class_groups() -> Array:
 	return _values.keys()
 
 
-func get_class_states(cls: String) -> Array:
-	if not _values.has(cls):
+func get_classes(class_group = "") -> Array:
+	return _values[class_group].keys()
+
+
+func get_class_states(cls: String, class_group = "") -> Array:
+	if not _values[class_group].has(cls):
 		return []
-	return _values[cls].keys()
+	return _values[class_group][cls].keys()
 
 
-func get_class_properties(cls: String, state = DEFAULT_STATE) -> Dictionary:
-	if not _values.has(cls):
+func get_class_properties(cls: String, state = DEFAULT_STATE, class_group = "") -> Dictionary:
+	if not _values[class_group].has(cls):
 		return {}
-	if not _values[cls].has(state):
+	if not _values[class_group][cls].has(state):
 		return {}
-	return _values[cls][state]
+	return _values[class_group][cls][state]
 
 
 func resolve_url(value: String) -> String:
