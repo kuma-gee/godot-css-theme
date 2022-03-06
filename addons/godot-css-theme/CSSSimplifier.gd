@@ -40,18 +40,27 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					if not new_props.has(style_type):
 						new_props[style_type] = "Empty"
 
-					var value = props["padding"]
-					var split = value.split(" ")
-					var vValue = value
-					var hValue = value
-					if split.size() > 1:
-						vValue = split[0]
-						hValue = split[1]
+					_shorthand_sides(new_props, props["padding"], style_prefix + "content-margin")
 
-					new_props[style_prefix + "content-margin-left"] = hValue
-					new_props[style_prefix + "content-margin-right"] = hValue
-					new_props[style_prefix + "content-margin-top"] = vValue
-					new_props[style_prefix + "content-margin-bottom"] = vValue
+				if props.has("border-width"):
+					new_props[style_type] = "Flat"
+					_shorthand_sides(
+						new_props, props["border-width"], style_prefix + "border-width"
+					)
+
+				if props.has("border-radius"):
+					new_props[style_type] = "Flat"
+					_shorthand_sides(
+						new_props,
+						props["border-radius"],
+						style_prefix + "corner-radius",
+						["top-left", "top-right", "bottom-right", "bottom-left"]
+					)
+
+				if props.has("border-color"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "border-color"] = props["border-color"]
+					print(new_props)
 
 				if props.has("gap"):
 					new_props["--const-separation"] = props["gap"]
@@ -59,3 +68,27 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 
 	return Stylesheet.new(values, stylesheet.get_css_file())
+
+
+func _shorthand_sides(
+	props: Dictionary, value: String, prefix: String, sides = ["top", "right", "bottom", "left"]
+):
+	var split = value.split(" ")
+
+	# Usually: top, right, bottom, left
+	var side_values = [value, value, value, value]
+
+	if split.size() == 2:
+		side_values[0] = split[0]
+		side_values[1] = split[1]
+		side_values[2] = split[0]
+		side_values[3] = split[1]
+
+	if split.size() == 4:
+		side_values[0] = split[0]
+		side_values[1] = split[1]
+		side_values[2] = split[2]
+		side_values[3] = split[3]
+
+	for i in range(0, sides.size()):
+		props[prefix + "-" + sides[i]] = side_values[i]

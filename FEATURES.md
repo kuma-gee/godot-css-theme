@@ -61,6 +61,9 @@ If you use the base syntax like `--colors-font-color`, it will only apply to the
 - `gap` -> `separation`
 - `padding` -> `content_margin_*`
 - `background` -> `bg_color`
+- `border-width` -> `border_width_*`
+- `border-radius` -> `corner_radius_*`
+- `border-color` -> `border_color`
 
 ## SCSS
 

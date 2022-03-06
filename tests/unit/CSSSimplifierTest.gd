@@ -42,6 +42,11 @@ func test_map_background_none_from_state():
 	assert_is(disabled, StyleBoxEmpty)
 
 
+func test_map_gap():
+	var theme = create_theme_from_text("HBoxContainer { gap: 5 }")[""]
+	assert_eq(theme.get_constant("separation", "HBoxContainer"), 5)
+
+
 func test_map_padding():
 	var theme = create_theme_from_text("Button { padding: 5 }")[""]
 	var normal = theme.get_stylebox("normal", "Button")
@@ -60,6 +65,15 @@ func test_map_padding_horizontal_vertical():
 	assert_eq(normal.get("content_margin_bottom"), 5.0)
 
 
+func test_map_padding_all_sides():
+	var theme = create_theme_from_text("Button { padding: 1 2 3 4 }")[""]
+	var normal = theme.get_stylebox("normal", "Button")
+	assert_eq(normal.get("content_margin_top"), 1.0)
+	assert_eq(normal.get("content_margin_right"), 2.0)
+	assert_eq(normal.get("content_margin_bottom"), 3.0)
+	assert_eq(normal.get("content_margin_left"), 4.0)
+
+
 func test_map_padding_from_state():
 	var theme = create_theme_from_text("Button:disabled { padding: 5 }")[""]
 	var disabled = theme.get_stylebox("disabled", "Button")
@@ -69,6 +83,25 @@ func test_map_padding_from_state():
 	assert_eq(disabled.get("content_margin_bottom"), 5.0)
 
 
-func test_map_gap():
-	var theme = create_theme_from_text("HBoxContainer { gap: 5 }")[""]
-	assert_eq(theme.get_constant("separation", "HBoxContainer"), 5)
+func test_map_border_width():
+	var theme = create_theme_from_text("Button { border-width: 5 10 }")[""]
+	var normal = theme.get_stylebox("normal", "Button")
+	assert_eq(normal.get("border_width_top"), 5)
+	assert_eq(normal.get("border_width_left"), 10)
+	assert_eq(normal.get("border_width_right"), 10)
+	assert_eq(normal.get("border_width_bottom"), 5)
+
+
+func test_map_border_radius():
+	var theme = create_theme_from_text("Button { border-radius: 2 5 }")[""]
+	var normal = theme.get_stylebox("normal", "Button")
+	assert_eq(normal.get("corner_radius_top_left"), 2)
+	assert_eq(normal.get("corner_radius_top_right"), 5)
+	assert_eq(normal.get("corner_radius_bottom_left"), 5)
+	assert_eq(normal.get("corner_radius_bottom_right"), 2)
+
+
+func test_map_border_color():
+	var theme = create_theme_from_text("Button { border-color: #333 }")[""]
+	var normal = theme.get_stylebox("normal", "Button")
+	assert_eq(normal.get("border_color"), Color("#333"))
