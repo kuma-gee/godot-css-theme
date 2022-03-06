@@ -20,6 +20,8 @@ func get_class_groups() -> Array:
 
 
 func get_classes(class_group = "") -> Array:
+	if not _values.has(class_group):
+		return []
 	return _values[class_group].keys()
 
 

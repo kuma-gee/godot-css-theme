@@ -72,3 +72,10 @@ func test_save_properties_by_classes():
 	assert_eq_deep(stylesheet.get_classes("test-class"), ["Button", "Label"])
 	assert_eq_deep(stylesheet.get_class_properties("Button", "test-class"), {"color": "#333"})
 	assert_eq_deep(stylesheet.get_class_properties("Label", "test-class"), {"color": "#333"})
+
+
+func test_ignore_standalone_classes():
+	var stylesheet = parser.parse_text(".alone { color: #333 }", "")
+
+	assert_eq(stylesheet.get_class_groups(), [""])
+	assert_eq(stylesheet.get_classes("alone"), [])

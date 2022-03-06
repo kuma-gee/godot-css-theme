@@ -58,6 +58,9 @@ func parse_text(content: String, path: String):
 			var actual_tag = split[0]
 			var class_group = split[1]
 
+			if not actual_tag:
+				continue
+
 			if not class_group in result:
 				result[class_group] = {}
 
