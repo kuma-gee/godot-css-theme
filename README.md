@@ -58,10 +58,6 @@ Button {
 }
 ```
 
-## How to use
-
-`godot -s addons/godot-css-theme/convert.gd --input="res://theme.css" --output="res://theme.tres"`
-
 ## Contribute
 
 If you see any problem or have any ideas for new features feel free to create an issue or a PR :)
