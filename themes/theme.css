@@ -30,3 +30,11 @@ HSlider {
     --styles-slider-type: Empty;
     --styles-slider-content-margin-top: 10;
 }
+
+Button.test {
+    color: #333;
+}
+
+Button.test:disabled {
+    color: #AAA;
+}

@@ -15,12 +15,10 @@ func _init():
 		quit(1)
 		return
 
-	var theme = Theme.new()
-	var applier = ThemeApplier.new(theme, debug)
-
+	var applier = ThemeApplier.new(debug)
 	var simplifier = CSSSimplifier.new()
 	var fullStylesheet = simplifier.simplify(stylesheet)
-	applier.apply_css(fullStylesheet)
+	var themes = applier.apply_css(fullStylesheet)
 
 	var output = options.get_value("output")
 	if not output:
@@ -31,11 +29,19 @@ func _init():
 		var file_name_without_ext = file_name.split(".")[0]
 		output = dir_path + "/" + file_name_without_ext + ".tres"
 
-	print(output)
-	var err = ResourceSaver.save(output, theme)
-	if err != OK:
-		print("Failed to save theme %s" % err)
-		quit(1)
-		return
+	var output_dir = output.substr(0, output.find_last("/") + 1)
+	print("Generating themes to %s" % output_dir)
+
+	for theme_name in themes.keys():
+		var theme = themes[theme_name]
+		var theme_output = output_dir + theme_name + ".tres"
+		if theme_name == "":
+			theme_output = output
+		
+		var err = ResourceSaver.save(theme_output, theme)
+		if err != OK:
+			print("Failed to save theme %s" % err)
+		else:
+			print("Saved theme %s to %s" % [theme_name, theme_output])
 
 	quit()

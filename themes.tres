@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[ext_resource path="res://tests/unit/font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+content_margin_top = 10.0
+
+[resource]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 0, 0, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.2, 0.2, 0.2, 1 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/font_color_pressed = Color( 0, 0, 0, 0 )
+Button/constants/hseparation = 10
+Button/fonts/font = ExtResource( 1 )
+Button/styles/hover = SubResource( 1 )
+Button/styles/normal = SubResource( 2 )
+CheckBox/icons/checked = ExtResource( 2 )
+HSlider/styles/grabber_area = SubResource( 2 )
+HSlider/styles/grabber_area_highlight = SubResource( 2 )
+HSlider/styles/slider = SubResource( 3 )
