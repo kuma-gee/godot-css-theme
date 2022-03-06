@@ -16,6 +16,8 @@ The structure for a statement is `--{TYPE}-{PROPERTY}: {VALUE}`
 The only exception is for setting `styles`. They need a special type definition like
 `--styles-{PROPERTY}-type: {VALUE}`. See [syntax](#syntax)
 
+Classes for `node_types` are supported and they will be generated as a separate theme.
+
 ### Syntax Overview
 
 For a list of all supported features see [FEATURES.md](./FEATURES.md)

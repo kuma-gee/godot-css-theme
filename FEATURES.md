@@ -2,6 +2,24 @@
 
 For a full list of examples see the css files in `tests/e2e`.
 
+## Classes
+
+You can use classes in the css files but they need to be associated with a `node_type` (e.g `Button.cool-button`).
+They cannot be used standalone. Classes will be grouped together and will be generated as a separate theme.
+
+For example the following will generate two separate themes. In the same directory where the default one is created,
+there will be another theme called `dark-mode.tres`
+
+```css
+Button {
+  color: #000;
+}
+
+Button.dark-mode {
+  color: #fff;
+}
+```
+
 ## Base Syntax
 
 This syntax should theoretically support every property in godot.
