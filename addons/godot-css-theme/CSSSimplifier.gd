@@ -60,7 +60,6 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 				if props.has("border-color"):
 					new_props[style_type] = "Flat"
 					new_props[style_prefix + "border-color"] = props["border-color"]
-					print(new_props)
 
 				if props.has("gap"):
 					new_props["--const-separation"] = props["gap"]
