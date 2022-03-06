@@ -48,7 +48,24 @@ func parse_text(content: String, path: String):
 		else:
 			return null
 
-	return Stylesheet.new(_values, path)
+	var result = {"": {}}
+	for tag in _values.keys():
+		if not tag:
+			continue
+		var value = _values[tag]
+		if "." in tag:
+			var split = tag.split(".")
+			var actual_tag = split[0]
+			var class_group = split[1]
+
+			if not class_group in result:
+				result[class_group] = {}
+
+			result[class_group][actual_tag] = value
+		else:
+			result[""][tag] = value
+
+	return Stylesheet.new(result, path)
 
 
 func _parse_classes(line: String) -> Dictionary:

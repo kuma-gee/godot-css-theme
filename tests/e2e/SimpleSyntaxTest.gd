@@ -6,7 +6,7 @@ var theme: Theme
 
 
 func before_all():
-	theme = create_theme_from_css(TEST_CSS)
+	theme = create_theme_from_css(TEST_CSS)[0]
 
 
 func test_global_font():

@@ -23,13 +23,13 @@ func test_parse():
 		}
 	)
 
-	var button_state = stylesheet.get_class_properties("button", "hover")
+	var button_state = stylesheet.get_class_properties("button", "", "hover")
 	assert_eq_deep(button_state, {"color": "red"})
-	button_state = stylesheet.get_class_properties("button", "focus")
+	button_state = stylesheet.get_class_properties("button", "", "focus")
 	assert_eq_deep(button_state, {"color": "red"})
-	button_state = stylesheet.get_class_properties("button", "disabled")
+	button_state = stylesheet.get_class_properties("button", "", "disabled")
 	assert_eq_deep(button_state, {"color": "black"})
-	button_state = stylesheet.get_class_properties("button", "active")
+	button_state = stylesheet.get_class_properties("button", "", "active")
 	assert_eq_deep(button_state, {"color": "black"})
 
 	var body = stylesheet.get_class_properties("body")
@@ -58,3 +58,17 @@ func test_combine_same_tags():
 	var button = stylesheet.get_class_properties("Button")
 	assert_eq_deep(button, {"color": "red", "padding": "1em"})
 
+
+func test_save_properties_by_classes():
+	var stylesheet = parser.parse_text(
+		"Button {color: #FFF} Button.test-class { color: #333 } Label.test-class { color: #333 }",
+		""
+	)
+
+	assert_eq(stylesheet.get_class_groups(), ["", "test-class"])
+	assert_eq(stylesheet.get_classes(), ["Button"])
+	assert_eq(stylesheet.get_classes("test-class"), ["Button", "Label"])
+
+	assert_eq_deep(stylesheet.get_classes("test-class"), ["Button", "Label"])
+	assert_eq_deep(stylesheet.get_class_properties("Button", "test-class"), {"color": "#333"})
+	assert_eq_deep(stylesheet.get_class_properties("Label", "test-class"), {"color": "#333"})

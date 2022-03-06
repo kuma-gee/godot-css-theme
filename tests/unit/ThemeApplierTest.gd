@@ -5,7 +5,7 @@ const TEST_CSS = "res://tests/unit/applier-test.css"
 
 
 func test_apply_css():
-	var theme = create_theme_from_css(TEST_CSS)
+	var theme = create_theme_from_css(TEST_CSS)[""]
 
 	assert_eq(theme.get("default_font").resource_path, "res://tests/unit/font.tres")
 

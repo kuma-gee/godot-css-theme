@@ -34,3 +34,12 @@ HSlider {
   --styles-grabber-area-highlight-type: Empty;
   --styles-slider-type: Empty;
 }
+
+Button.test,
+Label.test {
+  --colors-font-color: #fff;
+}
+
+Label.test {
+  --colors-font-color-disabled: #aaa;
+}
