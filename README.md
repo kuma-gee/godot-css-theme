@@ -5,6 +5,17 @@ Converts CSS to Godot Themes.
 The goal is to make theme creating easier and more reusable. Using CSS you also have the advantage to use preprocessors
 like [SASS](https://sass-lang.com/). Since using normal CSS variables with `var()` is not supported (yet?).
 
+## How to use
+
+```sh
+# Output defaults to same folder with .tres extension
+godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css"
+
+# To output in a different file
+godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css" --output="res://output/themes.tres"
+
+```
+
 ## Supported Features
 
 Generally all properties of a Godot Theme should be supported. The program uses custom css variables to set values.
@@ -16,7 +27,7 @@ The structure for a statement is `--{TYPE}-{PROPERTY}: {VALUE}`
 The only exception is for setting `styles`. They need a special type definition like
 `--styles-{PROPERTY}-type: {VALUE}`. See [syntax](#syntax)
 
-Classes for `node_types` are supported and they will be generated as a separate theme.
+Classes for `node_types` are supported and they will be generated as a separate theme in the same output directory.
 
 ### Syntax Overview
 
