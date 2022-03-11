@@ -60,7 +60,7 @@ Button {
 
 ## Contribute
 
-If you see any problems or have any ideas for new features feel free to create an issue or a PR :)
+If you see any problems or have any ideas for new features feel free to create an issue or a PR
 
 Just make sure that the tests in `tests/e2e` are updated to handle the case
 and that features are documented in `FEATURES.md`.
