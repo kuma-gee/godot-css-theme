@@ -29,9 +29,9 @@ The only exception is for setting `styles`. They need a special type definition 
 
 Classes for `node_types` are supported and they will be generated as a separate theme in the same output directory.
 
-### Syntax Overview
-
 For a list of all supported features see [FEATURES.md](./FEATURES.md)
+
+### Syntax Overview
 
 - `--{TYPE}-{PROPERTY}: {VALUE}`
   - `{TYPE}` - `colors`, `const`, `fonts`, `styles`
@@ -60,9 +60,9 @@ Button {
 
 ## Contribute
 
-If you see any problem or have any ideas for new features feel free to create an issue or a PR :)
+If you see any problems or have any ideas for new features feel free to create an issue or a PR :)
 
-Just make sure that the tests in `tests/e2e` should be updated to handle the case
+Just make sure that the tests in `tests/e2e` are updated to handle the case
 and that features are documented in `FEATURES.md`.
 
 - `base-syntax.css` - should contain all possible styles that can be set
@@ -73,3 +73,9 @@ and that features are documented in `FEATURES.md`.
 - Using colors with words like `red` or `blue` does not work. Either use hex `#000` or
   native gdscript `Color(0, 0, 0, 1)`
 - Godot might have to be closed before generating. Otherwise it might rewrite some values
+
+## Supporting
+
+If you want to :)
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L8BJI9A)
