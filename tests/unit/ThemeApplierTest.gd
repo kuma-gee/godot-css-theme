@@ -3,11 +3,14 @@ extends BaseCSSTest
 # TODO: change to actual unit test
 const TEST_CSS = "res://tests/unit/applier-test.css"
 
+const CURRENT_DIR = "res://tests/unit"
+
 
 func test_apply_css():
 	var theme = create_theme_from_css(TEST_CSS)[""]
 
 	assert_eq(theme.get("default_font").resource_path, "res://tests/unit/font.tres")
+	assert_eq(theme.get("default_font").get("size"), 24)
 
 	assert_eq(theme.get_color("font_color", "Button"), Color("#000"))
 	assert_eq(theme.get_color("font_color_disabled", "Button"), Color("#333"))
@@ -38,3 +41,16 @@ func test_apply_css():
 		theme.get_stylebox("grabber_area_highlight", "HSlider"),
 		theme.get_stylebox("slider", "HSlider")
 	)
+
+
+func test_apply_font_family_for_ttf():
+	var font_path = CURRENT_DIR + "/jackeyfont.ttf"
+	var theme = create_theme_from_text("body { font-family: url(%s); }" % font_path)[""]
+
+	var font = theme.get("default_font")
+	assert_not_null(font, "Expected default_font to exist")
+
+	var font_data = font.get("font_data")
+	assert_not_null(font_data, "Expected font_data to exist")
+
+	assert_eq(font_data.get("font_path"), font_path)

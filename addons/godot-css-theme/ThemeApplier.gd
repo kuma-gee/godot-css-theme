@@ -26,13 +26,27 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 			print("Setting properties for %s" % node_type)
 		var properties = stylesheet.get_class_properties(node_type, class_group)
 
-		if node_type == "body" or node_type == "*":
+		if node_type == "body":
 			if properties.has("font-family"):
 				var url = stylesheet.resolve_url(properties.get("font-family"))
 				if url:
-					theme.set("default_font", load(url))
+					var font
+					if url.ends_with(".tres"):
+						font = load(url)
+					else:
+						font = DynamicFont.new()
+						font.font_data = load(url)
+
+					if properties.has("font-size"):
+						var size = properties.get("font-size")
+						font.set("size", size)
+						if _debug:
+							print("Set font size: %s" % size)
+
+					theme.set("default_font", font)
 					if _debug:
 						print("Set default font: %s" % url)
+
 			continue
 
 		var style_properties = []

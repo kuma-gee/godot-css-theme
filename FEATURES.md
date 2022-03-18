@@ -49,6 +49,11 @@ External resources are specified with `url()`:
 - `url(res://file.txt)` or `url(/file.txt)` - absolute path
 - `url(file.txt)` - relative path to css file
 
+`body` styles are treated as global and currently support:
+
+- `font-family`: font `.tres` or `.ttf` file
+- `font-size`: set font size of the default font
+
 ## Simplified Syntax
 
 See [`tests/e2e/simple-syntax.css`](./tests/e2e/simple-syntax.css) for an example.
