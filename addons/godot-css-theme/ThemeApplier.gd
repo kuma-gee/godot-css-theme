@@ -36,6 +36,8 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 					else:
 						font = DynamicFont.new()
 						font.font_data = load(url)
+						var output = url.split(".")[0]
+						ResourceSaver.save(output + ".tres", font)
 
 					if properties.has("font-size"):
 						var size = properties.get("font-size")
