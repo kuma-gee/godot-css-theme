@@ -7,6 +7,8 @@ like [SASS](https://sass-lang.com/). Since using normal CSS variables with `var(
 
 ## How to use
 
+Create a `css` file and run one of the following commands to create the themes.
+
 ```sh
 # Output defaults to same folder with .tres extension
 godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css"
@@ -15,6 +17,8 @@ godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css"
 godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css" --output="res://output/themes.tres"
 
 ```
+
+Then set the default theme and font in the Project Settings in `gui/theme/custom` and `gui/theme/custom_font`;
 
 ## Supported Features
 
