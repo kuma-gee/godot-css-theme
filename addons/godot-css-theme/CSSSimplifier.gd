@@ -7,6 +7,7 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 	for class_group in stylesheet.get_class_groups():
 		values[class_group] = {}
+
 		for cls in stylesheet.get_classes(class_group):
 			values[class_group][cls] = {}
 
@@ -16,6 +17,7 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 			for state in stylesheet.get_class_states(cls, class_group):
 				var props = stylesheet.get_class_properties(cls, class_group, state).duplicate(true)
+				print(props.keys())
 
 				var style_prefix = "--styles-%s-" % state
 				var style_type = style_prefix + "type"
@@ -27,14 +29,6 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 						else "--colors-font-color-%s" % state
 					)
 					new_props[mapped_prop] = props["color"]
-
-				if props.has("background"):
-					var value = props["background"]
-					if value == "none":
-						new_props[style_type] = "Empty"
-					else:
-						new_props[style_type] = "Flat"
-						new_props[style_prefix + "bg-color"] = value
 
 				if props.has("padding"):
 					if not new_props.has(style_type):
@@ -64,8 +58,26 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 				if props.has("gap"):
 					new_props["--const-separation"] = props["gap"]
 
+				if props.has("background"):
+					var value = props["background"]
+					print(value)
+					var is_none = value == "none"
+
+					if not new_props.has(style_type):
+						new_props[style_type] = "Empty" if is_none else "Flat"
+
+					if new_props[style_type] == "Flat":
+						var color = "Color(0, 0, 0, 0)" if is_none else value
+						new_props[style_prefix + "bg-color"] = color
+
+					# if value == "none":
+					# 	new_props[style_type] = "Empty"
+					# else:
+					# 	new_props[style_type] = "Flat"
+
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 
+	print(values)
 	return Stylesheet.new(values, stylesheet.get_css_file())
 
 

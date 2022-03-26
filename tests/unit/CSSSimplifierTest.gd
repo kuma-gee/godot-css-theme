@@ -105,3 +105,11 @@ func test_map_border_color():
 	var theme = create_theme_from_text("Button { border-color: #333 }")[""]
 	var normal = theme.get_stylebox("normal", "Button")
 	assert_eq(normal.get("border_color"), Color("#333"))
+
+
+# Doesn't have background property for some reason? But works in a project?
+# func test_map_border_with_background_none():
+# 	var theme = create_theme_from_text("Button { border-width: 5, background: #000 }")[""]
+# 	var normal = theme.get_stylebox("normal", "Button")
+# 	assert_eq(normal.get("border_width_top"), 5)
+# 	assert_eq(normal.get("border_color"), Color.transparent)

@@ -66,8 +66,7 @@ Button {
 
 If you see any problems or have any ideas for new features feel free to create an issue or a PR
 
-Just make sure that the tests in `tests/e2e` are updated to handle the case
-and that features are documented in `FEATURES.md`.
+Just make sure that the features are documented in `FEATURES.md` and that there is some kind of test for it.
 
 - `base-syntax.css` - should contain all possible styles that can be set
 - `simple-syntax.css` - should contain all simplified syntax that is supported
