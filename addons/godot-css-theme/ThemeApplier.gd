@@ -3,6 +3,7 @@ class_name ThemeApplier
 const FONT_PROPERTY = "--fonts-font"
 const FONT_SIZE_PROPERTY = "--fonts-font-size"
 const GLOBAL_NODE = "body"
+const TRANSPARENT = "transparent"
 
 var EMPTY_STYLE = StyleBoxEmpty.new()
 
@@ -158,6 +159,9 @@ func _create_value(stylesheet: Stylesheet, value: String):
 
 	if value.begins_with("#"):
 		return Color(value)
+	
+	if value == TRANSPARENT:
+		return Color.transparent
 
 	return str2var(value)
 

@@ -38,7 +38,7 @@ For a list of all supported features see [FEATURES.md](./FEATURES.md)
 ### Syntax Overview
 
 - `--{TYPE}-{PROPERTY}: {VALUE}`
-  - `{TYPE}` - `colors`, `const`, `fonts`, `styles`
+  - `{TYPE}` - `colors`, `const`, `fonts`, `styles`, `icons`
   - `{PROPERTY}` - anything the node_type supports
   - `{VALUE}` - anything `str2var()` supports, hex values, `url()`
 - `--styles-{PROPERTY}-type` values: `Empty`, `Flat`, `Line`, `Texture`
