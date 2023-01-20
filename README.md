@@ -3,7 +3,7 @@
 Converts CSS to Godot Themes.
 
 The goal is to make theme creating easier and more reusable. Using CSS you also have the advantage to use preprocessors
-like [SASS](https://sass-lang.com/). Since using normal CSS variables with `var()` is not supported (yet?).
+like [SASS](https://sass-lang.com/).
 
 ## How to use
 
@@ -76,9 +76,3 @@ Just make sure that the features are documented in `FEATURES.md` and that there 
 - Using colors with words like `red` or `blue` does not work. Either use hex `#000` or
   native gdscript `Color(0, 0, 0, 1)`
 - Godot might have to be closed before generating. Otherwise it might rewrite some values
-
-## Supporting
-
-If you want to :)
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L8BJI9A)

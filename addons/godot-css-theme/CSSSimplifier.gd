@@ -17,7 +17,6 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 			for state in stylesheet.get_class_states(cls, class_group):
 				var props = stylesheet.get_class_properties(cls, class_group, state).duplicate(true)
-				print(props.keys())
 
 				var style_prefix = "--styles-%s-" % state
 				var style_type = style_prefix + "type"
@@ -60,7 +59,6 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 				if props.has("background"):
 					var value = props["background"]
-					print(value)
 					var is_none = value == "none"
 
 					if not new_props.has(style_type):
@@ -77,7 +75,6 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 
-	print(values)
 	return Stylesheet.new(values, stylesheet.get_css_file())
 
 
