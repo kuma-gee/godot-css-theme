@@ -29,11 +29,23 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					)
 					new_props[mapped_prop] = props["color"]
 
-				if props.has("padding"):
-					if not new_props.has(style_type):
-						new_props[style_type] = "Empty"
+				if props.has("gap"):
+					new_props["--const-separation"] = props["gap"]
 
-					_shorthand_sides(new_props, props["padding"], style_prefix + "content-margin")
+				if props.has("font-family"):
+					var value = props["font-family"]
+					new_props['--fonts-font'] = value
+					if props.has("font-size"):
+						new_props['--fonts-font-size'] = props["font-size"]
+
+					
+				if props.has("background"):
+					var value = props["background"]
+					var is_none = value == "none"
+
+					new_props[style_type] = "Flat"
+					var color = "Color(0, 0, 0, 0)" if is_none else value
+					new_props[style_prefix + "bg-color"] = color
 
 				if props.has("border-width"):
 					new_props[style_type] = "Flat"
@@ -54,30 +66,12 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					new_props[style_type] = "Flat"
 					new_props[style_prefix + "border-color"] = props["border-color"]
 
-				if props.has("gap"):
-					new_props["--const-separation"] = props["gap"]
-
-				if props.has("background"):
-					var value = props["background"]
-					var is_none = value == "none"
-
+				if props.has("padding"):
 					if not new_props.has(style_type):
-						new_props[style_type] = "Empty" if is_none else "Flat"
+						new_props[style_type] = "Empty"
 
-					if new_props[style_type] == "Flat":
-						var color = "Color(0, 0, 0, 0)" if is_none else value
-						new_props[style_prefix + "bg-color"] = color
+					_shorthand_sides(new_props, props["padding"], style_prefix + "content-margin")
 
-					# if value == "none":
-					# 	new_props[style_type] = "Empty"
-					# else:
-					# 	new_props[style_type] = "Flat"
-				
-				if props.has("font-family"):
-					var value = props["font-family"]
-					new_props['--fonts-font'] = value
-					if props.has("font-size"):
-						new_props['--fonts-font-size'] = props["font-size"]
 
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 
