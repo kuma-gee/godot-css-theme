@@ -79,3 +79,11 @@ func test_ignore_standalone_classes():
 
 	assert_eq(stylesheet.get_class_groups(), [""])
 	assert_eq(stylesheet.get_classes("alone"), [])
+
+func test_class_parent():
+	var stylesheet = parser.parse_text(".special Button { color: #333 }", "")
+
+	assert_eq(stylesheet.get_class_groups(), ["", "special"])
+	assert_eq(stylesheet.get_classes("special"), ["Button"])
+
+	assert_eq_deep(stylesheet.get_class_properties("Button", "special"), {"color": "#333"})

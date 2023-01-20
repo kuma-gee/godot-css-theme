@@ -54,12 +54,20 @@ func parse_text(content: String, path: String):
 			continue
 		var value = _values[tag]
 		if "." in tag:
-			var split = tag.split(".")
+			var parts = tag.split(" ")
+			var class_idx = _find_index_for_class_in_array(parts)
+			if class_idx == -1:
+				continue
+
+			var split = parts[class_idx].split(".")
 			var actual_tag = split[0]
 			var class_group = split[1]
 
 			if not actual_tag:
-				continue
+				if class_idx + 1 < parts.size():
+					actual_tag = parts[class_idx + 1]
+				if not actual_tag:
+					continue
 
 			if not class_group in result:
 				result[class_group] = {}
@@ -70,6 +78,11 @@ func parse_text(content: String, path: String):
 
 	return Stylesheet.new(result, path)
 
+func _find_index_for_class_in_array(arr):
+	for i in range(0, arr.size()):
+		if "." in arr[i]:
+			return i
+	return -1
 
 func _parse_classes(line: String) -> Dictionary:
 	var result = {}
