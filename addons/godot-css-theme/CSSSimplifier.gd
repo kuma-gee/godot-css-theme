@@ -72,6 +72,12 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					# 	new_props[style_type] = "Empty"
 					# else:
 					# 	new_props[style_type] = "Flat"
+				
+				if props.has("font-family"):
+					var value = props["font-family"]
+					new_props['--fonts-font'] = value
+					if props.has("font-size"):
+						new_props['--fonts-font-size'] = props["font-size"]
 
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 

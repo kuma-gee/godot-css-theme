@@ -16,6 +16,8 @@ func test_global_font():
 func test_simple_prop_mapping():
 	assert_eq(theme.get_color("font_color", "Label"), Color("#FFF"))
 
+	assert_eq(theme.get_font("font", "Label").resource_path, "res://tests/e2e/font_2.tres")
+
 	# Since supporting border with background, doesnt' work for some reason
 	# var normal = theme.get_stylebox("normal", "Label")
 	# assert_is(normal, StyleBoxFlat)

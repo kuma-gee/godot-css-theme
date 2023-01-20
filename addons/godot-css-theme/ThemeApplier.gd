@@ -1,5 +1,7 @@
 class_name ThemeApplier
 
+const FONT_SIZE_PROPERTY = "--fonts-font-size"
+
 var EMPTY_STYLE = StyleBoxEmpty.new()
 
 var _debug: bool
@@ -19,37 +21,11 @@ func apply_css(stylesheet: Stylesheet) -> Dictionary:
 
 	return result
 
-
 func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) -> void:
 	for node_type in stylesheet.get_classes(class_group):
 		if _debug:
 			print("Setting properties for %s" % node_type)
 		var properties = stylesheet.get_class_properties(node_type, class_group)
-
-		if node_type == "body":
-			if properties.has("font-family"):
-				var url = stylesheet.resolve_url(properties.get("font-family"))
-				if url:
-					var font
-					if url.ends_with(".tres"):
-						font = load(url)
-					else:
-						font = DynamicFont.new()
-						font.font_data = load(url)
-						var output = url.split(".")[0]
-						ResourceSaver.save(output + ".tres", font)
-
-					if properties.has("font-size"):
-						var size = properties.get("font-size")
-						font.set("size", size)
-						if _debug:
-							print("Set font size: %s" % size)
-
-					theme.set("default_font", font)
-					if _debug:
-						print("Set default font: %s" % url)
-
-			continue
 
 		var style_properties = []
 		var styles = {}
@@ -70,11 +46,16 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 				theme.set_constant(type, node_type, _value)
 				if _debug:
 					print("Set const for %s: %s" % [type, _value])
-			elif property.begins_with("--fonts-"):
-				var type := _parse_type("--fonts-", property)
+			elif property == "--fonts-font":
+				var type = _parse_type("--fonts-", property)
 				var url := stylesheet.resolve_url(value)
 				if url:
-					theme.set_font(type, node_type, load(url))
+					# var font_size = properties[FONT_SIZE_PROPERTY] if properties.has(FONT_SIZE_PROPERTY) else null
+					var font = _load_font_resource(url, null)
+					if node_type == "body":
+						theme.set("default_font", font)
+					else:
+						theme.set_font(type, node_type, font)
 					if _debug:
 						print("Set font for %s: %s" % [type, url])
 				else:
@@ -112,6 +93,30 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 			if stylebox is StyleBoxEmpty and _is_equal_stylebox(stylebox, EMPTY_STYLE):
 				stylebox = EMPTY_STYLE
 			theme.set_stylebox(style.replace("-", "_"), node_type, stylebox)
+
+
+func _load_font_resource(url, size):
+	if url.ends_with(".tres"):
+		return load(url)
+	else:
+		return _create_font_with_size(url, size)
+
+
+func _create_font_with_size(font_url, size):
+	var font = DynamicFont.new()
+	font.font_data = load(font_url)
+	var output = font_url.split(".")[0]
+	var suffix = ""
+
+	# Changing font size does not get saved, but in Godot 4.0 this should be easier to change
+	if size != null:
+		suffix = "_" + str(size)
+		font.set("font_size", size)
+		if _debug:
+			print("Set font size: %s" % size)
+
+	ResourceSaver.save(output + suffix + ".tres", font)
+	return font
 
 
 func _is_equal_stylebox(style1: StyleBox, style2: StyleBox) -> bool:

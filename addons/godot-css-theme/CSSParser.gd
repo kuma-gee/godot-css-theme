@@ -20,7 +20,6 @@ func parse(file_path: String) -> Stylesheet:
 
 	var content: String = file.get_as_text()  # TODO: use buffer?
 	file.close()
-	print(_values)
 	return parse_text(content, file_path)
 
 

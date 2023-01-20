@@ -52,7 +52,7 @@ External resources are specified with `url()`:
 `body` styles are treated as global and currently support:
 
 - `font-family`: font `.tres` or `.ttf` file
-- `font-size`: set font size of the default font
+- `font-size`: set font size of the default font (bug: does not get saved)
 
 ## Simplified Syntax
 
@@ -69,6 +69,7 @@ If you use the base syntax like `--colors-font-color`, it will only apply to the
 - `border-width` -> `border_width_*`
 - `border-radius` -> `corner_radius_*`
 - `border-color` -> `border_color`
+- `font-family` -> `font`
 
 ## SCSS
 

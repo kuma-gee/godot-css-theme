@@ -1,40 +1,39 @@
 body {
-    font-family: url(res://tests/unit/font.tres);
+  font-family: url(res://tests/unit/font.tres);
 }
 
 Button {
-    --colors-font-color: #000;
-    --colors-font-color-disabled: #333;
-    --colors-font-color-hover: #FFF;
-    --colors-font-color-pressed: Color(0, 0, 0, 0);
+  --colors-font-color: #000;
+  --colors-font-color-disabled: #333;
+  --colors-font-color-hover: #fff;
+  --colors-font-color-pressed: Color(0, 0, 0, 0);
 
-    --const-hseparation: 10;
+  --const-hseparation: 10;
 
-    --fonts-font: url(res://tests/unit/font.tres);
+  --fonts-font: url(res://tests/unit/font.tres);
 
-    --styles-normal-type: Empty;
+  --styles-normal-type: Empty;
 
-    --styles-hover-type: Flat;
-    --styles-hover-bg-color: #FFF;
-    --styles-hover-shadow-size: 5;
+  --styles-hover-type: Flat;
+  --styles-hover-bg-color: #fff;
+  --styles-hover-shadow-size: 5;
 }
 
 CheckBox {
-    --icons-checked: url(res://icon.png);
+  --icons-checked: url(res://icon.png);
 }
 
-
 HSlider {
-    --styles-grabber-area-type: Empty;
-    --styles-grabber-area-highlight-type: Empty;
-    --styles-slider-type: Empty;
-    --styles-slider-content-margin-top: 10;
+  --styles-grabber-area-type: Empty;
+  --styles-grabber-area-highlight-type: Empty;
+  --styles-slider-type: Empty;
+  --styles-slider-content-margin-top: 10;
 }
 
 Button.test {
-    color: #333;
+  color: #333;
 }
 
 Button.test:disabled {
-    color: #AAA;
+  color: #aaa;
 }
