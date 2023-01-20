@@ -1,6 +1,8 @@
 class_name ThemeApplier
 
+const FONT_PROPERTY = "--fonts-font"
 const FONT_SIZE_PROPERTY = "--fonts-font-size"
+const GLOBAL_NODE = "body"
 
 var EMPTY_STYLE = StyleBoxEmpty.new()
 
@@ -14,15 +16,28 @@ func _init(debug := false):
 func apply_css(stylesheet: Stylesheet) -> Dictionary:
 	var result = {}
 
+	var global_styles = stylesheet.get_class_properties(GLOBAL_NODE, "")
+
 	for class_group in stylesheet.get_class_groups():
 		var theme = Theme.new()
 		_apply_to_theme(theme, stylesheet, class_group)
+
+		if global_styles.has(FONT_PROPERTY):
+			var font_url = global_styles[FONT_PROPERTY]
+			var url = stylesheet.resolve_url(font_url)
+			if url:
+				var font = _load_font_resource(url, null)
+				theme.set("default_font", font)
+
 		result[class_group] = theme
 
 	return result
 
 func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) -> void:
 	for node_type in stylesheet.get_classes(class_group):
+		if node_type == GLOBAL_NODE:
+			continue
+
 		if _debug:
 			print("Setting properties for %s" % node_type)
 		var properties = stylesheet.get_class_properties(node_type, class_group)
@@ -46,16 +61,13 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 				theme.set_constant(type, node_type, _value)
 				if _debug:
 					print("Set const for %s: %s" % [type, _value])
-			elif property == "--fonts-font":
+			elif property == FONT_PROPERTY:
 				var type = _parse_type("--fonts-", property)
 				var url := stylesheet.resolve_url(value)
 				if url:
 					# var font_size = properties[FONT_SIZE_PROPERTY] if properties.has(FONT_SIZE_PROPERTY) else null
 					var font = _load_font_resource(url, null)
-					if node_type == "body":
-						theme.set("default_font", font)
-					else:
-						theme.set_font(type, node_type, font)
+					theme.set_font(type, node_type, font)
 					if _debug:
 						print("Set font for %s: %s" % [type, url])
 				else:

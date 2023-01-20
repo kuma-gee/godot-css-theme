@@ -54,3 +54,11 @@ func test_apply_font_family_for_ttf():
 	assert_not_null(font_data, "Expected font_data to exist")
 
 	assert_eq(font_data.get("font_path"), font_path)
+
+func test_apply_default_font_to_all_classes():
+	var font_path = CURRENT_DIR + "/jackeyfont.tres"
+	var theme = create_theme_from_text("body { font-family: url(%s); } Button.simple { color: #000}" % font_path)["simple"]
+
+	var font = theme.get("default_font")
+	assert_not_null(font, "Expected default_font to exist")
+
