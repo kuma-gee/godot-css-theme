@@ -42,7 +42,7 @@ func get_class_properties(cls: String, class_group = "", state = DEFAULT_STATE) 
 
 
 func resolve_url(value: String) -> String:
-	if not value or not value.begins_with("url(") or not value.ends_with(")"):
+	if value == null or not value.begins_with("url(") or not value.ends_with(")"):
 		return ""
 
 	var url = value.substr(4, (value.length() - 1) - 4)
@@ -60,5 +60,5 @@ func _css_folder() -> String:
 	if file.ends_with("/"):
 		file = file.substr(0, file.length() - 2)
 
-	var last_slash = file.find_last("/")
+	var last_slash = Options.find_last(file, "/")
 	return file.substr(0, last_slash + 1)
