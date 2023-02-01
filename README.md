@@ -5,6 +5,9 @@ Converts CSS to Godot Themes.
 The goal is to make theme creating easier and more reusable. Using CSS you also have the advantage to use preprocessors
 like [SASS](https://sass-lang.com/).
 
+- `master` branch for godot 4
+- `godot-3.x` branch for godot 3
+
 ## How to use
 
 Create a `css` file and run one of the following commands to create the themes.
