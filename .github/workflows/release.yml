@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish new version to asset lib
     container:
-      image: barichello/godot-ci:3.3.2
+      image: barichello/godot-ci:4.1.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
