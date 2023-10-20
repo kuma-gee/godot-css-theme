@@ -40,3 +40,10 @@ func _ready():
 		for word in SUPPORTED_CSS:
 			syntax.add_member_keyword_color(word, FN_COLOR)
 	
+#	for k in syntax.member_keyword_colors:
+#		add_code_completion_option(CodeEdit.KIND_MEMBER, k, k)
+#	code_completion_prefixes = ["--"]
+#
+#
+#func _on_code_completion_requested():
+#	push_warning("completion")
