@@ -1,5 +1,8 @@
-[gd_resource type="Theme" format=2]
+[gd_resource type="Theme" load_steps=2 format=3]
+
+[ext_resource type="FontFile" path="res://tests/unit/mintsoda.ttf" id="1_tw5eh"]
 
 [resource]
-Button/colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
-Button/colors/font_color_disabled = Color( 0.666667, 0.666667, 0.666667, 1 )
+default_font = ExtResource("1_tw5eh")
+Button/colors/font_color = Color(0.2, 0.2, 0.2, 1)
+Button/colors/font_color_disabled = Color(0.666667, 0.666667, 0.666667, 1)

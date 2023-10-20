@@ -33,13 +33,13 @@ func test_map_background_from_state():
 func test_map_background_none():
 	var theme = create_theme_from_text("Button { background: none }")[""]
 	var normal = theme.get_stylebox("normal", "Button")
-	assert_eq(normal.get("bg_color").a, Color.transparent.a)
+	assert_eq(normal.get("bg_color").a, Color.TRANSPARENT.a)
 
 
 func test_map_background_none_from_state():
 	var theme = create_theme_from_text("Button:disabled { background: none }")[""]
 	var disabled = theme.get_stylebox("disabled", "Button")
-	assert_eq(disabled.get("bg_color").a, Color.transparent.a)
+	assert_eq(disabled.get("bg_color").a, Color.TRANSPARENT.a)
 
 
 func test_map_gap():
@@ -111,4 +111,4 @@ func test_map_padding_with_background():
 	var theme = create_theme_from_text("Button { padding: 5; background: #000 }")[""]
 	var normal = theme.get_stylebox("normal", "Button")
 	assert_eq(normal.get("content_margin_left"), 5.0)
-	assert_eq(normal.get("bg_color"), Color.black)
+	assert_eq(normal.get("bg_color"), Color.BLACK)

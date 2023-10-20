@@ -1,5 +1,5 @@
 body {
-  font-family: url(res://tests/unit/font.tres);
+  font-family: url(res://tests/unit/mintsoda.ttf);
 }
 
 Button {
@@ -10,7 +10,7 @@ Button {
 
   --const-hseparation: 10;
 
-  --fonts-font: url(res://tests/unit/font.tres);
+  --fonts-font: url(res://tests/unit/jackeyfont.ttf);
 
   --styles-normal-type: Empty;
 

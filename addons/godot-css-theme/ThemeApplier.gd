@@ -52,13 +52,21 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 					print("Set const for %s: %s" % [type, _value])
 			elif property == FONT_SIZE_PROPERTY:
 				var _value = _create_value(stylesheet, value)
-				theme.default_font_size = _value
+				if node_type == GLOBAL_NODE:
+					theme.default_font_size = _value
+				else:
+					var type := _parse_type("--fonts-", property)
+					theme.set_font_size(type, node_type, _value)
 				if _debug:
 					print("Set font size: %s" % _value)
 			elif property == FONT_PROPERTY:
 				var url := stylesheet.resolve_url(value)
 				if url:
-					theme.default_font = load(url)
+					if node_type == GLOBAL_NODE:
+						theme.default_font = load(url)
+					else:
+						var type := _parse_type("--fonts-", property)
+						theme.set_font(type, node_type, load(url))
 				else:
 					print("Invalid url %s for class %s" % [value, node_type])
 			elif property.begins_with("--icons-"):

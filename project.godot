@@ -15,10 +15,6 @@ run/main_scene="res://demo/Demo.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
-[autoload]
-
-CSSEditorData="*res://addons/godot-css-theme/editor/css_editor_data.gd"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-css-theme/plugin.cfg")

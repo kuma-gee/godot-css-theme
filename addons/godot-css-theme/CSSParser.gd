@@ -72,8 +72,18 @@ func parse_text(content: String, path: String):
 			result[class_group][actual_tag] = value
 		else:
 			result[""][tag] = value
+	
+	_copy_global_node_to_all_tags(result)
 
 	return Stylesheet.new(result, path)
+
+func _copy_global_node_to_all_tags(result):
+	if ThemeApplier.GLOBAL_NODE in result[""]:
+		var global = result[""][ThemeApplier.GLOBAL_NODE]
+		for tag in result:
+			if tag == "": continue
+
+			result[tag][ThemeApplier.GLOBAL_NODE] = global
 
 func _find_index_for_class_in_array(arr):
 	for i in range(0, arr.size()):

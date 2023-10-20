@@ -1,5 +1,5 @@
 body {
-    font-family: url(font.tres);
+    font-family: url(jackeyfont.ttf);
     font-size: 24;
 }
 
@@ -11,7 +11,7 @@ Button {
 
     --const-hseparation: 10;
 
-    --fonts-font: url(font.tres);
+    --fonts-font: url(mintsoda.ttf);
 
     --styles-normal-type: Empty;
 
