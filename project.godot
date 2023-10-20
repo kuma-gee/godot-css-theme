@@ -6,80 +6,27 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Reference",
-"class": "ArgumentParser",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/ArgumentParser.gd"
-}, {
-"base": "UnitTest",
-"class": "BaseCSSTest",
-"language": "GDScript",
-"path": "res://tests/BaseCSSTest.gd"
-}, {
-"base": "Reference",
-"class": "CSSParser",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/CSSParser.gd"
-}, {
-"base": "Reference",
-"class": "CSSSimplifier",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/CSSSimplifier.gd"
-}, {
-"base": "Reference",
-"class": "OptParse",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/optparse.gd"
-}, {
-"base": "Reference",
-"class": "Options",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/Options.gd"
-}, {
-"base": "Reference",
-"class": "Stylesheet",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/Stylesheet.gd"
-}, {
-"base": "Reference",
-"class": "ThemeApplier",
-"language": "GDScript",
-"path": "res://addons/godot-css-theme/ThemeApplier.gd"
-}, {
-"base": "Node",
-"class": "UnitTest",
-"language": "GDScript",
-"path": "res://tests/UnitTest.gd"
-} ]
-_global_script_class_icons={
-"ArgumentParser": "",
-"BaseCSSTest": "",
-"CSSParser": "",
-"CSSSimplifier": "",
-"OptParse": "",
-"Options": "",
-"Stylesheet": "",
-"ThemeApplier": "",
-"UnitTest": ""
-}
+config_version=5
 
 [application]
 
 config/name="Godot-CSS-Theme"
 run/main_scene="res://demo/Demo.tscn"
+config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
+
+[autoload]
+
+CSSEditorData="*res://addons/godot-css-theme/editor/css_editor_data.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-css-theme/plugin.cfg")
 
 [global]
 
 debug=false
 theme=false
-
-[gui]
-
-theme/custom_font="res://tests/unit/font.tres"
 
 [physics]
 

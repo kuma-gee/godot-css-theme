@@ -1,0 +1,84 @@
+[gd_resource type="CodeHighlighter" format=3 uid="uid://blglwyagrkxdm"]
+
+[resource]
+number_color = Color(0.701961, 0.513726, 0.870588, 1)
+symbol_color = Color(0.768627, 0.376471, 0.376471, 1)
+function_color = Color(0.180392, 0.560784, 0.941176, 1)
+member_variable_color = Color(0.866667, 0.866667, 0.866667, 1)
+keyword_colors = {
+"{": Color(1, 0, 0, 1),
+"}": Color(1, 0, 0, 1)
+}
+member_keyword_colors = {
+"AcceptDialog": Color(0.768627, 0.376471, 0.376471, 1),
+"BoxContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"Button": Color(0.768627, 0.376471, 0.376471, 1),
+"CheckBox": Color(0.768627, 0.376471, 0.376471, 1),
+"CheckButton": Color(0.768627, 0.376471, 0.376471, 1),
+"CodeEdit": Color(0.768627, 0.376471, 0.376471, 1),
+"ColorPicker": Color(0.768627, 0.376471, 0.376471, 1),
+"ColorPickerButton": Color(0.768627, 0.376471, 0.376471, 1),
+"ColorPresetButton": Color(0.768627, 0.376471, 0.376471, 1),
+"FileDialog": Color(0.768627, 0.376471, 0.376471, 1),
+"FlowContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"Fonts": Color(0.768627, 0.376471, 0.376471, 1),
+"GraphEdit": Color(0.768627, 0.376471, 0.376471, 1),
+"GraphEditMinimap": Color(0.768627, 0.376471, 0.376471, 1),
+"GraphNode": Color(0.768627, 0.376471, 0.376471, 1),
+"GridContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"HBoxContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"HFlowContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"HScrollBar": Color(0.768627, 0.376471, 0.376471, 1),
+"HSeparator": Color(0.768627, 0.376471, 0.376471, 1),
+"HSlider": Color(0.768627, 0.376471, 0.376471, 1),
+"HSplitContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"HeaderLarge": Color(0.768627, 0.376471, 0.376471, 1),
+"HeaderMedium": Color(0.768627, 0.376471, 0.376471, 1),
+"HeaderSmall": Color(0.768627, 0.376471, 0.376471, 1),
+"Icons": Color(0.768627, 0.376471, 0.376471, 1),
+"ItemList": Color(0.768627, 0.376471, 0.376471, 1),
+"Label": Color(0.768627, 0.376471, 0.376471, 1),
+"LineEdit": Color(0.768627, 0.376471, 0.376471, 1),
+"LinkButton": Color(0.768627, 0.376471, 0.376471, 1),
+"MarginContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"MenuBar": Color(0.768627, 0.376471, 0.376471, 1),
+"MenuButton": Color(0.768627, 0.376471, 0.376471, 1),
+"OptionButton": Color(0.768627, 0.376471, 0.376471, 1),
+"Panel": Color(0.768627, 0.376471, 0.376471, 1),
+"PanelContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"PopupDialog": Color(0.768627, 0.376471, 0.376471, 1),
+"PopupMenu": Color(0.768627, 0.376471, 0.376471, 1),
+"PopupPanel": Color(0.768627, 0.376471, 0.376471, 1),
+"ProgressBar": Color(0.768627, 0.376471, 0.376471, 1),
+"RichTextLabel": Color(0.768627, 0.376471, 0.376471, 1),
+"ScrollContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"SpinBox": Color(0.768627, 0.376471, 0.376471, 1),
+"SplitContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"TabBar": Color(0.768627, 0.376471, 0.376471, 1),
+"TabContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"TextEdit": Color(0.768627, 0.376471, 0.376471, 1),
+"TooltipLabel": Color(0.768627, 0.376471, 0.376471, 1),
+"TooltipPanel": Color(0.768627, 0.376471, 0.376471, 1),
+"Tree": Color(0.768627, 0.376471, 0.376471, 1),
+"VBoxContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"VFlowContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"VScrollBar": Color(0.768627, 0.376471, 0.376471, 1),
+"VSeparator": Color(0.768627, 0.376471, 0.376471, 1),
+"VSlider": Color(0.768627, 0.376471, 0.376471, 1),
+"VSplitContainer": Color(0.768627, 0.376471, 0.376471, 1),
+"Window": Color(0.768627, 0.376471, 0.376471, 1),
+"background": Color(0.180392, 0.560784, 0.941176, 1),
+"body": Color(0.768627, 0.376471, 0.376471, 1),
+"border-width": Color(0.180392, 0.560784, 0.941176, 1),
+"border_color": Color(0.180392, 0.560784, 0.941176, 1),
+"border_radius": Color(0.180392, 0.560784, 0.941176, 1),
+"color": Color(0.180392, 0.560784, 0.941176, 1),
+"font-family": Color(0.180392, 0.560784, 0.941176, 1),
+"font-size": Color(0.180392, 0.560784, 0.941176, 1),
+"gap": Color(0.180392, 0.560784, 0.941176, 1),
+"padding": Color(0.180392, 0.560784, 0.941176, 1)
+}
+color_regions = {
+"( )": Color(1, 0.67451, 0.388235, 1),
+"-- :": Color(0.180392, 0.560784, 0.941176, 1)
+}

@@ -1,3 +1,4 @@
+class_name CSSConvert
 extends SceneTree
 
 
@@ -9,15 +10,22 @@ func _init():
 	var debug = options.exists("debug")
 	print("Debug: ", debug)
 
-	var parser = CSSParser.new()
+
 	var css_file = options.get_value("input")
+	var output = options.get_value("output")
+
+	convert_css(css_file, output, debug)
+
+	quit()
+
+static func convert_css(css_file, output, debug = false):
+	var parser = CSSParser.new()
 
 	if debug:
 		print("Parsing Stylesheet")
 
 	var stylesheet = parser.parse(css_file)
 	if not stylesheet:
-		quit(1)
 		return
 
 	if debug:
@@ -33,7 +41,7 @@ func _init():
 
 	if debug:
 		print("Creating theme")
-	var output = options.get_value("output")
+
 	if not output:
 		var last_slash = Options.find_last(css_file, "/")
 		var file_name = css_file.substr(last_slash + 1)
@@ -56,5 +64,3 @@ func _init():
 			print("Failed to save theme %s" % err)
 		else:
 			print("Saved theme %s to %s" % [theme_name, theme_output])
-
-	quit()

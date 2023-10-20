@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcmut0gcayih2"]
+
+[ext_resource type="Script" path="res://addons/godot-css-theme/editor/css_editor.gd" id="1_d8bk4"]
+[ext_resource type="Script" path="res://addons/godot-css-theme/editor/EditorButton.gd" id="2_77gh4"]
+[ext_resource type="CodeHighlighter" uid="uid://blglwyagrkxdm" path="res://addons/godot-css-theme/editor/css_syntax.tres" id="3_ynjw3"]
+[ext_resource type="Script" path="res://addons/godot-css-theme/editor/css_code_edit.gd" id="4_76rs7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kctcl"]
+
+[node name="CSSEditor" type="Control" node_paths=PackedStringArray("open_key", "export_key", "code", "file_name_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_d8bk4")
+open_key = NodePath("VBoxContainer/MarginContainer/TopBar/Open")
+export_key = NodePath("VBoxContainer/MarginContainer/TopBar/Export")
+code = NodePath("VBoxContainer/Code")
+file_name_label = NodePath("VBoxContainer/MarginContainer/TopBar/FileName")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 2
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.css")
+
+[node name="ExportDialog" type="FileDialog" parent="."]
+initial_position = 2
+size = Vector2i(312, 157)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Open" type="Button" parent="VBoxContainer/MarginContainer/TopBar"]
+modulate = Color(0.6, 0.6, 0.6, 1)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kctcl")
+text = "Open File"
+script = ExtResource("2_77gh4")
+
+[node name="Export" type="Button" parent="VBoxContainer/MarginContainer/TopBar"]
+visible = false
+modulate = Color(0.6, 0.6, 0.6, 1)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kctcl")
+text = "Export Theme"
+script = ExtResource("2_77gh4")
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FileName" type="Label" parent="VBoxContainer/MarginContainer/TopBar"]
+layout_mode = 2
+
+[node name="Code" type="CodeEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0.113725, 0.133333, 0.160784, 1)
+highlight_all_occurrences = true
+highlight_current_line = true
+syntax_highlighter = ExtResource("3_ynjw3")
+line_folding = true
+gutters_draw_line_numbers = true
+gutters_draw_fold_gutter = true
+auto_brace_completion_highlight_matching = true
+script = ExtResource("4_76rs7")
