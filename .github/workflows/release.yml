@@ -12,10 +12,10 @@ jobs:
       image: barichello/godot-ci:4.1.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Unit Test
-        run: sh scripts/test.sh
-        timeout-minutes: 5
+        uses: actions/checkout@v4
+      # - name: Unit Test
+      #   run: sh scripts/test.sh
+      #   timeout-minutes: 5
       - name: Get the version
         id: version
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}

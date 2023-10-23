@@ -10,18 +10,14 @@ like [SASS](https://sass-lang.com/).
 
 ## How to use
 
-Create a `css` file and run one of the following commands to create the themes.
+Create a `css` file and run the following commands to create the theme.
 
 ```sh
 # Output defaults to same folder with .tres extension
 godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css"
-
-# To output in a different file
-godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css" --output="res://output/themes.tres"
-
 ```
 
-Then set the default theme and font in the Project Settings in `gui/theme/custom` and `gui/theme/custom_font`;
+Or enable the plugin in godot and go to the CSS tab. Open the css file and click "Export Theme"
 
 ## Supported Features
 
