@@ -1,4 +1,4 @@
-class_name Options
+class_name CSSCliOptions
 
 var _options = {
 	input = ['', 'CSS Input File'],
@@ -6,7 +6,7 @@ var _options = {
 	debug = [false, 'Enable debug mode']
 }
 
-var args = OptParse.new()
+var args = OptParseCustom.new()
 
 func init() -> bool:
 	args.add("--input", "", "CSS Input File")

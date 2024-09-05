@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-css-theme/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-css-theme/plugin.cfg", "res://addons/gut/plugin.cfg")
 
 [global]
 

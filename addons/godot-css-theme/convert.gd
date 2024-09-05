@@ -3,7 +3,7 @@ extends SceneTree
 
 
 func _init():
-	var options = Options.new()
+	var options = CSSCliOptions.new()
 	if not options.init():
 		quit(1)
 		return
@@ -43,14 +43,14 @@ static func convert_css(css_file, output, debug = false):
 		print("Creating theme")
 
 	if not output:
-		var last_slash = Options.find_last(css_file, "/")
+		var last_slash = CSSCliOptions.find_last(css_file, "/")
 		var file_name = css_file.substr(last_slash + 1)
 		var dir_path = css_file.substr(0, last_slash)
 
 		var file_name_without_ext = file_name.split(".")[0]
 		output = dir_path + "/" + file_name_without_ext + ".tres"
 
-	var output_dir = output.substr(0, Options.find_last(output, "/") + 1)
+	var output_dir = output.substr(0, CSSCliOptions.find_last(output, "/") + 1)
 	print("Generating themes to %s" % output_dir)
 
 	for theme_name in themes.keys():

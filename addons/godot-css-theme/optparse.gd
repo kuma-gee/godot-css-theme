@@ -42,7 +42,7 @@
 # Parses the command line arguments supplied into an array that can then be
 # examined and parsed based on how the gut options work.
 #-------------------------------------------------------------------------------
-class_name OptParse
+class_name OptParseCustom
 
 class CmdLineParser:
 	var _used_options = []

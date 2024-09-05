@@ -1,1 +1,1 @@
-class_name UnitTest extends "res://addons/gut/test.gd"
+class_name UnitTest extends GutTest
