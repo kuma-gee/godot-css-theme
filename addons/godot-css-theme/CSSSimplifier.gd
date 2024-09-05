@@ -53,7 +53,11 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 				if props.has("skew"):
 					new_props[style_type] = "Flat"
-					new_props[style_prefix + "skew"] = props["skew"]
+					_vector2(
+						new_props,
+						props["skew"],
+						style_prefix + "skew"
+					)
 
 				if props.has("corner-detail"):
 					new_props[style_type] = "Flat"
@@ -106,7 +110,11 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 				if props.has("shadow-offset"):
 					new_props[style_type] = "Flat"
-					new_props[style_prefix + "shadow-offset"] = props["shadow-offset"]
+					_vector2(
+						new_props,
+						props["shadow-offset"],
+						style_prefix + "shadow-offset"
+					)
 
 				if props.has("anti-aliasing"):
 					new_props[style_type] = "Flat"
@@ -143,3 +151,8 @@ func _shorthand_sides(
 
 	for i in range(0, sides.size()):
 		props[prefix + "-" + sides[i]] = side_values[i]
+
+
+func _vector2(props: Dictionary, value: String, prefix: String):
+	var split = value.split(" ")
+	props[prefix] = "Vector2(%s)" % ", ".join(split)
