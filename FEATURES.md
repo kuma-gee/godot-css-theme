@@ -62,14 +62,32 @@ States can be selected with pseudo selectors like `Button:disabled` where `disab
 Right now only simplified syntax works with this selector.
 If you use the base syntax like `--colors-font-color`, it will only apply to the normal state.
 
-- `color` -> `font_color`
-- `gap` -> `separation`
-- `padding` -> `content_margin_*`
-- `background` -> `bg_color`
-- `border-width` -> `border_width_*`
-- `border-radius` -> `corner_radius_*`
-- `border-color` -> `border_color`
-- `font-family` -> `font`
+| CSS Property       | Godot Attribute    | Parameters/Type |
+|--------------------|--------------------|------------|
+| anti-aliasing      | anti_aliasing      | bool |
+| anti-aliasing-size | anti_aliasing_size | float |
+| background         | bg_color           | Color |
+| border-blend       | border_blend       | bool |
+| border-color       | border_color       | Color |
+| border-radius      | corner_radius_*    | ints: `<top-left> <top-right> <bottom-right> <bottom-left>` |
+| border-width       | border_width_*     | floats: `<top> <right> <bottom> <left>` |StyleBoxFlat
+| color              | font_color         | Color |
+| corner-detail      | corner_detail      | int |
+| draw-center        | draw_center        | bool |
+| expand-margin      | expand_margin      | floats: `<top> <right> <bottom> <left>` |StyleBoxFlat
+| font-family        | font               | url: `url(res://path/to/font.ttf)` |
+| gap                | separation         | int |
+| padding            | content_margin_*   | floats: `<top> <right> <bottom> <left>` |
+| shadow-color       | shadow_color       | Color |
+| shadow-offset      | shadow_offset      | `<x> <y>` |
+| shadow-size        | shadow_size        | int |
+| skew               | skew               | `<x> <y>` |
+
+See
+[StyleBox](https://docs.godotengine.org/en/stable/classes/class_stylebox.html),
+[StyleBoxFlat](https://docs.godotengine.org/en/stable/classes/class_styleboxflat.html),
+and [BoxContainer](https://docs.godotengine.org/en/stable/classes/class_boxcontainer.html),
+for further reference on Godot attribute names.
 
 ## SCSS
 
