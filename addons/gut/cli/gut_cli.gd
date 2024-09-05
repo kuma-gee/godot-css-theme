@@ -97,8 +97,8 @@ To generate a .gutconfig.json file you can use -gprint_gutconfig_sample
 To see the effective values of a CLI command and a gutconfig use -gpo
 
 Values for options can be supplied using:
-    option=value    # no space around "="
-    option value    # a space between option and value w/o =
+	option=value    # no space around "="
+	option value    # a space between option and value w/o =
 
 Options whose values are lists/arrays can be specified multiple times:
 	-gdir=a,b

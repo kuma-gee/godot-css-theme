@@ -15,7 +15,7 @@ func test_map_color():
 
 func test_map_color_from_state():
 	var theme = create_theme_from_text("Button:disabled { color: #333}")[""]
-	assert_eq(theme.get_color("font_color_disabled", "Button"), Color("#333"))
+	assert_eq(theme.get_color("font_disabled_color", "Button"), Color("#333"))
 
 
 func test_map_background():

@@ -31,10 +31,10 @@ func test_simple_prop_mapping():
 
 func test_button_states():
 	assert_eq(theme.get_color("font_color", "Button"), Color("#FFF"))
-	assert_eq(theme.get_color("font_color_disabled", "Button"), Color("#FFF"))
-	assert_eq(theme.get_color("font_color_hover", "Button"), Color("#FFF"))
-	assert_eq(theme.get_color("font_color_pressed", "Button"), Color("#FFF"))
-	assert_eq(theme.get_color("font_color_focus", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_disabled_color", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_hover_color", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_pressed_color", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_focus_color", "Button"), Color("#FFF"))
 
 	assert_eq(theme.get_stylebox("normal", "Button").get("bg_color"), Color("#333"))
 	assert_eq(theme.get_stylebox("disabled", "Button").get("bg_color"), Color("#333"))

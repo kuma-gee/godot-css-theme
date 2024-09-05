@@ -3,19 +3,18 @@ name: "Test"
 
 on:
   workflow_dispatch: {}
-# Disable for now, an import problem with godot?
-#  push:
-#    branches:
-#      - master
+  push:
+    branches:
+      - master
 
 jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.1.2
+      image: barichello/godot-ci:4.3
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Unit Test
         run: sh scripts/test.sh
         timeout-minutes: 1

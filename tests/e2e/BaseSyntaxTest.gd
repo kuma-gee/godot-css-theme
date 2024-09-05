@@ -13,9 +13,9 @@ func before_all():
 
 func test_font_color():
 	assert_eq(theme.get_color("font_color", "Button"), Color("#000"))
-	assert_eq(theme.get_color("font_color_disabled", "Button"), Color("#333"))
-	assert_eq(theme.get_color("font_color_hover", "Button"), Color("#FFF"))
-	assert_eq(theme.get_color("font_color_pressed", "Button"), Color(0, 0, 0, 0))
+	assert_eq(theme.get_color("font_disabled_color", "Button"), Color("#333"))
+	assert_eq(theme.get_color("font_hover_color", "Button"), Color("#FFF"))
+	assert_eq(theme.get_color("font_pressed_color", "Button"), Color(0, 0, 0, 0))
 	assert_eq(theme.get_constant("hseparation", "Button"), 10)
 	assert_eq(theme.get_font("font", "Button").resource_path, "res://tests/e2e/font.tres")
 
@@ -58,4 +58,4 @@ func test_classes():
 	var classTheme = themes["test"]
 	assert_eq(classTheme.get_color("font_color", "Button"), Color("#fff"))
 	assert_eq(classTheme.get_color("font_color", "Label"), Color("#fff"))
-	assert_eq(classTheme.get_color("font_color_disabled", "Label"), Color("#aaa"))
+	assert_eq(classTheme.get_color("font_disabled_color", "Label"), Color("#aaa"))

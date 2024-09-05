@@ -1,8 +1,8 @@
 Button {
   --colors-font-color: #000;
-  --colors-font-color-disabled: #333;
-  --colors-font-color-hover: #fff;
-  --colors-font-color-pressed: Color(0, 0, 0, 0);
+  --colors-font-disabled-color: #333;
+  --colors-font-hover-color: #fff;
+  --colors-font-pressed-color: Color(0, 0, 0, 0);
 
   --const-hseparation: 10;
 
@@ -41,5 +41,5 @@ Label.test {
 }
 
 Label.test {
-  --colors-font-color-disabled: #aaa;
+  --colors-font-disabled-color: #aaa;
 }
