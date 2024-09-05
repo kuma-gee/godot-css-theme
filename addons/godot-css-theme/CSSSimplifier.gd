@@ -25,7 +25,7 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					var mapped_prop = (
 						"--colors-font-color"
 						if state == Stylesheet.DEFAULT_STATE
-						else "--colors-font-color-%s" % state
+						else "--colors-font-%s-color" % state
 					)
 					new_props[mapped_prop] = props["color"]
 
