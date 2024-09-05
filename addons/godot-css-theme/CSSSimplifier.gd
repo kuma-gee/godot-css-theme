@@ -47,6 +47,18 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					var color = "Color(0, 0, 0, 0)" if is_none else value
 					new_props[style_prefix + "bg-color"] = color
 
+				if props.has("draw-center"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "draw-center"] = props["draw-center"]
+
+				if props.has("skew"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "skew"] = props["skew"]
+
+				if props.has("corner-detail"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "corner-detail"] = props["corner-detail"]
+
 				if props.has("border-width"):
 					new_props[style_type] = "Flat"
 					_shorthand_sides(
@@ -66,12 +78,43 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					new_props[style_type] = "Flat"
 					new_props[style_prefix + "border-color"] = props["border-color"]
 
+				if props.has("border-blend"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "border-blend"] = props["border-blend"]
+
 				if props.has("padding"):
 					if not new_props.has(style_type):
 						new_props[style_type] = "Empty"
 
 					_shorthand_sides(new_props, props["padding"], style_prefix + "content-margin")
 
+				if props.has("expand-margin"):
+					new_props[style_type] = "Flat"
+					_shorthand_sides(
+						new_props,
+						props["expand-margin"],
+						style_prefix + "expand-margin",
+					)
+
+				if props.has("shadow-color"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "shadow-color"] = props["shadow-color"]
+
+				if props.has("shadow-size"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "shadow-size"] = props["shadow-size"]
+
+				if props.has("shadow-offset"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "shadow-offset"] = props["shadow-offset"]
+
+				if props.has("anti-aliasing"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "anti-aliasing"] = props["anti-aliasing"]
+
+				if props.has("anti-aliasing-size"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "anti-aliasing-size"] = props["anti-aliasing-size"]
 
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 
