@@ -34,11 +34,11 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 				if props.has("font-family"):
 					var value = props["font-family"]
-					new_props['--fonts-font'] = value
+					new_props["--fonts-font"] = value
 
 				if props.has("font-size"):
-					new_props['--fonts-font-size'] = props["font-size"]
-					
+					new_props["--fonts-font-size"] = props["font-size"]
+
 				if props.has("background"):
 					var value = props["background"]
 					var is_none = value == "none"
