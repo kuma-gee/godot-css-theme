@@ -25,7 +25,7 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					var mapped_prop = (
 						"--colors-font-color"
 						if state == Stylesheet.DEFAULT_STATE
-						else "--colors-font-color-%s" % state
+						else "--colors-font-%s-color" % state
 					)
 					new_props[mapped_prop] = props["color"]
 
@@ -34,11 +34,11 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 				if props.has("font-family"):
 					var value = props["font-family"]
-					new_props['--fonts-font'] = value
+					new_props["--fonts-font"] = value
 
 				if props.has("font-size"):
-					new_props['--fonts-font-size'] = props["font-size"]
-					
+					new_props["--fonts-font-size"] = props["font-size"]
+
 				if props.has("background"):
 					var value = props["background"]
 					var is_none = value == "none"
@@ -46,6 +46,22 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					new_props[style_type] = "Flat"
 					var color = "Color(0, 0, 0, 0)" if is_none else value
 					new_props[style_prefix + "bg-color"] = color
+
+				if props.has("draw-center"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "draw-center"] = props["draw-center"]
+
+				if props.has("skew"):
+					new_props[style_type] = "Flat"
+					_vector2(
+						new_props,
+						props["skew"],
+						style_prefix + "skew"
+					)
+
+				if props.has("corner-detail"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "corner-detail"] = props["corner-detail"]
 
 				if props.has("border-width"):
 					new_props[style_type] = "Flat"
@@ -66,12 +82,47 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					new_props[style_type] = "Flat"
 					new_props[style_prefix + "border-color"] = props["border-color"]
 
+				if props.has("border-blend"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "border-blend"] = props["border-blend"]
+
 				if props.has("padding"):
 					if not new_props.has(style_type):
 						new_props[style_type] = "Empty"
 
 					_shorthand_sides(new_props, props["padding"], style_prefix + "content-margin")
 
+				if props.has("expand-margin"):
+					new_props[style_type] = "Flat"
+					_shorthand_sides(
+						new_props,
+						props["expand-margin"],
+						style_prefix + "expand-margin",
+					)
+
+				if props.has("shadow-color"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "shadow-color"] = props["shadow-color"]
+
+				if props.has("shadow-size"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "shadow-size"] = props["shadow-size"]
+
+				if props.has("shadow-offset"):
+					new_props[style_type] = "Flat"
+					_vector2(
+						new_props,
+						props["shadow-offset"],
+						style_prefix + "shadow-offset"
+					)
+
+				if props.has("anti-aliasing"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "anti-aliasing"] = props["anti-aliasing"]
+
+				if props.has("anti-aliasing-size"):
+					new_props[style_type] = "Flat"
+					new_props[style_prefix + "anti-aliasing-size"] = props["anti-aliasing-size"]
 
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 
@@ -100,3 +151,8 @@ func _shorthand_sides(
 
 	for i in range(0, sides.size()):
 		props[prefix + "-" + sides[i]] = side_values[i]
+
+
+func _vector2(props: Dictionary, value: String, prefix: String):
+	var split = value.split(" ")
+	props[prefix] = "Vector2(%s)" % ", ".join(split)
