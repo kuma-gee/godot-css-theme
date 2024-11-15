@@ -10,6 +10,7 @@ like [SASS](https://sass-lang.com/).
 
 ## How to use
 
+- Download the plugin from the asset store
 - Enable the plugin `Godot-CSS-Theme` in the Project Settings
 - Create a `css` file and write your styles in css. See syntax below.
 - Saving it automatically creates a theme that can be used
