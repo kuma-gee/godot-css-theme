@@ -4,14 +4,19 @@ extends EditorPlugin
 const EDITOR = preload("res://addons/godot-css-theme/editor/css_editor.tscn")
 
 var file_editor
+var import_plugin
 
 func _enter_tree():
 	file_editor = EDITOR.instantiate()
 	get_editor_interface().get_editor_main_screen().add_child(file_editor)
 	_make_visible(false)
 
+	import_plugin = preload("res://addons/godot-css-theme/import_plugin.gd").new();
+	add_import_plugin(import_plugin)
+
 func _exit_tree():
 	get_editor_interface().get_editor_main_screen().remove_child(file_editor)
+	remove_import_plugin(import_plugin)
 
 func _has_main_screen():
 	return true
