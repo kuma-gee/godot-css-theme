@@ -7,7 +7,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kctcl"]
 
-[node name="CSSEditor" type="Control" node_paths=PackedStringArray("open_key", "export_key", "code", "file_name_label")]
+[node name="CSSEditor" type="Control" node_paths=PackedStringArray("open_key", "code", "file_name_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,6 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_d8bk4")
 open_key = NodePath("VBoxContainer/MarginContainer/TopBar/Open")
-export_key = NodePath("VBoxContainer/MarginContainer/TopBar/Export")
 code = NodePath("VBoxContainer/Code")
 file_name_label = NodePath("VBoxContainer/MarginContainer/TopBar/FileName")
 
@@ -60,18 +59,6 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_kctcl")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_kctcl")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kctcl")
 text = "Open File"
-script = ExtResource("2_77gh4")
-
-[node name="Export" type="Button" parent="VBoxContainer/MarginContainer/TopBar"]
-visible = false
-modulate = Color(0.6, 0.6, 0.6, 1)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kctcl")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kctcl")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kctcl")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_kctcl")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_kctcl")
-text = "Export Theme"
 script = ExtResource("2_77gh4")
 
 [node name="Control" type="Control" parent="VBoxContainer/MarginContainer/TopBar"]

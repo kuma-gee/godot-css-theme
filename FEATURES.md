@@ -4,6 +4,8 @@ For a full list of examples see the css files in `tests/e2e`.
 
 ## Classes
 
+Note: currently only works using the command cli (see issue #6)
+
 You can use classes in the css files but they need to be associated with a `node_type` (e.g `Button.cool-button`).
 They cannot be used standalone. Classes will be grouped together and will be generated as a separate theme.
 
@@ -91,4 +93,4 @@ for further reference on Godot attribute names.
 
 ## SCSS
 
-See [this file](https://github.com/kuma-gee/robo-soul/blob/master/theme/theme.scss) for now
+See [this file](./themes/theme.scss) for an example with SCSS

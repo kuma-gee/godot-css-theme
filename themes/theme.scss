@@ -1,0 +1,78 @@
+$light-salmon: #efa27fff;
+$light-cyan: #dbfcffff;
+$prussian-blue: #23395bff;
+$winter-sky: #ff006eff;
+$azure: #3a86ffff;
+
+$primary-color: #999;
+$disabled-color: #333;
+$hover-color: #FFF;
+$border-color: #666;
+
+$transparent: Color(0, 0, 0, 0);
+
+$slider-border: 1;
+$slider-content-size: 3;
+
+$line-separation: 10;
+
+$empty-image: url(assets/empty.png);
+
+body {
+    font-family: url(font.tres);
+}
+
+Button {
+    --colors-font-color: #{$primary-color};
+    --colors-font-color-disabled: #{$disabled-color};
+    --colors-font-color-hover: #{$hover-color};
+    --colors-font-color-pressed: #{$hover-color};
+
+    --styles-normal-type: Empty;
+    --styles-focus-type: Empty;
+    --styles-hover-type: Empty;
+    --styles-disabled-type: Empty;
+    --styles-pressed-type: Empty;
+}
+
+HSlider, VSlider {
+    --icons-grabber: #{$empty-image};
+    --icons-grabber-disabled: #{$empty-image};
+    --icons-grabber-highlight: #{$empty-image};
+
+    --styles-grabber-area-type: Flat;
+    --styles-grabber-area-bg-color: #{$primary-color};
+    --styles-grabber-area-border-width-left: #{$slider-border};
+    --styles-grabber-area-border-width-right: #{$slider-border};
+    --styles-grabber-area-border-width-top: #{$slider-border};
+    --styles-grabber-area-border-width-bottom: #{$slider-border};
+    --styles-grabber-area-border-color: #{$border-color};
+
+    --styles-grabber-area-highlight-type: Flat;
+    --styles-grabber-area-highlight-bg-color: #{$hover-color};
+    --styles-grabber-area-highlight-border-width-left: #{$slider-border};
+    --styles-grabber-area-highlight-border-width-right: #{$slider-border};
+    --styles-grabber-area-highlight-border-width-top: #{$slider-border};
+    --styles-grabber-area-highlight-border-width-bottom: #{$slider-border};
+    --styles-grabber-area-highlight-border-color: #{$border-color};
+
+    --styles-slider-type: Flat;
+    --styles-slider-bg-color: #{$transparent};
+    --styles-slider-border-width-left: #{$slider-border};
+    --styles-slider-border-width-right: #{$slider-border};
+    --styles-slider-border-width-top: #{$slider-border};
+    --styles-slider-border-width-bottom: #{$slider-border};
+    --styles-slider-border-color: #{$border-color};
+    --styles-slider-content-margin-left: #{$slider-content-size};
+    --styles-slider-content-margin-right: #{$slider-content-size};
+    --styles-slider-content-margin-top: #{$slider-content-size};
+    --styles-slider-content-margin-bottom: #{$slider-content-size};
+}
+
+VBoxContainer {
+    --const-separation: #{$line-separation};
+}
+
+ProgressBar {
+    --styles-bg-type: Flat;
+}

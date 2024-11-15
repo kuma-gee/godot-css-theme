@@ -4,7 +4,6 @@ extends Control
 signal saved(file)
 
 @export var open_key: BaseButton
-@export var export_key: BaseButton
 @export var code: TextEdit
 @export var file_name_label: Label
 
@@ -31,14 +30,11 @@ func _input(event: InputEvent):
 
 func _ready():
 	open_key.pressed.connect(func(): file_dialog.popup(Rect2i(0, 0, 700, 600)))
-	export_key.pressed.connect(func(): export_dialog.popup(Rect2i(0, 0, 700, 600)))
 	
 	file_dialog.file_selected.connect(func(p): open_file(p))
-	export_dialog.file_selected.connect(func(p): export_theme(p))
 	
 	code.text_changed.connect(func(): self.dirty = true)
 	code.hide()
-	export_key.hide()
 	_update_label()
 
 func _exit_tree():
@@ -58,7 +54,6 @@ func open_file(path):
 		self.css_file = path
 		code.text = file.get_as_text()
 		code.show()
-		export_key.show()
 	else:
 		push_error("Failed to open css file: %s" % path)
 
