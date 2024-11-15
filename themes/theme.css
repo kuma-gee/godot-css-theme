@@ -15,7 +15,7 @@ Button {
   --styles-normal-type: Empty;
 
   --styles-hover-type: Flat;
-  --styles-hover-bg-color: #fff;
+  --styles-hover-bg-color: #444;
   --styles-hover-shadow-size: 5;
 }
 

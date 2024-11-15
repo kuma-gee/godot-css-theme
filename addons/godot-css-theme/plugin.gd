@@ -8,6 +8,8 @@ var import_plugin
 
 func _enter_tree():
 	file_editor = EDITOR.instantiate()
+	file_editor.saved.connect(func(file): get_editor_interface().get_resource_filesystem().scan_sources())
+	
 	get_editor_interface().get_editor_main_screen().add_child(file_editor)
 	_make_visible(false)
 

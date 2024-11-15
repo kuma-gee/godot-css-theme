@@ -1,6 +1,8 @@
 @tool
 extends Control
 
+signal saved(file)
+
 @export var open_key: BaseButton
 @export var export_key: BaseButton
 @export var code: TextEdit
@@ -66,6 +68,7 @@ func save_file(path = css_file):
 		var file = FileAccess.open(path, FileAccess.WRITE)
 		if file:
 			file.store_string(code.text)
+			saved.emit(file)
 		else:
 			push_warning("Failed to save css file to path %s" % path)
 

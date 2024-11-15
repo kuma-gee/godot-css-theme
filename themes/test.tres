@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=2 format=3]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://byamu7w8htc4y"]
 
-[ext_resource type="FontFile" path="res://tests/unit/mintsoda.ttf" id="1_eylev"]
+[ext_resource type="FontFile" uid="uid://b4v2wmnaaj087" path="res://tests/unit/mintsoda.ttf" id="1_eylev"]
 
 [resource]
 default_font = ExtResource("1_eylev")

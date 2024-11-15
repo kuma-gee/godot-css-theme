@@ -1,8 +1,8 @@
-[gd_resource type="Theme" load_steps=7 format=3]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://der3b7h0edjrm"]
 
-[ext_resource type="FontFile" path="res://tests/unit/jackeyfont.ttf" id="1_yvrn1"]
-[ext_resource type="Texture2D" path="res://icon.png" id="2_1mmkd"]
-[ext_resource type="FontFile" path="res://tests/unit/mintsoda.ttf" id="3_ee2bd"]
+[ext_resource type="FontFile" uid="uid://ba3hxxe3k6agq" path="res://tests/unit/jackeyfont.ttf" id="1_yvrn1"]
+[ext_resource type="Texture2D" uid="uid://c0e63l3yw68fk" path="res://icon.png" id="2_1mmkd"]
+[ext_resource type="FontFile" uid="uid://b4v2wmnaaj087" path="res://tests/unit/mintsoda.ttf" id="3_ee2bd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnxfh"]
 bg_color = Color(1, 1, 1, 1)
