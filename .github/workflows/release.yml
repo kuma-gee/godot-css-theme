@@ -19,6 +19,10 @@ jobs:
       - name: Get the version
         id: version
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+      - name: Copy over files
+        run: |
+          cp LICENSE.txt addons/godot-css-theme/LICENSE
+          cp README.md addons/godot-css-theme/README.md
       - name: Godot Asset Lib
         uses: deep-entertainment/godot-asset-lib-action@v0.3.0
         env:
