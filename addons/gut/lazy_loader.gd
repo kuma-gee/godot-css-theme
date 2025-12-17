@@ -15,6 +15,9 @@ static func print_usage():
 		print(key._path, '  (', usage_counter.things[key], ')')
 
 
+static func clear():
+	usage_counter.things.clear()
+
 # ------------------------------------------------------------------------------
 # Class
 # ------------------------------------------------------------------------------
@@ -28,11 +31,9 @@ func _init(path):
 
 func get_loaded():
 	if(_loaded == null):
-		# if(ResourceLoader.has_cached(_path)):
-		# 	print('---- already loaded ', _path, ' ----')
-		# else:
-		# 	print('---- loading ', _path, ' ----')
 		_loaded = WarningsManager.load_script_ignoring_all_warnings(_path)
 	usage_counter.add(self)
 	return _loaded
+
+
 

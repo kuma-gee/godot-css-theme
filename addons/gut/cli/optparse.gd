@@ -1,130 +1,133 @@
-# ##############################################################################
-# Parses options from the command line, as one might expect.  It can also
-# generate help text that displays all the arguments your script accepts.
-#
-# This does alot, if you want to see it in action have a look at
-#	scratch/optparse_example.gd
-#
-#
-# Godot Argument Lists
-# -------------------------
-# There are two sets of command line arguments that Godot populates:
-#	OS.get_cmdline_args
-#	OS.get_cmdline_user_args.
-#
-# OS.get_cmdline_args contains any arguments that are not used by the engine
-# itself.  This means options like --help and -d will never appear in this list
-# since these are used by the engine.  The one exception is the -s option which
-# is always included as the first entry and the script path as the second.
-# Optparse ignores these values for argument processing but can be accessed
-# with my_optparse.options.script_option.  This list does not contain any
-# arguments that appear in OS.get_cmdline_user_args.
-#
-# OS.get_cmdline_user_args contains any arguments that appear on the command
-# line AFTER " -- " or " ++ ".  This list CAN contain options that the engine
-# would otherwise use, and are ignored completely by the engine.
-#
-# The parse method, by default, includes arguments from OS.get_cmdline_args and
-# OS.get_cmdline_user_args.  You can optionally pass one of these to the parse
-# method to limit which arguments are parsed.  You can also conjure up your own
-# array of arguments and pass that to parse.
-#
-# See Godot's documentation for get_cmdline_args and get_cmdline_user_args for
-# more information.
-#
-#
-# Adding Options
-# --------------
-# Use the following to add options to be parsed.  These methods return the
-# created Option instance.  See that class above for more info.  You can use
-# the returned instance to get values, or use get_value/get_value_or_null.
-#	add("--name", "default", "Description goes here")
-#	add_required("--name", "default", "Description goes here")
-# 	add_positional("--name", "default", "Description goes here")
-#	add_positional_required("--name", "default", "Description goes here")
-#
-# get_value will return the value of the option or the default if it was not
-# set.  get_value_or_null will return the value of the option or null if it was
-# not set.
-#
-# The Datatype for an option is determined from the default value supplied to
-# the various add methods.  Supported types are
-#	String
-#	Int
-#	Float
-#	Array of strings
-#	Boolean
-#
-#
-# Value Parsing
-# -------------
-# optparse uses option_name_prefix to differentiate between option names and
-# values.  Any argument that starts with this value will be treated as an
-# argument name.  The default is "-".  Set this before calling parse if you want
-# to change it.
-#
-# Values for options can be supplied on the command line with or without an "=":
-#	option=value    # no space around "="
-#	option value    # a space between option and value w/o =
-# There is no way to escape "=" at this time.
-#
-# Array options can be specified multiple times and/or set from a comma delimited
-# list.
-# 	-gdir=a,b
-# 	-gdir c,d
-# 	-gdir e
-# Results in -gdir equaling [a, b, c, d, e].  There is no way to escape commas
-# at this time.
-#
-# To specify an empty list via the command line follow the option with an equal
-# sign
-#	-gdir=
-#
-# Boolean options will have thier value set to !default when they are supplied
-# on the command line.  Boolean options cannot have a value on the command line.
-# They are either supplied or not.
-#
-# If a value is not an array and is specified multiple times on the command line
-# then the last entry will be used as the value.
-#
-# Positional argument values are parsed after all named arguments are parsed.
-# This means that other options can appear before, between, and after positional
-# arguments.
-#	--foo=bar positional_0_value --disabled --bar foo positional_1_value --a_flag
-#
-# Anything that is not used by named or positional arguments will appear in the
-# unused property.  You can use this to detect unrecognized arguments or treat
-# everything else provided as a list of things, or whatever you want.  You can
-# use is_option on the elements of unused (or whatever you want really) to see
-# if optparse would treat it as an option name.
-#
-# Use get_missing_required_options to get an array of Option with all required
-# options that were not found when parsing.
-#
-# The parsed_args property holds the list of arguments that were parsed.
-#
-#
-# Help Generation
-# ---------------
-# You can call get_help to generate help text, or you can just call print_help
-# and this will print it for you.
-#
-# Set the banner property to any text you want to appear before the usage and
-# options sections.
-#
-# Options are printed in the order they are added.  You can add a heading for
-# different options sections with add_heading.
-# 	add("--asdf", 1, "This will have no heading")
-#	add_heading("foo")
-#	add("--foo", false, "This will have the foo heading")
-#	add("--another_foo", 1.5, "This too.")
-#	add_heading("This is after foo")
-#	add("--bar", true, "You probably get it by now.")
-#
-# If you include "[default]" in the description of a option, then the help will
-# substitue it with the default value.
-#
-# ##############################################################################
+## Parses command line arguments, as one might expect.
+##
+## Parses command line arguments with a bunch of options including generating
+## text that displays all the arguments your script accepts.  This
+## is included in the GUT ClassRef since it might be usable by others and is
+## portable (everything it needs is in this one file).
+## [br]
+## This does alot, if you want to see it in action have a look at
+##	[url=https://github.com/bitwes/Gut/blob/main/scratch/optparse_example.gd]scratch/optparse_example.gd[/url]
+## [codeblock lang=text]
+##
+## Godot Argument Lists
+## -------------------------
+## There are two sets of command line arguments that Godot populates:
+##	OS.get_cmdline_args
+##	OS.get_cmdline_user_args.
+##
+## OS.get_cmdline_args contains any arguments that are not used by the engine
+## itself.  This means options like --help and -d will never appear in this list
+## since these are used by the engine.  The one exception is the -s option which
+## is always included as the first entry and the script path as the second.
+## Optparse ignores these values for argument processing but can be accessed
+## with my_optparse.options.script_option.  This list does not contain any
+## arguments that appear in OS.get_cmdline_user_args.
+##
+## OS.get_cmdline_user_args contains any arguments that appear on the command
+## line AFTER " -- " or " ++ ".  This list CAN contain options that the engine
+## would otherwise use, and are ignored completely by the engine.
+##
+## The parse method, by default, includes arguments from OS.get_cmdline_args and
+## OS.get_cmdline_user_args.  You can optionally pass one of these to the parse
+## method to limit which arguments are parsed.  You can also conjure up your own
+## array of arguments and pass that to parse.
+##
+## See Godot's documentation for get_cmdline_args and get_cmdline_user_args for
+## more information.
+##
+##
+## Adding Options
+## --------------
+## Use the following to add options to be parsed.  These methods return the
+## created Option instance.  See that class above for more info.  You can use
+## the returned instance to get values, or use get_value/get_value_or_null.
+##   add("--name", "default", "Description goes here")
+##   add(["--name", "--aliases"], "default", "Description goes here")
+##   add_required(["--name", "--aliases"], "default", "Description goes here")
+##   add_positional("--name", "default", "Description goes here")
+##   add_positional_required("--name", "default", "Description goes here")
+##
+## get_value will return the value of the option or the default if it was not
+## set.  get_value_or_null will return the value of the option or null if it was
+## not set.
+##
+## The Datatype for an option is determined from the default value supplied to
+## the various add methods.  Supported types are
+##   String
+##   Int
+##   Float
+##   Array of strings
+##   Boolean
+##
+##
+## Value Parsing
+## -------------
+## optparse uses option_name_prefix to differentiate between option names and
+## values.  Any argument that starts with this value will be treated as an
+## argument name.  The default is "-".  Set this before calling parse if you want
+## to change it.
+##
+## Values for options can be supplied on the command line with or without an "=":
+##	option=value    # no space around "="
+##	option value    # a space between option and value w/o =
+## There is no way to escape "=" at this time.
+##
+## Array options can be specified multiple times and/or set from a comma delimited
+## list.
+##   -gdir=a,b
+##   -gdir c,d
+##   -gdir e
+## Results in -gdir equaling [a, b, c, d, e].  There is no way to escape commas
+## at this time.
+##
+## To specify an empty list via the command line follow the option with an equal
+## sign
+##   -gdir=
+##
+## Boolean options will have thier value set to !default when they are supplied
+## on the command line.  Boolean options cannot have a value on the command line.
+## They are either supplied or not.
+##
+## If a value is not an array and is specified multiple times on the command line
+## then the last entry will be used as the value.
+##
+## Positional argument values are parsed after all named arguments are parsed.
+## This means that other options can appear before, between, and after positional
+## arguments.
+##   --foo=bar positional_0_value --disabled --bar foo positional_1_value --a_flag
+##
+## Anything that is not used by named or positional arguments will appear in the
+## unused property.  You can use this to detect unrecognized arguments or treat
+## everything else provided as a list of things, or whatever you want.  You can
+## use is_option on the elements of unused (or whatever you want really) to see
+## if optparse would treat it as an option name.
+##
+## Use get_missing_required_options to get an array of Option with all required
+## options that were not found when parsing.
+##
+## The parsed_args property holds the list of arguments that were parsed.
+##
+##
+## Help Generation
+## ---------------
+## You can call get_help to generate help text, or you can just call print_help
+## and this will print it for you.
+##
+## Set the banner property to any text you want to appear before the usage and
+## options sections.
+##
+## Options are printed in the order they are added.  You can add a heading for
+## different options sections with add_heading.
+##   add("--asdf", 1, "This will have no heading")
+##   add_heading("foo")
+##   add("--foo", false, "This will have the foo heading")
+##   add("--another_foo", 1.5, "This too.")
+##   add_heading("This is after foo")
+##   add("--bar", true, "You probably get it by now.")
+##
+## If you include "[default]" in the description of a option, then the help will
+## substitue it with the default value.
+## [/codeblock]
 
 
 #-------------------------------------------------------------------------------
@@ -151,6 +154,8 @@ class Option:
 	var default = null
 	var description = ''
 	var required = false
+	var aliases: Array[String] = []
+	var show_in_help = true
 
 
 	func _init(name,default_value,desc=''):
@@ -160,10 +165,51 @@ class Option:
 		_value = default
 
 
-	func to_s(min_space=0):
+	func wrap_text(text, left_indent, max_length, wiggle_room=15):
+		var line_indent = str("\n", " ".repeat(left_indent + 1))
+		var wrapped = ''
+		var position = 0
+		var split_length = max_length
+		while(position < text.length()):
+			if(position > 0):
+				wrapped += line_indent
+
+			var split_by = split_length
+			if(position + split_by + wiggle_room >= text.length()):
+				split_by = text.length() - position
+			else:
+				var min_space = text.rfind(' ', position + split_length)
+				var max_space = text.find(' ', position + split_length)
+				if(max_space <= position + split_length + wiggle_room):
+					split_by = max_space - position
+				else:
+					split_by = min_space - position
+
+			wrapped += text.substr(position, split_by).lstrip(' ')
+
+			if(position == 0):
+				split_length = max_length - left_indent
+
+			position += split_by
+
+
+		return wrapped
+
+
+
+	func to_s(min_space=0, wrap_length=100):
+		var line_indent = str("\n", " ".repeat(min_space + 1))
 		var subbed_desc = description
+		if not aliases.is_empty():
+			subbed_desc += "\naliases: " + ", ".join(aliases)
 		subbed_desc = subbed_desc.replace('[default]', str(default))
-		return str(option_name.rpad(min_space), ' ', subbed_desc)
+		subbed_desc = subbed_desc.replace("\n", line_indent)
+
+		var final = str(option_name.rpad(min_space), ' ', subbed_desc)
+		if(wrap_length != -1):
+			final = wrap_text(final, min_space, wrap_length)
+
+		return final
 
 
 	func has_been_set():
@@ -192,7 +238,7 @@ class Options:
 	var default_heading = OptionHeading.new()
 	var script_option = Option.new('-s', '?', 'script option provided by Godot')
 
-	var _options_by_name = {}
+	var _options_by_name = {"--script": script_option, "-s": script_option}
 	var _options_by_heading = [default_heading]
 	var _cur_heading = default_heading
 
@@ -204,10 +250,15 @@ class Options:
 		_options_by_heading.append(heading)
 
 
-	func add(option):
+	func add(option, aliases=null):
 		options.append(option)
 		_options_by_name[option.option_name] = option
 		_cur_heading.options.append(option)
+
+		if aliases != null:
+			for a in aliases:
+				_options_by_name[a] = option
+			option.aliases.assign(aliases)
 
 
 	func add_positional(option):
@@ -217,9 +268,7 @@ class Options:
 
 	func get_by_name(option_name):
 		var found_param = null
-		if(option_name == script_option.option_name):
-			found_param = script_option
-		elif(_options_by_name.has(option_name)):
+		if(_options_by_name.has(option_name)):
 			found_param = _options_by_name[option_name]
 
 		return found_param
@@ -236,8 +285,8 @@ class Options:
 			if(heading != default_heading):
 				text += str("\n", heading.display, "\n")
 			for option in heading.options:
-				text += str('  ', option.to_s(longest + 2), "\n")
-
+				if(option.show_in_help):
+					text += str('  ', option.to_s(longest + 2).replace("\n", "\n  "), "\n")
 
 		return text
 
@@ -297,11 +346,33 @@ class Options:
 # optarse
 #
 #-------------------------------------------------------------------------------
-var options = Options.new()
-var banner = ''
-var option_name_prefix = '-'
+## @ignore
+var options := Options.new()
+## Set the banner property to any text you want to appear before the usage and
+## options sections when printing the options help.
+var banner := ''
+## optparse uses option_name_prefix to differentiate between option names and
+## values.  Any argument that starts with this value will be treated as an
+## argument name.  The default is "-".  Set this before calling parse if you want
+## to change it.
+var option_name_prefix := '-'
+## @ignore
 var unused = []
+## @ignore
 var parsed_args = []
+## @ignore
+var values: Dictionary = {}
+
+
+func _populate_values_dictionary():
+	for entry in options.options:
+		var value_key = entry.option_name.lstrip('-')
+		values[value_key] = entry.value
+
+	for entry in options.positional:
+		var value_key = entry.option_name.lstrip('-')
+		values[value_key] = entry.value
+
 
 func _convert_value_to_array(raw_value):
 	var split = raw_value.split(',')
@@ -311,7 +382,6 @@ func _convert_value_to_array(raw_value):
 	if(split.size() == 1 and split[0] == ''):
 		split = []
 	return split
-
 
 # REMEMBER raw_value not used for bools.
 func _set_option_value(option, raw_value):
@@ -385,30 +455,87 @@ func _parse_command_line_arguments(args):
 	return parsed_opts
 
 
-func is_option(arg):
-	return arg.begins_with(option_name_prefix)
+## Test if something is an existing argument. If [code]str(arg)[/code] begins
+## with the [member option_name_prefix], it will considered true,
+## otherwise it will be considered false.
+func is_option(arg) -> bool:
+	return str(arg).begins_with(option_name_prefix)
 
 
-func add(op_name, default, desc):
-	var new_op = null
+## Adds a command line option.
+## If [param op_names] is a String, this is set as the argument's name.
+## If [param op_names] is an Array of Strings, all elements of the array
+## will be aliases for the same argument and will be treated as such during
+## parsing.
+## [param default] is the default value the option will be set to if it is not
+## explicitly set during parsing.
+## [param desc] is a human readable text description of the option.
+## If the option is successfully added, the Option object will be returned.
+## If the option is not successfully added (e.g. a name collision with another
+## option occurs), an error message will be printed and [code]null[/code]
+## will be returned.
+func add(op_names, default, desc: String) -> Option:
+	var op_name: String
+	var aliases: Array[String] = []
+	var new_op: Option = null
+
+	if(typeof(op_names) == TYPE_STRING):
+		op_name = op_names
+	else:
+		op_name = op_names[0]
+		aliases.assign(op_names.slice(1))
+
+	var bad_alias: int = aliases.map(
+		func (a: String) -> bool: return options.get_by_name(a) != null
+	).find(true)
 
 	if(options.get_by_name(op_name) != null):
 		push_error(str('Option [', op_name, '] already exists.'))
+	elif bad_alias != -1:
+		push_error(str('Option [', aliases[bad_alias], '] already exists.'))
 	else:
 		new_op = Option.new(op_name, default, desc)
-		options.add(new_op)
+		options.add(new_op, aliases)
 
 	return new_op
 
 
-func add_required(op_name, default, desc):
-	var op = add(op_name, default, desc)
+## Adds a required command line option.
+## Required options that have not been set may be collected after parsing
+## by calling [method get_missing_required_options].
+## If [param op_names] is a String, this is set as the argument's name.
+## If [param op_names] is an Array of Strings, all elements of the array
+## will be aliases for the same argument and will be treated as such during
+## parsing.
+## [param default] is the default value the option will be set to if it is not
+## explicitly set during parsing.
+## [param desc] is a human readable text description of the option.
+## If the option is successfully added, the Option object will be returned.
+## If the option is not successfully added (e.g. a name collision with another
+## option occurs), an error message will be printed and [code]null[/code]
+## will be returned.
+func add_required(op_names, default, desc: String) -> Option:
+	var op := add(op_names, default, desc)
 	if(op != null):
 		op.required = true
 	return op
 
 
-func add_positional(op_name, default, desc):
+## Adds a positional command line option.
+## Positional options are parsed by their position in the list of arguments
+## are are not assigned by name by the user.
+## If [param op_name] is a String, this is set as the argument's name.
+## If [param op_name] is an Array of Strings, all elements of the array
+## will be aliases for the same argument and will be treated as such during
+## parsing.
+## [param default] is the default value the option will be set to if it is not
+## explicitly set during parsing.
+## [param desc] is a human readable text description of the option.
+## If the option is successfully added, the Option object will be returned.
+## If the option is not successfully added (e.g. a name collision with another
+## option occurs), an error message will be printed and [code]null[/code]
+## will be returned.
+func add_positional(op_name, default, desc: String) -> Option:
 	var new_op = null
 	if(options.get_by_name(op_name) != null):
 		push_error(str('Positional option [', op_name, '] already exists.'))
@@ -418,35 +545,64 @@ func add_positional(op_name, default, desc):
 	return new_op
 
 
-func add_positional_required(op_name, default, desc):
+## Adds a required positional command line option.
+## If [param op_name] is a String, this is set as the argument's name.
+## Required options that have not been set may be collected after parsing
+## by calling [method get_missing_required_options].
+## Positional options are parsed by their position in the list of arguments
+## are are not assigned by name by the user.
+## If [param op_name] is an Array of Strings, all elements of the array
+## will be aliases for the same argument and will be treated as such during
+## parsing.
+## [param default] is the default value the option will be set to if it is not
+## explicitly set during parsing.
+## [param desc] is a human readable text description of the option.
+## If the option is successfully added, the Option object will be returned.
+## If the option is not successfully added (e.g. a name collision with another
+## option occurs), an error message will be printed and [code]null[/code]
+## will be returned.
+func add_positional_required(op_name, default, desc: String) -> Option:
 	var op = add_positional(op_name, default, desc)
 	if(op != null):
 		op.required = true
 	return op
 
 
-func add_heading(display_text):
+## Headings are used to separate logical groups of command line options
+## when printing out options from the help menu.
+## Headings are printed out between option descriptions in the order
+## that [method add_heading] was called.
+func add_heading(display_text: String) -> void:
 	options.add_heading(display_text)
 
 
-func get_value(name):
-	var found_param = options.get_by_name(name)
+## Gets the value assigned to an option after parsing.
+## [param name] can be the name of the option or an alias of it.
+## [param name] specifies the option whose value you wish to query.
+## If the option exists, the value assigned to it during parsing is returned.
+## Otherwise, an error message is printed and [code]null[/code] is returned.
+func get_value(name: String):
+	var found_param: Option = options.get_by_name(name)
 
 	if(found_param != null):
 		return found_param.value
 	else:
-		print("COULD NOT FIND OPTION " + name)
+		push_error("COULD NOT FIND OPTION " + name)
 		return null
 
 
-# This will return null instead of the default value if an option has not been
-# specified.  This can be useful when providing an order of precedence to your
-# values.  For example if
-#	default value < config file < command line
-# then you do not want to get the default value for a command line option or it
-# will overwrite the value in a config file.
-func get_value_or_null(name):
-	var found_param = options.get_by_name(name)
+## Gets the value assigned to an option after parsing,
+## returning null if the option was not assigned instead of its default value.
+## [param name] specifies the option whose value you wish to query.
+## This can be useful when providing an order of precedence to your values.
+## For example if
+## [codeblock]
+##     default value < config file < command line
+## [/codeblock]
+## then you do not want to get the default value for a command line option or
+## it will overwrite the value in a config file.
+func get_value_or_null(name: String):
+	var found_param: Option = options.get_by_name(name)
 
 	if(found_param != null and found_param.has_been_set()):
 		return found_param.value
@@ -454,10 +610,11 @@ func get_value_or_null(name):
 		return null
 
 
-func get_help():
-	var sep = '---------------------------------------------------------'
+## Returns the help text for all defined options.
+func get_help() -> String:
+	var sep := '---------------------------------------------------------'
 
-	var text = str(sep, "\n", banner, "\n\n")
+	var text := str(sep, "\n", banner, "\n\n")
 	text += "Usage\n-----------\n"
 	text += "  " + options.get_usage_text() + "\n\n"
 	text += "\nOptions\n-----------\n"
@@ -466,11 +623,18 @@ func get_help():
 	return text
 
 
-func print_help():
+## Prints out the help text for all defined options.
+func print_help() -> void:
 	print(get_help())
 
 
-func parse(cli_args=null):
+## Parses a string for all options that have been set in this optparse.
+## if [param cli_args] is passed as a String, then it is parsed.
+## Otherwise if [param cli_args] is null,
+## aruments passed to the Godot engine at startup are parsed.
+## See the explanation at the top of addons/gut/cli/optparse.gd to understand
+## which arguments this will have access to.
+func parse(cli_args=null) -> void:
 	parsed_args = cli_args
 
 	if(parsed_args == null):
@@ -478,9 +642,12 @@ func parse(cli_args=null):
 		parsed_args.append_array(OS.get_cmdline_user_args())
 
 	unused = _parse_command_line_arguments(parsed_args)
+	_populate_values_dictionary()
 
 
-func get_missing_required_options():
+## Get all options that were required and were not set during parsing.
+## The return value is an Array of Options.
+func get_missing_required_options() -> Array:
 	return options.get_missing_required_options()
 
 
@@ -488,7 +655,7 @@ func get_missing_required_options():
 # The MIT License (MIT)
 # =====================
 #
-# Copyright (c) 2024 Tom "Butch" Wesley
+# Copyright (c) 2025 Tom "Butch" Wesley
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal

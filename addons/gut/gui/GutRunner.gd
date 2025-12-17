@@ -10,11 +10,7 @@
 #
 # This will create a GUI and wire it up and apply gut_config.gd options.
 #
-# Running tests:
-# By default, this will run tests once this control has been added to the tree.
-# You can override this by setting ran_from_editor to false before adding
-# this to the tree.  To run tests manually, call run_tests.
-#
+# Running tests:  Call run_tests
 # ##############################################################################
 extends Node2D
 
@@ -32,22 +28,21 @@ var result_json_path = null
 var lgr = GutUtils.get_logger()
 var gut_config = null
 
+var error_tracker = GutUtils.get_error_tracker()
+
 var _hid_gut = null;
 # Lazy loaded gut instance.  Settable for testing purposes.
 var gut = _hid_gut :
 	get:
 		if(_hid_gut == null):
-			_hid_gut = Gut.new()
+			_hid_gut = Gut.new(lgr)
+			_hid_gut.error_tracker = error_tracker
 		return _hid_gut
 	set(val):
 		_hid_gut = val
-var _wrote_results = false
 
-# The editor runs this scene using play_custom_scene, which means we cannot
-# pass any info directly to the scene.  Whenever this is being used from
-# somewhere else, you probably want to set this to false before adding this
-# to the tree.
-var ran_from_editor = true
+var _wrote_results = false
+var _ran_from_editor = false
 
 @onready var _gut_layer = $GutLayer
 @onready var _gui = $GutLayer/GutScene
@@ -56,31 +51,11 @@ var ran_from_editor = true
 func _ready():
 	GutUtils.WarningsManager.apply_warnings_dictionary(
 		GutUtils.warnings_at_start)
-	GutUtils.LazyLoader.load_all()
-
-	# When used from the panel we have to kick off the tests ourselves b/c
-	# there's no way I know of to interact with the scene that was run via
-	# play_custom_scene.
-	if(ran_from_editor):
-		_run_from_editor()
 
 
 func _exit_tree():
-	if(!_wrote_results and ran_from_editor):
+	if(!_wrote_results and _ran_from_editor):
 		_write_results_for_gut_panel()
-
-
-func _run_from_editor():
-	var GutEditorGlobals = load('res://addons/gut/gui/editor_globals.gd')
-	runner_json_path = GutUtils.nvl(runner_json_path, GutEditorGlobals.editor_run_gut_config_path)
-	result_bbcode_path = GutUtils.nvl(result_bbcode_path, GutEditorGlobals.editor_run_bbcode_results_path)
-	result_json_path = GutUtils.nvl(result_json_path, GutEditorGlobals.editor_run_json_results_path)
-
-	if(gut_config == null):
-		gut_config = GutConfig.new()
-		gut_config.load_options(runner_json_path)
-
-	call_deferred('run_tests')
 
 
 func _setup_gui(show_gui):
@@ -147,8 +122,10 @@ func _handle_quit(should_exit, should_exit_on_success, override_exit_code=EXIT_O
 
 
 func _end_run(override_exit_code=EXIT_OK):
-	if(ran_from_editor):
+	if(_ran_from_editor):
 		_write_results_for_gut_panel()
+
+	GutErrorTracker.deregister_logger(error_tracker)
 
 	_handle_quit(gut_config.options.should_exit,
 		gut_config.options.should_exit_on_success,
@@ -165,11 +142,29 @@ func _on_tests_finished():
 # -------------
 # Public
 # -------------
+# For internal use only, but still public.  Consider it "protected" and you
+# don't have my permission to call this, unless "you" is "me".
+func run_from_editor():
+	_ran_from_editor = true
+	var GutEditorGlobals = load('res://addons/gut/gui/editor_globals.gd')
+	runner_json_path = GutUtils.nvl(runner_json_path, GutEditorGlobals.editor_run_gut_config_path)
+	result_bbcode_path = GutUtils.nvl(result_bbcode_path, GutEditorGlobals.editor_run_bbcode_results_path)
+	result_json_path = GutUtils.nvl(result_json_path, GutEditorGlobals.editor_run_json_results_path)
+
+	if(gut_config == null):
+		gut_config = GutConfig.new()
+		gut_config.load_options(runner_json_path)
+
+	call_deferred('run_tests')
+
+
 func run_tests(show_gui=true):
 	_setup_gui(show_gui)
 
 	if(gut_config.options.dirs.size() + gut_config.options.tests.size() == 0):
-		var err_text = "You do not have any directories configrued, so GUT doesn't know where to find the tests.  Tell GUT where to find the tests and GUT shall run the tests."
+		var err_text = "You do not have any directories configured, so GUT " + \
+			"doesn't know where to find the tests.  Tell GUT where to find the " + \
+			"tests and GUT shall run the tests."
 		lgr.error(err_text)
 		push_error(err_text)
 		_end_run(EXIT_ERROR)
@@ -189,12 +184,13 @@ func run_tests(show_gui=true):
 			_gut_layer.add_child(gut)
 		else:
 			add_child(gut)
-
-	gut.end_run.connect(_on_tests_finished)
+	
+	if(!gut.end_run.is_connected(_on_tests_finished)):
+		gut.end_run.connect(_on_tests_finished)
 
 	gut_config.apply_options(gut)
 	var run_rest_of_scripts = gut_config.options.unit_test_name == ''
-
+	GutErrorTracker.register_logger(error_tracker)
 	gut.test_scripts(run_rest_of_scripts)
 
 
@@ -211,16 +207,20 @@ func quit(exit_code):
 	# Sometimes quitting takes a few seconds.  This gives some indicator
 	# of what is going on.
 	_gui.set_title("Exiting")
+
 	await get_tree().process_frame
 
 	lgr.info(str('Exiting with code ', exit_code))
 	get_tree().quit(exit_code)
 
+
+
+
 # ##############################################################################
 # The MIT License (MIT)
 # =====================
 #
-# Copyright (c) 2023 Tom "Butch" Wesley
+# Copyright (c) 2025 Tom "Butch" Wesley
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
