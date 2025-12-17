@@ -3,12 +3,10 @@ extends BaseCSSTest
 const TEST_CSS = "res://tests/e2e/base-syntax.css"
 
 var theme: Theme
-var themes: Dictionary
 
 
 func before_all():
-	themes = create_theme_from_css(TEST_CSS)
-	theme = themes[""]
+	theme = create_theme_from_css(TEST_CSS)
 
 
 func test_font_color():
@@ -55,7 +53,6 @@ func test_slider():
 
 
 func test_classes():
-	var classTheme = themes["test"]
-	assert_eq(classTheme.get_color("font_color", "Button"), Color("#fff"))
-	assert_eq(classTheme.get_color("font_color", "Label"), Color("#fff"))
-	assert_eq(classTheme.get_color("font_disabled_color", "Label"), Color("#aaa"))
+	assert_eq(theme.get_color("font_color", "ButtonTest"), Color("#fff"))
+	assert_eq(theme.get_color("font_color", "LabelTest"), Color("#fff"))
+	assert_eq(theme.get_color("font_disabled_color", "LabelTest"), Color("#aaa"))

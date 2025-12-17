@@ -37,7 +37,7 @@ static func convert_css(css_file, output, debug = false):
 	if debug:
 		print("Applying Stylesheet")
 	var applier = ThemeApplier.new(debug)
-	var themes = applier.apply_css(fullStylesheet)
+	var theme = applier.apply_css(fullStylesheet)
 
 	if debug:
 		print("Creating theme")
@@ -53,14 +53,8 @@ static func convert_css(css_file, output, debug = false):
 	var output_dir = output.substr(0, CSSCliOptions.find_last(output, "/") + 1)
 	print("Generating themes to %s" % output_dir)
 
-	for theme_name in themes.keys():
-		var theme = themes[theme_name]
-		var theme_output = output_dir + theme_name + ".tres"
-		if theme_name == "":
-			theme_output = output
-		
-		var err = ResourceSaver.save(theme, theme_output)
-		if err != OK:
-			print("Failed to save theme %s" % err)
-		else:
-			print("Saved theme %s to %s" % [theme_name, theme_output])
+	var err = ResourceSaver.save(theme, output)
+	if err != OK:
+		print("Failed to save theme %s" % err)
+	else:
+		print("Saved theme to %s" % output)

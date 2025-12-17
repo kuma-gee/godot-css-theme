@@ -17,3 +17,13 @@ Button:pressed {
   color: #fff;
   background: #333;
 }
+
+Button.dark {
+  color: #000;
+  background: #fff;
+}
+
+Button.dark:disabled {
+  color: #555;
+  background: #ccc;
+}

@@ -1,29 +1,35 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://der3b7h0edjrm"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cgjoxkbnucgm4"]
 
-[ext_resource type="FontFile" uid="uid://ba3hxxe3k6agq" path="res://tests/unit/jackeyfont.ttf" id="1_yvrn1"]
-[ext_resource type="Texture2D" uid="uid://c0e63l3yw68fk" path="res://icon.png" id="2_1mmkd"]
-[ext_resource type="FontFile" uid="uid://b4v2wmnaaj087" path="res://tests/unit/mintsoda.ttf" id="3_ee2bd"]
+[ext_resource type="FontFile" uid="uid://ba3hxxe3k6agq" path="res://tests/unit/jackeyfont.ttf" id="1_kgv31"]
+[ext_resource type="Texture2D" uid="uid://c0e63l3yw68fk" path="res://icon.png" id="2_6c42i"]
+[ext_resource type="FontFile" uid="uid://b4v2wmnaaj087" path="res://tests/unit/mintsoda.ttf" id="3_2hrgd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnxfh"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8t2u"]
+bg_color = Color(0.26666668, 0.26666668, 0.26666668, 1)
 shadow_size = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_srbe1"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k0q7g"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gy2gh"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j33s6"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsup1"]
 content_margin_top = 10.0
 
 [resource]
-default_font = ExtResource("3_ee2bd")
+default_font = ExtResource("3_2hrgd")
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_disabled_color = Color(0.2, 0.2, 0.2, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 0)
 Button/constants/hseparation = 10
-Button/fonts/font = ExtResource("1_yvrn1")
-Button/styles/hover = SubResource("StyleBoxFlat_qnxfh")
-Button/styles/normal = SubResource("StyleBoxEmpty_srbe1")
-CheckBox/icons/checked = ExtResource("2_1mmkd")
-HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_srbe1")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_srbe1")
-HSlider/styles/slider = SubResource("StyleBoxEmpty_gy2gh")
+Button/fonts/font = ExtResource("1_kgv31")
+Button/styles/hover = SubResource("StyleBoxFlat_a8t2u")
+Button/styles/normal = SubResource("StyleBoxEmpty_k0q7g")
+ButtonDark/base_type = &"Button"
+ButtonDark/colors/font_color = Color(0, 0, 0, 1)
+ButtonDark/styles/normal = SubResource("StyleBoxFlat_j33s6")
+CheckBox/icons/checked = ExtResource("2_6c42i")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_k0q7g")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_k0q7g")
+HSlider/styles/slider = SubResource("StyleBoxEmpty_vsup1")

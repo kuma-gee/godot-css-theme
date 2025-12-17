@@ -1,10 +1,10 @@
 [gd_resource type="CodeHighlighter" format=3 uid="uid://blglwyagrkxdm"]
 
 [resource]
-number_color = Color(0.701961, 0.513726, 0.870588, 1)
-symbol_color = Color(0.768627, 0.376471, 0.376471, 1)
-function_color = Color(0.180392, 0.560784, 0.941176, 1)
-member_variable_color = Color(0.866667, 0.866667, 0.866667, 1)
+number_color = Color(0.7019608, 0.5137255, 0.87058824, 1)
+symbol_color = Color(0.76862746, 0.3764706, 0.3764706, 1)
+function_color = Color(0.18039216, 0.56078434, 0.9411765, 1)
+member_variable_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
 keyword_colors = {
 "{": Color(1, 0, 0, 1),
 "}": Color(1, 0, 0, 1)

@@ -87,3 +87,14 @@ func test_class_parent():
 	assert_eq(stylesheet.get_classes("special"), ["Button"])
 
 	assert_eq_deep(stylesheet.get_class_properties("Button", "special"), {"color": "#333"})
+
+func test_class_with_state():
+	var stylesheet = parser.parse_text("Button.special:disabled { color: #333 }", "")
+
+	assert_eq(stylesheet.get_class_groups(), ["", "special"])
+	assert_eq(stylesheet.get_classes("special"), ["Button"])
+
+	assert_eq_deep(
+		stylesheet.get_class_properties("Button", "special", "disabled"),
+		{"color": "#333"}
+	)

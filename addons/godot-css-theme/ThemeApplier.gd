@@ -14,22 +14,26 @@ func _init(debug := false):
 	_debug = debug
 
 
-func apply_css(stylesheet: Stylesheet) -> Dictionary:
+func apply_css(stylesheet: Stylesheet):
 	var result = {}
 
+	var theme = Theme.new()
 	for class_group in stylesheet.get_class_groups():
-		var theme = Theme.new()
+		print("Processing class group: %s" % class_group)
 		_apply_to_theme(theme, stylesheet, class_group)
-
 		result[class_group] = theme
-
-	return result
+	return theme
 
 func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) -> void:
 	for node_type in stylesheet.get_classes(class_group):
 		if _debug:
 			print("Setting properties for %s" % node_type)
 		var properties = stylesheet.get_class_properties(node_type, class_group)
+		if class_group != "" and node_type != GLOBAL_NODE:
+			var new_type = node_type + class_group.capitalize()
+			theme.set_type_variation(new_type, node_type)
+			print("Set type variation: %s" % [new_type])
+			node_type = new_type
 
 		var style_properties = []
 		var styles = {}

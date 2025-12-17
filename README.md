@@ -12,18 +12,14 @@ like [SASS](https://sass-lang.com/).
 
 - Download the plugin from the asset store
 - Enable the plugin `Godot-CSS-Theme` in the Project Settings
-- Create a `css` file and write your styles in css. See syntax below.
+- Create a `css` file and open it in the CSS tab (or some external tool)
+- Write your styles in css. See syntax below.
 - Saving it automatically creates a theme that can be used
-
-Legacy method: you can convert it using a command: (will create a separate `.tres` file)
-```sh
-# Output defaults to same folder with .tres extension
-godot -s addons/godot-css-theme/convert.gd --input="res://themes/themes.css"
-```
 
 ### General Syntax
 
 ```css
+/* Base syntax */
 Button {
   --colors-font-color: #000;
   --colors-font-color-disabled: Color(0, 0, 0, 0.5);
@@ -34,6 +30,15 @@ Button {
 
   --styles-normal-type: Flat;
   --styles-normal-bg-color: #fff;
+}
+
+/* Simplified syntax */
+Button {
+  color: #000;
+  backgroud: #fff;
+}
+Button:disabled {
+  color: Color(0, 0, 0, 0.5);
 }
 ```
 
@@ -48,8 +53,8 @@ Just make sure that new features are documented in `FEATURES.md` and that there 
 - `base-syntax.css` - should contain all possible styles that can be set
 - `simple-syntax.css` - should contain all simplified syntax that is supported
 
-## Problems
+## Known Limitations / Problems
 
 - Using colors with words like `red` or `blue` does not work. Either use hex `#000` or
   native gdscript `Color(0, 0, 0, 1)`
-- Classes do not work inside the editor yet (#6)
+- Only plain numbers are allowed, no `px`, `rem` etc. supported

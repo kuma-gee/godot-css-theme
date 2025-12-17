@@ -7,7 +7,7 @@ const CURRENT_DIR = "res://tests/unit"
 
 
 func test_apply_css():
-	var theme = create_theme_from_css(TEST_CSS)[""]
+	var theme = create_theme_from_css(TEST_CSS)
 
 	assert_eq(theme.get("default_font").resource_path, "res://tests/unit/jackeyfont.ttf")
 	assert_eq(theme.get("default_font_size"), 24)
@@ -42,20 +42,11 @@ func test_apply_css():
 		theme.get_stylebox("slider", "HSlider")
 	)
 
-
-func test_apply_default_font_to_all_classes():
-	var font_path = CURRENT_DIR + "/jackeyfont.ttf"
-	var theme = create_theme_from_text("body { font-family: url(%s); } Button.simple { color: #000}" % font_path)["simple"]
-
-	var font = theme.get("default_font")
-	assert_not_null(font, "Expected default_font to exist")
-
 func test_apply_separate_font_styles():
 	var font_1 = CURRENT_DIR + "/jackeyfont.ttf"
 	var font_2 = CURRENT_DIR + "/mintsoda.ttf"
 
-	var styles = create_theme_from_text("body { font-family: url(%s); font-size: 16 } Label { font-family: url(%s); font-size: 20}" % [font_1, font_2])
-	var theme = styles[""] as Theme
+	var theme = create_theme_from_text("body { font-family: url(%s); font-size: 16 } Label { font-family: url(%s); font-size: 20}" % [font_1, font_2])
 	
 	assert_eq(theme.default_font.resource_path, font_1)
 	assert_eq(theme.get_font("Label", "") .resource_path, font_1)

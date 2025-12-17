@@ -2,29 +2,9 @@
 
 For a full list of examples see the css files in `tests/e2e`.
 
-## Classes
-
-Note: currently only works using the command cli (see issue #6)
-
-You can use classes in the css files but they need to be associated with a `node_type` (e.g `Button.cool-button`).
-They cannot be used standalone. Classes will be grouped together and will be generated as a separate theme.
-
-For example the following will generate two separate themes. In the same directory where the default one is created,
-there will be another theme called `dark-mode.tres`
-
-```css
-Button {
-  color: #000;
-}
-
-Button.dark-mode {
-  color: #fff;
-}
-```
-
 ## Base Syntax
 
-This syntax should theoretically support every property in godot.
+This syntax should theoretically support every property in godot. See [tests/e2e/base-syntax.css](./tests/e2e/base-syntax.css)
 
 The `node_type` is used like a tag to decide which node to style (e.g. `Button` or `CheckBox`).
 
@@ -90,6 +70,20 @@ See
 [StyleBoxFlat](https://docs.godotengine.org/en/stable/classes/class_styleboxflat.html),
 and [BoxContainer](https://docs.godotengine.org/en/stable/classes/class_boxcontainer.html),
 for further reference on Godot attribute names.
+
+## Classes
+
+You can use classes in the css files but they need to be associated with a `node_type` (e.g `Button.flat`).
+They cannot be used standalone. Classes will be converted to type variation of the `node_type`.
+The state (e.g `:disabled`) has to be after the class for the simplified syntax.
+
+For example the following will generate a type variation called `ButtonFlat`
+
+```css
+Button.flat {
+  color: #fff;
+}
+```
 
 ## SCSS
 

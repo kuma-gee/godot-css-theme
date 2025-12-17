@@ -21,10 +21,6 @@ func _import(css_path: String, save_path: String, _o, _p, _g):
 		return ERR_PARSE_ERROR;
 
 	var full_stylesheet = CSSSimplifier.new().simplify(stylesheet);
-	var themes = ThemeApplier.new().apply_css(full_stylesheet);
+	var theme = ThemeApplier.new().apply_css(full_stylesheet);
 
-	var main_theme = themes.get("", null);
-	if not main_theme:
-		return ERR_PARSE_ERROR;
-
-	return ResourceSaver.save(main_theme, save_path + ".tres");
+	return ResourceSaver.save(theme, save_path + ".tres");

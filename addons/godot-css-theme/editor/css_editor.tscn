@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcmut0gcayih2"]
 
-[ext_resource type="Script" path="res://addons/godot-css-theme/editor/css_editor.gd" id="1_d8bk4"]
-[ext_resource type="Script" path="res://addons/godot-css-theme/editor/EditorButton.gd" id="2_77gh4"]
+[ext_resource type="Script" uid="uid://ji1ibjvf6183" path="res://addons/godot-css-theme/editor/css_editor.gd" id="1_d8bk4"]
+[ext_resource type="Script" uid="uid://diulj8wlgnh57" path="res://addons/godot-css-theme/editor/EditorButton.gd" id="2_77gh4"]
 [ext_resource type="CodeHighlighter" uid="uid://blglwyagrkxdm" path="res://addons/godot-css-theme/editor/css_syntax.tres" id="3_ynjw3"]
-[ext_resource type="Script" path="res://addons/godot-css-theme/editor/css_code_edit.gd" id="4_76rs7"]
+[ext_resource type="Script" uid="uid://bduhgnxg4vyha" path="res://addons/godot-css-theme/editor/css_code_edit.gd" id="4_76rs7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kctcl"]
 
@@ -29,7 +29,7 @@ filters = PackedStringArray("*.css")
 
 [node name="ExportDialog" type="FileDialog" parent="."]
 initial_position = 2
-size = Vector2i(312, 175)
+size = Vector2i(348, 175)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -53,11 +53,11 @@ theme_override_constants/separation = 10
 [node name="Open" type="Button" parent="VBoxContainer/MarginContainer/TopBar"]
 modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kctcl")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kctcl")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kctcl")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_kctcl")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kctcl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kctcl")
 text = "Open File"
 script = ExtResource("2_77gh4")
 

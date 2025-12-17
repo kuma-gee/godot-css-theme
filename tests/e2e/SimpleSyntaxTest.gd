@@ -6,7 +6,7 @@ var theme: Theme
 
 
 func before_all():
-	theme = create_theme_from_css(TEST_CSS)[""]
+	theme = create_theme_from_css(TEST_CSS)
 
 
 func test_global_font():
@@ -41,3 +41,10 @@ func test_button_states():
 	assert_eq(theme.get_stylebox("hover", "Button").get("bg_color"), Color("#333"))
 	assert_eq(theme.get_stylebox("pressed", "Button").get("bg_color"), Color("#333"))
 	assert_eq(theme.get_stylebox("focus", "Button").get("bg_color"), Color("#333"))
+
+func test_classes():
+	assert_eq(theme.get_color("font_color", "ButtonDark"), Color("#000"))
+	assert_eq(theme.get_color("font_disabled_color", "ButtonDark"), Color("#555"))
+
+	assert_eq(theme.get_stylebox("normal", "ButtonDark").get("bg_color"), Color("#FFF"))
+	assert_eq(theme.get_stylebox("disabled", "ButtonDark").get("bg_color"), Color("#CCC"))
