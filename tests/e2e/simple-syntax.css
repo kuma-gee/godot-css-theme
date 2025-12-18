@@ -27,3 +27,7 @@ Button.dark:disabled {
   color: #555;
   background: #ccc;
 }
+
+PanelContainer {
+  background: #252b34;
+}

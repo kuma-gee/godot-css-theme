@@ -1,6 +1,9 @@
 class_name Stylesheet
 
 const DEFAULT_STATE = "normal"
+const DEFAULT_STATE_FOR_NODE = {
+	"PanelContainer": "panel",
+}
 
 var _css_file: String
 var _values: Dictionary = {"": {}}

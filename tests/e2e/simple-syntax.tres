@@ -1,0 +1,53 @@
+[gd_resource type="Theme" load_steps=11 format=3]
+
+[ext_resource type="FontFile" path="res://tests/e2e/font_2.tres" id="1_qmdf6"]
+[ext_resource type="FontFile" path="res://tests/e2e/font.tres" id="2_qdkw5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yb8i5"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_on10b"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fg3p"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma4cd"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vish0"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2r4sp"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdawi"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdc5b"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+
+[resource]
+default_font = ExtResource("2_qdkw5")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_yb8i5")
+Button/styles/focus = SubResource("StyleBoxFlat_on10b")
+Button/styles/hover = SubResource("StyleBoxFlat_2fg3p")
+Button/styles/normal = SubResource("StyleBoxFlat_ma4cd")
+Button/styles/pressed = SubResource("StyleBoxFlat_vish0")
+ButtonDark/base_type = &"Button"
+ButtonDark/colors/font_color = Color(0, 0, 0, 1)
+ButtonDark/colors/font_disabled_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+ButtonDark/styles/disabled = SubResource("StyleBoxFlat_2r4sp")
+ButtonDark/styles/normal = SubResource("StyleBoxFlat_bdawi")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/fonts/font = ExtResource("1_qmdf6")
+Label/styles/normal = SubResource("StyleBoxFlat_kdc5b")

@@ -18,7 +18,11 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 			for state in stylesheet.get_class_states(cls, class_group):
 				var props = stylesheet.get_class_properties(cls, class_group, state).duplicate(true)
 
-				var style_prefix = "--styles-%s-" % state
+				var style_state = state
+				if state == Stylesheet.DEFAULT_STATE:
+					style_state = Stylesheet.DEFAULT_STATE_FOR_NODE.get(cls, Stylesheet.DEFAULT_STATE)
+
+				var style_prefix = "--styles-%s-" % style_state
 				var style_type = style_prefix + "type"
 
 				if props.has("color"):

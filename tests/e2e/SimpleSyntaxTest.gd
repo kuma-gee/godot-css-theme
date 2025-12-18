@@ -42,6 +42,9 @@ func test_button_states():
 	assert_eq(theme.get_stylebox("pressed", "Button").get("bg_color"), Color("#333"))
 	assert_eq(theme.get_stylebox("focus", "Button").get("bg_color"), Color("#333"))
 
+func test_mapping_default_state():
+	assert_eq(theme.get_stylebox("panel", "PanelContainer").get("bg_color"), Color("#252b34"))
+
 func test_classes():
 	assert_eq(theme.get_color("font_color", "ButtonDark"), Color("#000"))
 	assert_eq(theme.get_color("font_disabled_color", "ButtonDark"), Color("#555"))

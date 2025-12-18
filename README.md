@@ -58,3 +58,4 @@ Just make sure that new features are documented in `FEATURES.md` and that there 
 - Using colors with words like `red` or `blue` does not work. Either use hex `#000` or
   native gdscript `Color(0, 0, 0, 1)`
 - Only plain numbers are allowed, no `px`, `rem` etc. supported
+- Numbers cannot be shorted to e.g `.5`, must be `0.5`
