@@ -2,7 +2,7 @@ name: "Push to asset lib"
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v*.*"
 
 jobs:
   publish:
