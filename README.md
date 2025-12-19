@@ -59,3 +59,7 @@ Just make sure that new features are documented in `FEATURES.md` and that there 
   native gdscript `Color(0, 0, 0, 1)`
 - Only plain numbers are allowed, no `px`, `rem` etc. supported
 - Numbers cannot be shorted to e.g `.5`, must be `0.5`
+
+## Notes
+
+- This plugin itself cannot use css otherwise there might be problems enabling/disabling the plugin since it's depending on itself
