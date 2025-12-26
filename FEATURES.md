@@ -85,6 +85,19 @@ Button.flat {
 }
 ```
 
+## Variables
+
+CSS Variables using `var()` are supported. Define them using `:root`.
+
+```css
+:root {
+  --primary-color: #fff;
+}
+Button {
+  background: var(--primary-color);
+}
+```
+
 ## SCSS
 
 See [this file](./themes/theme.scss) for an example with SCSS
