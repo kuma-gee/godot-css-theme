@@ -51,8 +51,7 @@ class GutGuiPrinter:
 	var _colors = {
 			red = Color.RED,
 			yellow = Color.YELLOW,
-			green = Color.GREEN,
-			blue = Color.BLUE
+			green = Color.GREEN
 	}
 
 	func _init():
@@ -154,7 +153,6 @@ class TerminalPrinter:
 		red = escape + '[31m',
 		yellow = escape + '[33m',
 		green = escape + '[32m',
-		blue = escape + '[34m',
 
 		underline = escape + '[4m',
 		bold = escape + '[1m',

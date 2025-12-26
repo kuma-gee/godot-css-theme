@@ -89,13 +89,11 @@ func set_font(font_name):
 
 func _set_font(rtl, font_name, custom_name):
 	if(font_name == null):
-		rtl.remove_theme_font_override(custom_name)
+		rtl.add_theme_font_override(custom_name, null)
 	else:
-		var font_path = 'res://addons/gut/fonts/' + font_name + '.ttf'
-		if(FileAccess.file_exists(font_path)):
-			var dyn_font = FontFile.new()
-			dyn_font.load_dynamic_font('res://addons/gut/fonts/' + font_name + '.ttf')
-			rtl.add_theme_font_override(custom_name, dyn_font)
+		var dyn_font = FontFile.new()
+		dyn_font.load_dynamic_font('res://addons/gut/fonts/' + font_name + '.ttf')
+		rtl.add_theme_font_override(custom_name, dyn_font)
 
 
 func _set_all_fonts_in_rtl(rtl, base_name):
@@ -127,6 +125,3 @@ func use_compact_mode(should=true):
 func set_opacity(val):
 	_normal_gui.modulate.a = val
 	_compact_gui.modulate.a = val
-
-func set_title(text):
-	_set_both_titles(text)
