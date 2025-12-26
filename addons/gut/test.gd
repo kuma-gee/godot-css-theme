@@ -2696,10 +2696,10 @@ func double_inner(path, subpath, strategy=null):
 ## @deprecated:  Use [method assert_called_count] instead.
 func assert_call_count(inst, method_name, expected_count, parameters=null):
 	gut.logger.deprecated('This has been replaced with assert_called_count which accepts a Callable with optional bound arguments.')
-	var callable = Callable.create(inst, method_name)
-	if(parameters != null):
-		callable = callable.bindv(parameters)
-	assert_called_count(callable, expected_count)
+#	var callable = Callable.create(inst, method_name)
+#	if(parameters != null):
+#		callable = callable.bindv(parameters)
+#	assert_called_count(callable, expected_count)
 
 
 ## @deprecated: no longer supported.

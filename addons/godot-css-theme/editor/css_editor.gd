@@ -3,7 +3,7 @@ extends Control
 
 signal saved(file)
 
-# @export var open_key: BaseButton
+# @export var apply_btn: BaseButton
 @export var code: TextEdit
 @export var file_name_label: Label
 @export var files_list: Control
@@ -42,7 +42,7 @@ func _update_files_list():
 func _add_files_to_list_rec(dir: String):
 	var items = DirAccess.get_files_at(dir)
 	for item in items:
-		if item.get_extension() == "css":
+		if item.get_extension() == "css" and load(item):
 			_add_to_list(dir, item)
 	
 	var dirs = DirAccess.get_directories_at(dir)

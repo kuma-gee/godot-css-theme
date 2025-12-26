@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcmut0gcayih2"]
+[gd_scene load_steps=5 format=3 uid="uid://dcmut0gcayih2"]
 
 [ext_resource type="Theme" uid="uid://ch0an13yu6a4q" path="res://addons/godot-css-theme/editor/editor-theme.tres" id="1_bsmes"]
 [ext_resource type="Script" path="res://addons/godot-css-theme/editor/css_editor.gd" id="1_d8bk4"]
-[ext_resource type="Script" path="res://addons/godot-css-theme/editor/EditorButton.gd" id="2_77gh4"]
 [ext_resource type="CodeHighlighter" uid="uid://blglwyagrkxdm" path="res://addons/godot-css-theme/editor/css_syntax.tres" id="3_ynjw3"]
 [ext_resource type="Script" path="res://addons/godot-css-theme/editor/css_code_edit.gd" id="4_76rs7"]
 
-[node name="CSSEditor" type="Control" node_paths=PackedStringArray("code", "file_name_label", "files_list")]
+[node name="CSSEditor" type="Control" node_paths=PackedStringArray("apply_btn", "code", "file_name_label", "files_list")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +15,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme = ExtResource("1_bsmes")
 script = ExtResource("1_d8bk4")
+apply_btn = NodePath("VBoxContainer/Toolbar/TopBar/Apply")
 code = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/Code")
 file_name_label = NodePath("VBoxContainer/Toolbar/TopBar/FileName")
 files_list = NodePath("VBoxContainer/HBoxContainer/PanelContainer/Files")
@@ -48,20 +48,17 @@ theme_type_variation = &"MarginContainerToolbar"
 [node name="TopBar" type="HBoxContainer" parent="VBoxContainer/Toolbar"]
 layout_mode = 2
 
-[node name="Open" type="Button" parent="VBoxContainer/Toolbar/TopBar"]
-visible = false
-modulate = Color(0.6, 0.6, 0.6, 1)
+[node name="FileName" type="Label" parent="VBoxContainer/Toolbar/TopBar"]
 layout_mode = 2
-text = "Open File"
-script = ExtResource("2_77gh4")
 
 [node name="Control" type="Control" parent="VBoxContainer/Toolbar/TopBar"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FileName" type="Label" parent="VBoxContainer/Toolbar/TopBar"]
+[node name="Apply" type="Button" parent="VBoxContainer/Toolbar/TopBar"]
+visible = false
 layout_mode = 2
+text = "Apply theme to all scenes"
 
 [node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -101,3 +98,11 @@ indent_use_spaces = true
 indent_automatic = true
 auto_brace_completion_highlight_matching = true
 script = ExtResource("4_76rs7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
