@@ -46,10 +46,31 @@ func parse_text(content: String, path: String):
 			current_classes = {}
 		else:
 			return null
+	
+	var variables = {}
+	if _values.has(""):
+		for tag in _values[""]:
+			if tag == "root":
+				variables = _values[""][tag]
+				break
 
 	var result = {"": {}}
 	for tag in _values.keys():
+		if tag == "": 
+			continue
+
 		var value = _values[tag]
+		for state in value.keys():
+			for property in value[state].keys():
+				var v = value[state][property].strip_edges()
+				if v.begins_with("var("):
+					var var_name = v.substr(4, v.length() - 5).strip_edges()
+					print(var_name)
+					if variables.has(var_name):
+						value[state][property] = variables[var_name]
+					else:
+						print("Variable %s not found for tag %s" % [var_name, tag])
+
 		if "." in tag:
 			var parts = tag.split(" ")
 			var class_idx = _find_index_for_class_in_array(parts)

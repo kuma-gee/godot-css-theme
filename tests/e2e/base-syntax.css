@@ -1,7 +1,11 @@
+:root {
+  --white: #fff;
+}
+
 Button {
   --colors-font-color: #000;
   --colors-font-disabled-color: #333;
-  --colors-font-hover-color: #fff;
+  --colors-font-hover-color: var(--white);
   --colors-font-pressed-color: Color(0, 0, 0, 0);
 
   --const-hseparation: 10;
@@ -15,7 +19,7 @@ Button {
   --styles-normal-content-margin-bottom: 2;
 
   --styles-hover-type: Flat;
-  --styles-hover-bg-color: #fff;
+  --styles-hover-bg-color: var(--white);
   --styles-hover-draw-center: false;
   --styles-hover-shadow-color: #333;
   --styles-hover-shadow-size: 5;
@@ -37,7 +41,7 @@ HSlider {
 
 Button.test,
 Label.test {
-  --colors-font-color: #fff;
+  --colors-font-color: var(--white);
 }
 
 Label.test {
