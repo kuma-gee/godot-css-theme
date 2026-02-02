@@ -56,3 +56,4 @@ func test_classes():
 	assert_eq(theme.get_color("font_color", "ButtonTest"), Color("#fff"))
 	assert_eq(theme.get_color("font_color", "LabelTest"), Color("#fff"))
 	assert_eq(theme.get_color("font_disabled_color", "LabelTest"), Color("#aaa"))
+	assert_eq(theme.get_color("font_hover_color", "ButtonTestClass"), Color("#0f0"))

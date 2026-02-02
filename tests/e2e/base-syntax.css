@@ -47,3 +47,11 @@ Label.test {
 Label.test {
   --colors-font-disabled-color: #aaa;
 }
+
+Button.test-class {
+  --colors-font-hover-color: #0f0;
+}
+
+Button.test+class,Button.test#class,Button.test~asd {
+  --colors-font-hover-color: #0f0;
+}
