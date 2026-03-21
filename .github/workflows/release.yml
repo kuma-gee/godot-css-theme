@@ -23,6 +23,12 @@ jobs:
           sed -i "s/##VERSION/${{ env.VERSION }}/g" ./addons/godot-css-theme/plugin.cfg
         env:
           VERSION: ${{ steps.version.outputs.VERSION }}
+      - name: Upload addon to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: addons/godot-css-theme/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Godot Asset Lib
         uses: deep-entertainment/godot-asset-lib-action@v0.3.0
         env:
