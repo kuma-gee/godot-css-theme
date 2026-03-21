@@ -54,6 +54,9 @@ func resolve_url(value: String) -> String:
 		return url
 	if url.begins_with("/"):
 		return "res:/" + url
+	if url.begins_with("uid://"):
+		var id = ResourceUID.text_to_id(url)
+		return ResourceUID.get_id_path(id)
 
 	return _css_folder() + url
 

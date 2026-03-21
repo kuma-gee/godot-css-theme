@@ -46,6 +46,8 @@ See [FEATURES](./FEATURES.md) for all supported features
 
 ## Contribute
 
+Make sure to use Godot 4.1 for this project
+
 If you see any problems or have any ideas for new features feel free to create an issue or a PR
 
 Just make sure that new features are documented in `FEATURES.md` and that there is some kind of test for it.

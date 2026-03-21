@@ -8,7 +8,6 @@ var theme: Theme
 func before_all():
 	theme = create_theme_from_css(TEST_CSS)
 
-
 func test_font_color():
 	assert_eq(theme.get_color("font_color", "Button"), Color("#000"))
 	assert_eq(theme.get_color("font_disabled_color", "Button"), Color("#333"))
@@ -39,6 +38,7 @@ func test_style_box_flat():
 
 func test_checkbox():
 	assert_eq(theme.get_icon("checked", "CheckBox").resource_path, "res://icon.png")
+	assert_eq(theme.get_icon("checked_disabled", "CheckBox").resource_path, "res://icon.png")
 
 
 func test_slider():

@@ -28,6 +28,7 @@ Button {
 
 CheckBox {
   --icons-checked: url(res://icon.png);
+  --icons-checked-disabled: url(uid://c0e63l3yw68fk);
 }
 
 HSlider {
