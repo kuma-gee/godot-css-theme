@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Import
+        run: godot -e --headless --import --quit
       - name: Unit Test
         run: godot -s addons/gut/gut_cmdln.gd --headless
         timeout-minutes: 1
