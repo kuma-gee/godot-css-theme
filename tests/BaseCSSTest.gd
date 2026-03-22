@@ -1,6 +1,5 @@
 class_name BaseCSSTest extends UnitTest
 
-
 func create_theme_from_text(text: String, path = "") -> Theme:
 	var parser = CSSParser.new()
 	return _apply_stylesheet(parser.parse_text(text, path))

@@ -15,5 +15,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Unit Test
-        run: godot -s addons/gut/gut_cmdln.gd --headless
-        timeout-minutes: 1
+        run: godot --headless -s tests/framework/test_runner.gd
+        timeout-minutes: 2

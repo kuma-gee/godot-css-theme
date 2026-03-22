@@ -66,5 +66,5 @@ func _css_folder() -> String:
 	if file.ends_with("/"):
 		file = file.substr(0, file.length() - 2)
 
-	var last_slash = CSSCliOptions.find_last(file, "/")
+	var last_slash = file.rfind("/")
 	return file.substr(0, last_slash + 1)
