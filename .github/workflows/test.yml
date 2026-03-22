@@ -10,12 +10,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.1
+      image: barichello/godot-ci:4.5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Import
-        run: godot -e --headless --import --quit
       - name: Unit Test
         run: godot -s addons/gut/gut_cmdln.gd --headless
         timeout-minutes: 1
