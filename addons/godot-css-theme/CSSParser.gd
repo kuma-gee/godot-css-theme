@@ -63,13 +63,16 @@ func parse_text(content: String, path: String):
 		for state in value.keys():
 			for property in value[state].keys():
 				var v = value[state][property].strip_edges()
-				if v.begins_with("var("):
-					var var_name = v.substr(4, v.length() - 5).strip_edges()
-					print(var_name)
+				var regex = RegEx.new()
+				regex.compile("var\\(([^)]+)\\)")
+				var matches = regex.search_all(v)
+				for match in matches:
+					var var_name = match.get_string(1).strip_edges()
 					if variables.has(var_name):
-						value[state][property] = variables[var_name]
+						v = v.replace(match.get_string(0), variables[var_name])
 					else:
 						print("Variable %s not found for tag %s" % [var_name, tag])
+				value[state][property] = v
 
 		if "." in tag:
 			var parts = tag.split(" ")

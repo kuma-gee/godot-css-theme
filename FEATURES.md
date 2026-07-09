@@ -24,7 +24,7 @@ Styles have a special syntax. First a type has to be specified:
 Then values of the style can be set with a `--styles` prefix:
 
 - `--styles-{PROPERTY}-{INNER_PROPERTY}: {VALUE}`
-  - e.g for a flat type: `--stypes-normal-border-width-left: 5`
+  - e.g for a flat type: `--styles-normal-border-width-left: 5`
 
 External resources are specified with `url()`:
 

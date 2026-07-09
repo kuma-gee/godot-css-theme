@@ -54,9 +54,6 @@ func resolve_url(value: String) -> String:
 		return url
 	if url.begins_with("/"):
 		return "res:/" + url
-	if url.begins_with("uid://"):
-		var id = ResourceUID.text_to_id(url)
-		return ResourceUID.get_id_path(id)
 
 	return _css_folder() + url
 
@@ -66,5 +63,5 @@ func _css_folder() -> String:
 	if file.ends_with("/"):
 		file = file.substr(0, file.length() - 2)
 
-	var last_slash = file.rfind("/")
+	var last_slash = CSSCliOptions.find_last(file, "/")
 	return file.substr(0, last_slash + 1)

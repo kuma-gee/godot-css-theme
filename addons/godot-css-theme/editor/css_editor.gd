@@ -40,13 +40,23 @@ func _update_files_list():
 	_add_files_to_list_rec("res://")
 	
 func _add_files_to_list_rec(dir: String):
-	var items = DirAccess.get_files_at(dir)
+	var dir_list = DirAccess.open(dir)
+	dir_list.include_hidden = true
+	var items = dir_list.get_files()
+
+	if ".gdignore" in items:
+		return
+
 	for item in items:
-		if item.get_extension() == "css" and load(item):
+		if item.begins_with("."): continue
+		if item.get_extension() == "css":
 			_add_to_list(dir, item)
 	
 	var dirs = DirAccess.get_directories_at(dir)
 	for d in dirs:
+		if d == "node_modules": continue
+		if d.begins_with("."): continue
+		if d == "build": continue
 		_add_files_to_list_rec("%s%s/" % [dir, d])
 
 func _add_to_list(folder: String, file: String):
