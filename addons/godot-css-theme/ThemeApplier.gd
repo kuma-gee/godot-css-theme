@@ -30,7 +30,7 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 			print("Setting properties for %s" % node_type)
 		var properties = stylesheet.get_class_properties(node_type, class_group)
 		if class_group != "" and node_type != GLOBAL_NODE:
-			var new_type = node_type + class_group.capitalize()
+			var new_type = node_type + _to_type_variation_suffix(class_group)
 			theme.set_type_variation(new_type, node_type)
 			print("Set type variation: %s" % [new_type])
 			node_type = new_type
@@ -184,3 +184,15 @@ func _parse_type(prefix: String, property: String, replace = true) -> String:
 	if replace:
 		value = value.replace("-", "_")
 	return value
+
+
+func _to_type_variation_suffix(class_group: String) -> String:
+	var suffix = ""
+	var normalized = class_group.replace("-", " ").replace("_", " ")
+	normalized = normalized.replace("+", " ").replace("#", " ").replace("~", " ")
+	var parts = normalized.split(" ")
+	for part in parts:
+		if part == "":
+			continue
+		suffix += part.substr(0, 1).to_upper() + part.substr(1)
+	return suffix

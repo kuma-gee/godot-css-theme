@@ -50,3 +50,12 @@ func test_apply_separate_font_styles():
 	
 	assert_eq(theme.default_font.resource_path, font_1)
 	assert_eq(theme.get_font("Label", "") .resource_path, font_1)
+
+
+func test_class_group_type_variation_names():
+	var theme = create_theme_from_text(
+		"Label.SliderActive { color: #FFF } Button.test-class { color: #333 }"
+	)
+
+	assert_eq(theme.get_color("font_color", "LabelSliderActive"), Color("#FFF"))
+	assert_eq(theme.get_color("font_color", "ButtonTestClass"), Color("#333"))
